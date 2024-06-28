@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
-import DashboardLayout from '@/Layouts/DashboardLayout'
+import React from 'react'
 
 const DashboardPage = () => {
   return (
-    <DashboardLayout>
-      This is box render as an HTML section
-    </DashboardLayout>
+    <div>
+
+    </div>
   )
 }
-
-export default DashboardPage
