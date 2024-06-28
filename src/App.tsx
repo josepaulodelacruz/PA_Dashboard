@@ -3,6 +3,7 @@ import { routes } from "./routes"
 
 function App() {
   const location = useLocation()
+
   return (
     <Routes key={location.pathname} location={location.pathname}>
       {
