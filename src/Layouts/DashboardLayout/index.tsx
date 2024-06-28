@@ -1,20 +1,16 @@
 import React from 'react'
-import { Box } from '@mui/material'
-import { useLocation } from 'react-router-dom'
+import Box from '@mui/material/Box'
 
 interface DashboardLayoutProps {
-  children: React.ReactNode,
+  children: React.ReactNode
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
-  const { pathname } = useLocation()
-
+function DashboardLayout({ children } : DashboardLayoutProps ) {
   return (
-    <Box component='section' sx={{p: 2, border: '1px dashed grey'}}>
+    <Box>
       {children}
     </Box>
   )
-    
 }
 
-export default DashboardLayout
+export default DashboardLayout 
