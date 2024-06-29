@@ -1,5 +1,3 @@
-import Box from "@mui/material/Box"
-
 import Grid from "@mui/material/Grid"
 import React from 'react'
 
@@ -10,7 +8,8 @@ interface TemplateConainerProps {
 
 const TemplateContainer = ({ children, sideElement }: TemplateConainerProps) => {
   return (
-    <Grid container >
+    <Grid container  
+    >
       <Grid item md={2} >
         {sideElement}
       </Grid>
@@ -20,7 +19,6 @@ const TemplateContainer = ({ children, sideElement }: TemplateConainerProps) => 
       </Grid>
 
     </Grid>
-
   )
 }
 
