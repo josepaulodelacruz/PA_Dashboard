@@ -1,9 +1,11 @@
 import DashboardLayout from "@/Layouts/DashboardLayout"
+import Sidenav from '@/Components/Sidenav';
 
 const DashboardPage = () => {
   return (
     <DashboardLayout>
-      TESTING NEW LAYOUT
+      Dashboard Page
+
     </DashboardLayout>
   )
 }
