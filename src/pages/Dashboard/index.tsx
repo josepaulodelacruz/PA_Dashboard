@@ -1,5 +1,4 @@
 import DashboardLayout from "@/Layouts/DashboardLayout"
-import Sidenav from '@/Components/Sidenav';
 
 const DashboardPage = () => {
   return (
