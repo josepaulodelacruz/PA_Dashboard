@@ -1,5 +1,16 @@
 
-const breakpoints = {
+type Breakpoints = {
+  values: {
+    xs: number;
+    sm: number;
+    md: number;
+    lg: number;
+    xl: number;
+    xxl: number;
+  }
+}
+
+const breakpoints: Breakpoints = {
   values: {
     xs: 0,
     sm: 576,
@@ -9,5 +20,8 @@ const breakpoints = {
     xxl: 1400,
   }
 }
+
+console.log(breakpoints.values.xxl)
+
 
 export default breakpoints
