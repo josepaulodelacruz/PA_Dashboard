@@ -7,7 +7,18 @@ interface DashboardLayoutProps {
 
 function DashboardLayout({ children } : DashboardLayoutProps ) {
   return (
-    <Box>
+    <Box
+      sx={({ breakpoints, transitions }) => ({
+        p: 3,
+        position: "relative",
+        [breakpoints.up("xl")]: {
+          transition: transitions.create(["margin-left", "margin-right"], {
+            easing: transitions.easing.easeInOut,
+            duration: transitions.duration.standard,
+          }),
+        },
+      })}
+    >
       {children}
     </Box>
   )

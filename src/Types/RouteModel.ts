@@ -7,5 +7,3 @@ export type RouteModel = {
   component: React.ReactNode,
 }
 
-
-
