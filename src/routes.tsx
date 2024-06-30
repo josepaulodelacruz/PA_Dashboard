@@ -2,7 +2,7 @@ import { RouteModel } from "./Types"
 import Icon from '@mui/material/Icon'
 
 //Pages
-import DashboardPage from '@/Pages/Dashboard'
+import DashboardPage from '@/pages/Dashboard'
 
 const routes: RouteModel[] = [
   {
