@@ -1,28 +1,55 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
+import List from '@mui/material/List'
+import { routes } from '@/routes'
+import { useTheme } from '@mui/material/styles'
+import pxToRem from '@/assets/theme/functions/pxToRem'
+import linearGradient from '@/assets/theme/functions/linearGradient'
 
 const Sidenav = () => {
+  const theme = useTheme()
+  const { palette } = theme
+  const { gradients } = palette
+
+  let backgroundValue = linearGradient(gradients.dark.main, gradients.dark.state)
+  console.log(backgroundValue);
+
+  const renderRoutes = routes.map((item) => {
+    let returnValue
+
+    returnValue = (
+      <div key={item.key}>
+        <Typography>
+          {item.name}
+        </Typography>
+      </div>
+    )
+    return returnValue
+  })
+
   return (
-    <Box 
+    <Box
       textAlign='center'
-      sx={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
         height: '100vh' // Parent container height
       }}
     >
       <Paper
-        sx={{ 
+        
+        sx={{
+          background: backgroundValue,
           margin: '10px',
-          display: 'flex',  
-          flexDirection: 'column', 
-          alignItems: 'center', 
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
           flex: 1, // Child element takes up remaining space
           overflowY: 'auto' // Scroll if content overflows
         }}
       >
-        <Typography> hello </Typography>
+        <List>{renderRoutes}</List>
       </Paper>
     </Box>
   )
