@@ -13,14 +13,13 @@ const Sidenav = () => {
   const { gradients } = palette
 
   let backgroundValue = linearGradient(gradients.dark.main, gradients.dark.state)
-  console.log(backgroundValue);
 
   const renderRoutes = routes.map((item) => {
     let returnValue
 
     returnValue = (
       <div key={item.key}>
-        <Typography>
+        <Typography >
           {item.name}
         </Typography>
       </div>
@@ -31,15 +30,13 @@ const Sidenav = () => {
   return (
     <Box
       textAlign='center'
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh' // Parent container height
-      }}
+      display='flex'
+      flexDirection='column'
+      height="100vh"
     >
       <Paper
-        
         sx={{
+          borderRadius: 4,
           background: backgroundValue,
           margin: '10px',
           display: 'flex',
