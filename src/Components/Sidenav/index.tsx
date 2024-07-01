@@ -22,7 +22,7 @@ const Sidenav = () => {
 
     returnValue = (
       <div key={item.key}>
-
+        <SidenavItem icon={item.icon} name={item.name} route={item.route} />
       </div>
     )
     return returnValue

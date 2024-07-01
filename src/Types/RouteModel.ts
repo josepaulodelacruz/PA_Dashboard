@@ -2,7 +2,7 @@ export type RouteModel = {
   type: 'collapse',
   name: string,
   key: string,
-  icon: React.ReactNode, 
+  icon: string, 
   route: string,
   component: React.ReactNode,
 }

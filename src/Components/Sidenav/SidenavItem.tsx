@@ -1,21 +1,39 @@
 import React from 'react'
-import ListItem from '@mui/material/ListItem'
+import linearGradient from '@/assets/theme/functions/linearGradient'
+import { useTheme } from '@mui/material/styles'
+import { useLocation } from 'react-router-dom'
 
 
 interface SidenavItemProps {
-  type: 'collapse',
   name: string,
-  key: string,
   icon: React.ReactNode,
   route: string,
-  component: React.ReactNode
 }
 
-const SidenavItem = (props: SidenavItemProps) => {
+const SidenavItem = ({icon, name, route} : SidenavItemProps) => {
+  const location = useLocation()
+  const theme = useTheme()
+  const { gradients } = theme.palette
+
+  let backgroundValue = linearGradient(gradients.info.main, gradients.info.state)
+
   return (
-    <ListItem component="li">
-    </ListItem>
-    
+    <div
+      className='py-[0.5rem] px-[0.925rem] my-[0.09375rem] mx-[1rem] flex flex-row border-stone-100 rounded-[0.375rem]'
+      style={{background: route === location.pathname ? backgroundValue : 'transparent'}}
+    >
+
+      <div className='p-[0.025rem]'>
+        {icon}
+        <span className='text-white font-normal ' style={{ fontSize: '0.875rem' }}>{name}</span>
+      </div>
+
+
+
+
+
+
+    </div>
   )
 }
 
