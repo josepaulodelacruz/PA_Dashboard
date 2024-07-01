@@ -22,7 +22,7 @@ const Sidenav = () => {
 
     returnValue = (
       <div key={item.key}>
-        <SidenavItem />
+
       </div>
     )
     return returnValue

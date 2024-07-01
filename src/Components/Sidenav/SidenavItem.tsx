@@ -1,13 +1,19 @@
-import Box from '@mui/material/Box'
+import React from 'react'
 import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import CloseIcon from '@mui/icons-material/Close'
 
-const SidenavItem = () => {
+
+interface SidenavItemProps {
+  type: 'collapse',
+  name: string,
+  key: string,
+  icon: React.ReactNode,
+  route: string,
+  component: React.ReactNode
+}
+
+const SidenavItem = (props: SidenavItemProps) => {
   return (
     <ListItem component="li">
-
     </ListItem>
     
   )
