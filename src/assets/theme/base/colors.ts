@@ -115,7 +115,7 @@ const colors: any  = {
       main: "#42424a",
       state: "#191919",
     },
-  },
+  } as any,
 
   socialMediaColors: {
     facebook: {

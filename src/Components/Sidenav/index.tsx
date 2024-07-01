@@ -11,8 +11,7 @@ import './index.css'
 
 const Sidenav = () => {
   const theme = useTheme()
-  const { palette } = theme
-  const { gradients } = palette
+  const { gradients } = theme.palette as { gradients?: any }
 
   let backgroundValue = linearGradient(gradients.dark.main, gradients.dark.state)
   let textColor = '#FFF'

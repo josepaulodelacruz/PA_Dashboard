@@ -13,7 +13,7 @@ interface SidenavItemProps {
 const SidenavItem = ({icon, name, route} : SidenavItemProps) => {
   const location = useLocation()
   const theme = useTheme()
-  const { gradients } = theme.palette
+  const { gradients } = theme.palette as { gradients?: any }
 
   let backgroundValue = linearGradient(gradients.info.main, gradients.info.state)
 
@@ -27,12 +27,6 @@ const SidenavItem = ({icon, name, route} : SidenavItemProps) => {
         {icon}
         <span className='text-white font-normal ' style={{ fontSize: '0.875rem' }}>{name}</span>
       </div>
-
-
-
-
-
-
     </div>
   )
 }
