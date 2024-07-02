@@ -1,21 +1,19 @@
+import Sidenav from "@/Components/Sidenav"
 import Grid from "@mui/material/Grid"
-import React from 'react'
+import Navbar from '@/Components/Navbar'
+import { Outlet } from 'react-router-dom'
 
-interface TemplateConainerProps {
-  children: React.ReactNode,
-  sideElement: React.ReactNode
-}
-
-const TemplateContainer = ({ children, sideElement }: TemplateConainerProps) => {
+const TemplateContainer = () => {
   return (
     <Grid container  
     >
-      <Grid item md={2} >
-        {sideElement}
+      <Grid item md={2} xs={12} >
+        <Sidenav />
       </Grid>
 
-      <Grid item md={10} xs={12}>
-        {children}
+      <Grid item md={10} xs={12} style={{height: '100vh', overflowY: 'auto'}}>
+        <Navbar />
+        <Outlet />
       </Grid>
 
     </Grid>

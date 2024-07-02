@@ -61,7 +61,7 @@ const colors: any  = {
   dark: {
     main: "#344767",
     focus: "#2c3c58",
-  },
+  } as any,
 
   grey: {
     100: "#f8f9fa",

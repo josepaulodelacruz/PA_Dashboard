@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import List from '@mui/material/List'
+import { NavLink } from 'react-router-dom'
 import { routes } from '@/routes'
 import { useTheme } from '@mui/material/styles'
 import linearGradient from '@/assets/theme/functions/linearGradient'
@@ -20,9 +21,9 @@ const Sidenav = () => {
     let returnValue
 
     returnValue = (
-      <div key={item.key}>
-        <SidenavItem icon={item.icon} name={item.name} route={item.route} />
-      </div>
+      <NavLink key={item.key} to={item.route}>
+          <SidenavItem icon={item.icon} name={item.name} route={item.route} />
+      </NavLink>
     )
     return returnValue
   })
@@ -36,9 +37,9 @@ const Sidenav = () => {
       <Paper
         sx={{
           paddingTop: '10px',
-          borderRadius: 4,
+          borderRadius: 3,
           background: backgroundValue,
-          margin: '10px',
+          margin: '15px',
           display: 'flex',
           flexDirection: 'column',
           flex: 1, // Child element takes up remaining space

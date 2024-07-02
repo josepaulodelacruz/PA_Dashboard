@@ -1,7 +1,5 @@
 import React from 'react'
 import Box from '@mui/material/Box'
-import TemplateContainer from '@/Layouts/TemplateContainer'
-import Sidenav from '@/Components/Sidenav'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -9,28 +7,23 @@ interface DashboardLayoutProps {
 
 function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <TemplateContainer
-      sideElement={<Sidenav/>}
+    <Box
+      px={2}
+      display='flex'
+      flexDirection='column'
+      sx={({ breakpoints, transitions }) => ({
+        paddingTop: '0.5rem',
+        position: "relative",
+        [breakpoints.up("xl")]: {
+          transition: transitions.create(["margin-left", "margin-right"], {
+            easing: transitions.easing.easeInOut,
+            duration: transitions.duration.standard,
+          }),
+        },
+      })}
     >
-      <Box
-        sx={({ breakpoints, transitions }) => ({
-          p: 3,
-          position: "relative",
-          [breakpoints.up("xl")]: {
-            transition: transitions.create(["margin-left", "margin-right"], {
-              easing: transitions.easing.easeInOut,
-              duration: transitions.duration.standard,
-            }),
-          },
-        })}
-      >
-        {children}
-      </Box>
-
-    </TemplateContainer>
-
-
-
+      {children}
+    </Box>
   )
 }
 

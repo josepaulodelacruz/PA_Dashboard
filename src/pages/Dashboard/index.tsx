@@ -3,7 +3,38 @@ import DashboardLayout from "@/Layouts/DashboardLayout"
 const DashboardPage = () => {
   return (
     <DashboardLayout>
-      Dashboard Page
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
+      <span>TESTING</span>
     </DashboardLayout>
   )
 }
