@@ -8,7 +8,7 @@ interface DashboardLayoutProps {
 function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <Box
-      px={2}
+      px={1.5}
       display='flex'
       flexDirection='column'
       sx={({ breakpoints, transitions }) => ({
