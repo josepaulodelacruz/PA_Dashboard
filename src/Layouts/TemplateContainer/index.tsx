@@ -10,14 +10,14 @@ const TemplateContainer = () => {
   const location = useLocation()
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
   const scrollableRef = useRef<any>(null);
-  const [routeObject, setRouteObject] = useState<RouteModel>(routes[0]);
+  const [routeObject, setRouteObject] = useState<RouteModel>(routes[0])
 
   const handleScroll = () => {
     if (scrollableRef.current) {
       if (scrollableRef.current.scrollTop > 0) {
-        setIsScrolled(true);
+        setIsScrolled(true)
       } else {
-        setIsScrolled(false);
+        setIsScrolled(false)
       }
     }
   }
@@ -26,13 +26,13 @@ const TemplateContainer = () => {
     let matchedRoute = null;
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].route === location.pathname) {
-        matchedRoute = routes[i];
+        matchedRoute = routes[i]
         break;
       }
     }
 
     if (matchedRoute) {
-      setRouteObject(matchedRoute);
+      setRouteObject(matchedRoute)
     }
 
   }, [location.pathname, routeObject])
@@ -40,9 +40,9 @@ const TemplateContainer = () => {
   useEffect(() => {
     const scrollableElement = scrollableRef.current;
     if (scrollableElement) {
-      scrollableElement.addEventListener('scroll', handleScroll);
+      scrollableElement.addEventListener('scroll', handleScroll)
       return () => {
-        scrollableElement.removeEventListener('scroll', handleScroll);
+        scrollableElement.removeEventListener('scroll', handleScroll)
       };
     }
   }, []);
