@@ -39,6 +39,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
         position: 'sticky',
         top: '1rem',
         zIndex: 1100,
+        borderRadius: '0.75rem',
         boxShadow: boxShadow,
         marginTop: '2rem',
         marginRight: '1rem',
@@ -47,7 +48,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
         paddingBottom: '0.5rem',
         background: backgroundColor,
         backdropFilter: backdropFilter,
-      }} elevation={0}>
+      }} elevation={4}>
       <nav className='flex flex-row px-4 justify-between items-center'>
 
         <div className='flex flex-col'>
