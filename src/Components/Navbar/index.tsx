@@ -6,31 +6,19 @@ import NotificationIcon from '@mui/icons-material/NotificationImportant'
 import { useTheme } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import { useState, useEffect } from 'react'
 
 
 /**
  * TODO CONINUATION OF DYNAMIC STYLE SCROLLING
 **/
 
-const Navbar = () => {
+interface NavbarProps {
+  isScrolled: boolean
+}
+
+const Navbar = ({ isScrolled } : NavbarProps) => {
   const theme = useTheme()
-  const [isScrolled, setIsScrolled] = useState(false);
 
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   let colorIcon = theme.palette.grey[500]
   let backgroundColor = isScrolled ? 'rgba(255, 255, 255, 0.8)' : 'transparent';
