@@ -9,11 +9,6 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import { RouteModel } from '@/Types'
 
-
-/**
- * TODO CONINUATION OF DYNAMIC STYLE SCROLLING
-**/
-
 interface NavbarProps {
   isScrolled: boolean,
   route: RouteModel
@@ -27,13 +22,14 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
   let backdropFilter = isScrolled ? 'saturate(200%) blur(1.875rem);' : 'none';
   let boxShadow = isScrolled ? 'rgba(255, 255, 255, 0.9) 0rem 0rem 0.0625rem 0.0625rem inset, rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem' : 'none'
 
-  let IconComponent = function() {
-    if(route.name === 'Dashboard') {
-      return <HomeIcon fontSize='small' style={{ color: colorIcon, fontSize: '16px' }} />
-    } else {
-      return <TablesIcon fontSize='small' style={{ color: colorIcon, fontSize: '16px' }} />
+  const IconComponent: React.FC<{ style: React.CSSProperties, name: string }> = ({ style, name }) => {
+    if (name === 'Dashboard') {
+      return <HomeIcon fontSize='small' style={style} />;
+    } else if (name === 'Tables') {
+      return <TablesIcon fontSize='small' style={style} />;
     }
-  }
+    return null;
+  };
 
 
   return (
@@ -56,7 +52,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
 
         <div className='flex flex-col'>
           <div className='flex flex-row items-center'>
-            <IconComponent />
+            <IconComponent name={route.name} style={{ color: colorIcon, fontSize: '16px' }} />
             <div className='text-sm' style={{ color: '#344767' }}>
               <span className='px-2'>/</span>
               <span>{route.name}</span>
