@@ -26,13 +26,14 @@ const Navbar = ({ isScrolled } : NavbarProps) => {
   let boxShadow = isScrolled ? 'rgba(255, 255, 255, 0.9) 0rem 0rem 0.0625rem 0.0625rem inset, rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem' : 'none'
 
   return (
-    <Paper sx={{
+    <Paper
+      sx={{
       position: 'sticky',
       top: '1rem',
       zIndex: 1100,
       boxShadow: boxShadow,
       marginTop: '2rem', marginRight: '1rem', marginLeft: '1rem', paddingTop: '0.5rem', paddingBottom: '0.5rem',
-      backgroundColor: backgroundColor,
+      background: backgroundColor,
       backdropFilter: backdropFilter,
     }} elevation={0}>
       <nav className='flex flex-row px-4 justify-between items-center'>
