@@ -22,7 +22,7 @@ const Sidenav = () => {
 
     returnValue = (
       <NavLink key={item.key} to={item.route}>
-          <SidenavItem icon={item.icon} name={item.name} route={item.route} />
+        <SidenavItem icon={item.icon} name={item.name} route={item.route} />
       </NavLink>
     )
     return returnValue
@@ -30,7 +30,7 @@ const Sidenav = () => {
 
   return (
     <Box
-      display='flex'
+      display={{xs: 'none', xl: 'flex'}}
       flexDirection='column'
       height="100vh"
     >
@@ -46,7 +46,7 @@ const Sidenav = () => {
           overflowY: 'auto' // Scroll if content overflows
         }}
       >
-        <Box 
+        <Box
           pb={2}
           pt={1.5}
           px={4}
@@ -54,13 +54,13 @@ const Sidenav = () => {
           justifyContent='flex-start'
           alignItems='center'
         >
-          <div style={{marginRight: '10px', height: '20px', width: '30px', backgroundColor: 'white'}}/>
+          <div style={{ marginRight: '10px', height: '20px', width: '30px', backgroundColor: 'white' }} />
           <Typography color={textColor} display="block" fontWeight='bold' variant='h6'>
             App Name
           </Typography>
         </Box>
 
-        <hr className='divider'/>
+        <hr className='divider' />
 
         <List>{renderRoutes}</List>
       </Paper>

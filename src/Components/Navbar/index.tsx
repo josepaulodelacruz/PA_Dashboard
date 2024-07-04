@@ -4,6 +4,7 @@ import TablesIcon from '@mui/icons-material/TableRows'
 import ProfileIcon from '@mui/icons-material/Person'
 import SettingIcon from '@mui/icons-material/Settings'
 import NotificationIcon from '@mui/icons-material/NotificationImportant'
+import SideMenuToggleIcon from '@mui/icons-material/Menu'
 import { useTheme } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
@@ -49,7 +50,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
         background: backgroundColor,
         backdropFilter: backdropFilter,
       }} elevation={4}>
-      <nav className='flex flex-row px-4 justify-between items-center'>
+      <nav className='flex sm:flex-row flex-col px-4 md:justify-between items-start md:items-center'>
 
         <div className='flex flex-col'>
           <div className='flex flex-row items-center'>
@@ -62,23 +63,25 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
           <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{route.name}</span>
         </div>
 
-        <div className='flex flex-row items-center'>
+        <div className='flex flex-row items-center w-full justify-between  sm:justify-end py-2 sm:p-0'>
           <Box
             sx={{
               color: 'black',
-              '& > :not(style)': { m: 1, width: '25ch' },
+              '& > :not(style)': { m: 0, width: '22ch' },
             }} component='form'
 
             noValidate
             autoComplete="off"
           >
-            <TextField id="outlined-basic" size='small' label="Outlined" variant="outlined" />
-
-
+            <TextField id="outlined-basic" size='small' label="Search" variant="outlined" />
           </Box>
-          <ProfileIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
-          <SettingIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
-          <NotificationIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
+          <div>
+            <SideMenuToggleIcon onClick={() => console.log('close sidenav')} fontSize='small'  style={{ color: colorIcon, marginLeft: '1rem' }} />
+            <ProfileIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
+            <SettingIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
+            <NotificationIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
+          </div>
+
         </div>
 
       </nav>

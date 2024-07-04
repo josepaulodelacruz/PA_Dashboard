@@ -1,7 +1,6 @@
 
 import { useTheme } from "@mui/material/styles"
 import Paper from '@mui/material/Paper'
-import WeekendIcon from '@mui/icons-material/Weekend'
 import React from 'react'
 import '../index.css'
 

@@ -5,9 +5,9 @@ import WeekendIcon from '@mui/icons-material/Weekend'
 import LeaderBoardIcon from '@mui/icons-material/Leaderboard'
 import StoreIcon from '@mui/icons-material/Store'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import Paper from '@mui/material/Paper'
 import linearGradient from "@/assets/theme/functions/linearGradient"
 import { useTheme } from "@mui/material/styles"
+import CardWithTable from "./Components/CardWithTable"
 
 
 const DashboardPage = () => {
@@ -66,21 +66,20 @@ const DashboardPage = () => {
 
         <Grid container item md={12} xs={12} direction='row' spacing={3} >
 
-          {
-            Array.from({ length: 12 }).map((_, i) => (
-              <Grid item md={4} key={i}>
-                <Paper
-                  sx={{
-                    height: 250,
-                    borderRadius: '0.75rem',
-                    boxShadow: 'rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem'
-                  }}>
-                </Paper>
-              </Grid>
-            ))
-          }
-          <Grid>
+          <Grid item md={8} xs={12} >
+            <CardWithTable >
+              <div>Table</div>
+            </CardWithTable>
           </Grid>
+
+          <Grid item md={4} xs={12}>
+            <CardWithTable >
+              <div>Table</div>
+            </CardWithTable>
+
+
+          </Grid>
+
 
         </Grid>
       </Grid>

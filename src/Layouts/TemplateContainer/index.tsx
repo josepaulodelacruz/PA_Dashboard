@@ -49,11 +49,11 @@ const TemplateContainer = () => {
 
   return (
     <Grid container >
-      <Grid item md={2} xs={12} >
+      <Grid item lg={2} xs={0} >
         <Sidenav />
       </Grid>
 
-      <Grid ref={scrollableRef} item md={10} xs={12} style={{ height: '100vh', overflowY: 'auto' }} >
+      <Grid ref={scrollableRef} item lg={10} xs={12} style={{ height: '100vh', overflowY: 'auto' }} >
         <Navbar isScrolled={isScrolled} route={routeObject}/>
         <Outlet />
       </Grid>
