@@ -12,7 +12,7 @@ interface CardWithTableProps {
 const CardWithTable = ({ children } : CardWithTableProps ) => {
   const theme = useTheme()
   const { info } = theme.palette as { info?: any }
-  console.log(info.main)
+
   return (
     <div className='mt-4 bg-white shadow-md rounded-xl h-[450px] w-full'>
       <div className='flex flex-row justify-between items-end'>
