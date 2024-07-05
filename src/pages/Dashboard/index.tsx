@@ -8,6 +8,8 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import linearGradient from "@/assets/theme/functions/linearGradient"
 import { useTheme } from "@mui/material/styles"
 import CardWithTable from "./Components/CardWithTable"
+import DataTable from './Components/DataTable'
+import Stepper from "@/Components/Stepper"
 
 
 const DashboardPage = () => {
@@ -64,22 +66,24 @@ const DashboardPage = () => {
           }
         </Grid>
 
-        <Grid container item md={12} xs={12} direction='row' spacing={3} >
+        <Grid container item md={12} xs={12} direction='row' spacing={3} style={{padding: '1rem 1rem 0'}} >
 
           <Grid item md={8} xs={12} >
-            <CardWithTable >
-              <div>Table</div>
+            <CardWithTable title="House Hold" >
+              <div className="h-[0.60rem]"/>
+              <DataTable />
             </CardWithTable>
           </Grid>
 
           <Grid item md={4} xs={12}>
-            <CardWithTable >
-              <div>Table</div>
+            <CardWithTable title="Payment Transactions">
+              <div className="h-[0.60rem]"/>
+
+              <Stepper /> 
+
+
             </CardWithTable>
-
-
           </Grid>
-
 
         </Grid>
       </Grid>
