@@ -9,6 +9,7 @@ import { useTheme } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import { RouteModel } from '@/Types'
+import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
 
 interface NavbarProps {
   isScrolled: boolean,
@@ -17,6 +18,7 @@ interface NavbarProps {
 
 const Navbar = ({ isScrolled, route }: NavbarProps) => {
   const theme = useTheme()
+  const store = useToggleDrawer();
 
   let colorIcon = theme.palette.grey[500]
   let backgroundColor = isScrolled ? 'rgba(255, 255, 255, 0.8)' : 'transparent';
@@ -76,7 +78,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
             <TextField id="outlined-basic" size='small' label="Search" variant="outlined" />
           </Box>
           <div>
-            <SideMenuToggleIcon onClick={() => console.log('close sidenav')} fontSize='small'  style={{ color: colorIcon, marginLeft: '1rem' }} />
+            <SideMenuToggleIcon onClick={() => store.isToggled() } fontSize='small'  style={{ color: colorIcon, marginLeft: '1rem' }} />
             <ProfileIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <SettingIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <NotificationIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
