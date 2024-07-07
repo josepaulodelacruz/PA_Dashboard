@@ -66,7 +66,7 @@ const DashboardPage = () => {
           }
         </Grid>
 
-        <Grid container item md={12} xs={12} direction='row' spacing={3} style={{padding: '1rem 1rem 0'}} >
+        <Grid container item md={12} xs={12} direction='row' spacing={3} style={{padding: '1rem 0 0 1rem'}} >
 
           <Grid item md={8} xs={12} >
             <CardWithTable title="House Hold" >
@@ -78,10 +78,7 @@ const DashboardPage = () => {
           <Grid item md={4} xs={12}>
             <CardWithTable title="Payment Transactions">
               <div className="h-[0.60rem]"/>
-
               <Stepper /> 
-
-
             </CardWithTable>
           </Grid>
 
