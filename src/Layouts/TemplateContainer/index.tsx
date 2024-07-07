@@ -1,12 +1,10 @@
 import Sidenav from "@/Components/Sidenav"
-import Grid from "@mui/material/Grid"
 import Navbar from '@/Components/Navbar'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { routes } from '@/routes'
 import { RouteModel } from "@/Types"
 import useToggleDrawer from "@/Hooks/Sidenav/useToggleDrawer"
-import Slide from '@mui/material/Slide'
 
 const TemplateContainer = () => {
   const location = useLocation()
@@ -67,22 +65,6 @@ const TemplateContainer = () => {
     </div>
 
   )
-  /*
-  return (
-    <Grid container >
-      <Grid item lg={2} xs={0} >
-        <Sidenav />
-      </Grid>
-
-      <Grid ref={scrollableRef} item lg={10} xs={12} style={{ height: '100vh', overflowY: 'auto' }} >
-        <Navbar isScrolled={isScrolled} route={routeObject}/>
-        <Outlet />
-      </Grid>
-
-    </Grid>
-  )
-  */
-
 }
 
 export default TemplateContainer
