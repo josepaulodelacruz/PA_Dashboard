@@ -30,8 +30,8 @@ const Sidenav = () => {
 
   return (
     <Box
-      display={{xs: 'none', xl: 'flex'}}
-      flexDirection='column'
+      display={{ xs: 'none', xl: 'flex' }}
+      flexDirection="column"
       height="100vh"
     >
       <Paper
@@ -43,7 +43,7 @@ const Sidenav = () => {
           display: 'flex',
           flexDirection: 'column',
           flex: 1, // Child element takes up remaining space
-          overflowY: 'auto' // Scroll if content overflows
+          overflowY: 'auto', // Scroll if content overflows
         }}
       >
         <Box
@@ -51,21 +51,36 @@ const Sidenav = () => {
           pt={1.5}
           px={4}
           display="flex"
-          justifyContent='flex-start'
-          alignItems='center'
+          justifyContent="flex-start"
+          alignItems="center"
+          gap={2} // Space between the icon and the text
         >
-          <div style={{ marginRight: '10px', height: '20px', width: '30px', backgroundColor: 'white' }} />
-          <Typography color={textColor} display="block" fontWeight='bold' variant='h6'>
+          <div
+            style={{
+              height: '20px',
+              width: '30px',
+              backgroundColor: 'white',
+              borderRadius: '4px', // Added to make it look better
+            }}
+          />
+          <Typography
+            color={textColor}
+            display="block"
+            fontWeight="bold"
+            variant="h6"
+            whiteSpace="nowrap" // Prevent text from wrapping
+            overflow="hidden" // Hide overflow text
+            textOverflow="ellipsis" // Add ellipsis for overflow text
+          >
             App Name
           </Typography>
         </Box>
 
-        <hr className='divider' />
+        <hr className="divider" />
 
         <List>{renderRoutes}</List>
       </Paper>
-    </Box>
-  )
+    </Box>)
 }
 
 export default Sidenav

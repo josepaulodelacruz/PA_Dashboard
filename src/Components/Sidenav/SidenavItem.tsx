@@ -28,17 +28,22 @@ const SidenavItem = ({ icon, name, route }: SidenavItemProps) => {
 
   return (
     <div
-      className='py-[0.5rem] px-[0.925rem] my-[0.09375rem] mx-[1rem] mb-2 flex flex-row border-stone-100 rounded-[0.375rem]'
+      className='py-[0.5rem] px-[0.925rem] my-[0.09375rem] mx-[1rem] mb-2 flex items-center border-stone-100 rounded-[0.375rem]'
       style={{
         background: route === location.pathname ? backgroundValue : isHovered ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
-        transition: 'background 0.3s ease'
+        transition: 'background 0.3s ease',
+        whiteSpace: 'nowrap', // Prevent text wrapping
+        overflow: 'hidden',   // Hide overflowing text
+        textOverflow: 'ellipsis', // Add ellipsis for overflowing text
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className='p-[0.025rem]'>
+      <div className='p-[0.025rem] flex items-center'>
         {icon}
-        <span className='text-white font-normal ' style={{ fontSize: '0.875rem' }}>{name}</span>
+        <span className='text-white font-normal ml-2' style={{ fontSize: '0.875rem' }}>
+          {name}
+        </span>
       </div>
     </div>
   );

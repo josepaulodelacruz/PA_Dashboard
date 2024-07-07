@@ -1,0 +1,16 @@
+/* Define the transition for the sidebar */
+.sidebar {
+  transition: all 0.3s ease;
+}
+
+/* Define styles for the open state */
+.sidebar.open {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Define styles for the closed state */
+.sidebar.closed {
+  transform: translateX(-100%);
+  opacity: 0;
+}
