@@ -52,7 +52,7 @@ const TemplateContainer = () => {
 
 
   return (
-    <div className={`grid h-screen transition-all  duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[20%_80%]' : 'xl:grid-cols-[0_100%]'}`}>
+    <div className={`grid h-screen transition-all  duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[14%_86%]' : 'xl:grid-cols-[0_100%]'}`}>
 
       <Sidenav />
 
