@@ -19,7 +19,6 @@ interface NavbarProps {
 const Navbar = ({ isScrolled, route }: NavbarProps) => {
   const theme = useTheme()
   const store = useToggleDrawer();
-
   let colorIcon = theme.palette.grey[500]
   let backgroundColor = isScrolled ? 'rgba(255, 255, 255, 0.8)' : 'transparent';
   let backdropFilter = isScrolled ? 'saturate(200%) blur(1.875rem);' : 'none';
@@ -33,6 +32,10 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
     }
     return null;
   };
+
+  const _handleSidebarToggle = () => {
+    store.isToggled()
+  }
 
 
   return (
@@ -78,7 +81,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
             <TextField id="outlined-basic" size='small' label="Search" variant="outlined" />
           </Box>
           <div>
-            <SideMenuToggleIcon onClick={() => store.isToggled() } fontSize='small'  style={{ color: colorIcon, marginLeft: '1rem' }} />
+            <SideMenuToggleIcon onClick={_handleSidebarToggle} fontSize='small'  style={{ color: colorIcon, marginLeft: '1rem' }} />
             <ProfileIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <SettingIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <NotificationIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />

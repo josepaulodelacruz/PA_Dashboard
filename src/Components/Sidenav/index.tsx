@@ -9,7 +9,6 @@ import linearGradient from '@/assets/theme/functions/linearGradient'
 import SidenavItem from './SidenavItem'
 import Drawer from '@mui/material/Drawer'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
-import { useEffect, useLayoutEffect } from 'react'
 import './index.css'
 
 interface SidenavProps {
@@ -22,19 +21,20 @@ const Sidenav = ({ classNames }: SidenavProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen size is mobile
   let backgroundValue = linearGradient(gradients.dark.main, gradients.dark.state)
   let textColor = '#FFF'
-  const _toggleDrawer = useToggleDrawer()
-  let _isSideDrawerOpen = _toggleDrawer.isOpen
+  let _toggleDrawer = useToggleDrawer()
 
-  /*
-  useLayoutEffect(() => {
+  const _handleCloseDrawer = () => {
+    _toggleDrawer.isClosed()
+  }
+
+  const _handleDrawerEvent = () => {
     if(isMobile) {
       _toggleDrawer.isClosed()
     }
-
-  }, [location, isMobile])*/
+  }
 
   const renderRoutes = routes.map((item) => (
-    <NavLink key={item.key} to={item.route}>
+    <NavLink key={item.key} to={item.route} onClick={_handleDrawerEvent}>
       <SidenavItem icon={item.icon} name={item.name} route={item.route} />
     </NavLink>
   ))
@@ -43,8 +43,8 @@ const Sidenav = ({ classNames }: SidenavProps) => {
     return (
       <Drawer
         variant="temporary"
-        open={_isSideDrawerOpen}
-        onClose={() => _toggleDrawer.isClosed()}
+        open={_toggleDrawer.isOpen}
+        onClose={_handleCloseDrawer}
         sx={{
           display: { xs: 'block', xl: 'none' },
           '& .MuiDrawer-paper': {
