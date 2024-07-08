@@ -4,6 +4,7 @@ import TablesIcon from '@mui/icons-material/TableRows'
  
 //Pages
 import DashboardPage from '@/Pages/Dashboard'
+import TablesPage from "@/Pages/Tables"
 
 const routes: RouteModel[] = [
   {
@@ -20,7 +21,7 @@ const routes: RouteModel[] = [
     key: 'tables',
     icon: <TablesIcon fontSize='small' sx={{marginRight: '10px', color: "#FFF"}}>Tables</TablesIcon>,
     route: '/tables',
-    component: <div>Tables</div>
+    component: <TablesPage />
   },
 ];
 
