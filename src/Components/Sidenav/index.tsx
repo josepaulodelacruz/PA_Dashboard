@@ -9,7 +9,7 @@ import linearGradient from '@/assets/theme/functions/linearGradient'
 import SidenavItem from './SidenavItem'
 import Drawer from '@mui/material/Drawer'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
-import { useEffect, useState, useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import './index.css'
 
 interface SidenavProps {
@@ -19,18 +19,19 @@ interface SidenavProps {
 const Sidenav = ({ classNames }: SidenavProps) => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
-  const isMobile = useMediaQuery(theme.breakpoints.down('xl')) // Check if the screen size is mobile
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen size is mobile
   let backgroundValue = linearGradient(gradients.dark.main, gradients.dark.state)
   let textColor = '#FFF'
   const _toggleDrawer = useToggleDrawer()
-  const _isSideDrawerOpen = _toggleDrawer.isOpen
+  let _isSideDrawerOpen = _toggleDrawer.isOpen
 
+  /*
   useLayoutEffect(() => {
     if(isMobile) {
       _toggleDrawer.isClosed()
     }
 
-  }, [location, isMobile])
+  }, [location, isMobile])*/
 
   const renderRoutes = routes.map((item) => (
     <NavLink key={item.key} to={item.route}>
