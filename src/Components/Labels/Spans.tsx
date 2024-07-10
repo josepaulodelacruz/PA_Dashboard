@@ -1,4 +1,5 @@
 import { useTheme } from "@mui/material/styles";
+import { ReactNode } from "react";
 
 const SpanTheme = () => {
   const theme = useTheme()
@@ -21,11 +22,15 @@ const MainSpan = () => {
   )
 }
 
-const SubSpan = () => {
+interface SubSpanProps {
+  children: ReactNode
+}
+
+const SubSpan = ({ children } : SubSpanProps ) => {
   const textTheme = SpanTheme()
   return (
     <span className='text-[0.70rem] font-light' style={{ color: textTheme.subTextColor }} >
-      Last Campaign Performance
+      {children}
     </span>
   )
 

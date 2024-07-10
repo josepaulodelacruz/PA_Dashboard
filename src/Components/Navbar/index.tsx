@@ -80,7 +80,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
           >
             <TextField id="outlined-basic" size='small' label="Search" variant="outlined" />
           </Box>
-          <div>
+          <div  className='justify-end'>
             <SideMenuToggleIcon onClick={_handleSidebarToggle} fontSize='small'  style={{ color: colorIcon, marginLeft: '1rem' }} />
             <ProfileIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <SettingIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />

@@ -6,9 +6,9 @@ interface TableCellWithAvatarProps {
   subName: string
 }
 
-const TableCellWithAvatar = ({ avatar, name, subName} : TableCellWithAvatarProps ) => {
+const TableCellWithAvatar = ({ name, subName } : TableCellWithAvatarProps ) => {
   const theme = useTheme();
-  const { dark, primary } = theme.palette as { dark?: any, primary?: any }
+  const { dark } = theme.palette as { dark?: any, primary?: any }
 
   return (
     <div className="flex flex-row justify-start items-center">

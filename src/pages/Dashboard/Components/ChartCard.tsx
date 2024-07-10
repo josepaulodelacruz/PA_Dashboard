@@ -17,7 +17,7 @@ const ChartCard: React.FC<ChartCardProps> = ({ backgroundValue }) => {
         <Paper className="absolute px-7 pb-5 items-start mt-10 bg-white flex flex-col justify-end w-full h-full top-0 left-0 rounded-xl shadow-md"
           sx={{ borderRadius: '0.75rem', boxShadow: 'rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem' }}>
           <MainSpan/>
-          <SubSpan/>
+          <SubSpan>Last Payment</SubSpan>
         </Paper>
       </div>
     </Grid>
