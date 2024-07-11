@@ -4,11 +4,12 @@ import { ReactNode } from 'react'
 
 interface IconButtonProps {
   children: ReactNode
+  onClick?: () => void,
 }
 
-const IconButton = ({ children } : IconButtonProps ) => {
+const IconButton = ({ children, onClick } : IconButtonProps ) => {
   return (
-    <Button variant='outlined' size='small' sx={{ width: 'auto', padding: '0', margin: '5px', minWidth: '30px' }}>
+    <Button variant='outlined' onClick={onClick} size='small' sx={{ width: 'auto', padding: '0', margin: '5px', minWidth: '30px' }}>
       {children}
     </Button>
   )

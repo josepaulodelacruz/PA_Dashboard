@@ -1,6 +1,6 @@
 
 import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
+import TestModal from '@/Components/Modal/TestModal'
 import DashboardLayout from "@/Layouts/DashboardLayout"
 import Table from '@mui/material/Table'
 import TableHead from '@mui/material/TableHead'
@@ -13,9 +13,41 @@ import { SubSpan } from '@/Components/Labels/Spans'
 import IconButton from '@/Components/Button/IconButton'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import useTestModal from '@/Hooks/Test'
 import '@/index.css'
 
 const TablesPage = () => {
+
+  const { isOpen, onClose, onOpen } = useTestModal()
+
+  const RowComponent = () => {
+    return (
+      <TableRow className='w-full border-b'>
+        <td className='column-header whitespace-nowrap'>
+          <TableCellWithAvatar avatar='' name='Dela Cruz' subName='BLK 24 LOT 18 PHASE 2' />
+        </td>
+        <td align='left' className='column-header whitespace-nowrap'>
+          <TableCellProfileImg length={4} />
+        </td>
+        <td align='left' className='whitespace-nowrap'>
+          <TableMainSub label="P 120.00" subLabel='VIA GCASH' />
+        </td>
+        <td align='left'>
+          <SubSpan >RENT</SubSpan>
+        </td>
+        <td className='whitespace-nowrap'>
+          <IconButton onClick={onOpen} >
+            <DeleteIcon />
+          </IconButton>
+          <IconButton>
+            <EditIcon />
+          </IconButton>
+        </td>
+      </TableRow>
+    )
+
+  }
+
   return (
     <DashboardLayout>
 
@@ -25,7 +57,7 @@ const TablesPage = () => {
             <h6 className='table-header-text'>Residents Table</h6>
           </div>
 
-          <Paper className='top-7 bg-white min-h-[100px] max-h-[500px] w-full absolute pt-16 overflow-y-auto' sx={{ borderRadius: '0.5rem' }} elevation={2} >
+          <div className='top-7 bg-white min-h-[100px] w-full absolute pt-16 overflow-y-auto shadow-md rounded-xl'  >
             <Table >
               <TableHead>
                 <TableRow className='w-full border-b border-gray-300 '>
@@ -38,39 +70,21 @@ const TablesPage = () => {
               </TableHead>
 
               <TableBody>
-                <TableRow className='w-full border-b'>
-                  <td className='column-header whitespace-nowrap'>
-                    <TableCellWithAvatar avatar='' name='Dela Cruz' subName='BLK 24 LOT 18 PHASE 2' />
-                  </td>
-                  <td align='left' className='column-header whitespace-nowrap'>
-                    <TableCellProfileImg length={4} />
-                  </td>
-                  <td align='left' className='whitespace-nowrap'>
-                    <TableMainSub label="P 120.00" subLabel='VIA GCASH' />
-                  </td>
-                  <td align='left'>
-                    <SubSpan >RENT</SubSpan>
-                  </td>
-                  <td className='whitespace-nowrap'>
-                    <IconButton>
-                      <DeleteIcon />
-                    </IconButton>
-                    <IconButton>
-                      <EditIcon />
-                    </IconButton>
+                <RowComponent />
 
-
-
-                  </td>
-                </TableRow>
               </TableBody>
 
             </Table>
-          </Paper>
+          </div>
 
         </div>
 
       </Grid>
+
+      <TestModal
+        isOpen={isOpen}
+        onClose={onClose}
+      />
 
     </DashboardLayout>
   )
