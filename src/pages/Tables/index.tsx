@@ -2,9 +2,7 @@
 import Grid from '@mui/material/Grid'
 import TestModal from '@/Components/Modal/TestModal'
 import DashboardLayout from "@/Layouts/DashboardLayout"
-import Table from '@mui/material/Table'
-import TableHead from '@mui/material/TableHead'
-import TableBody from '@mui/material/TableBody'
+import TableContainer from '@/Components/Table/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import TableCellWithAvatar from '@/Components/Table/TableCellWithAvatar'
 import TableCellProfileImg from '@/Components/Table/TableCellProfileImg'
@@ -39,7 +37,7 @@ const TablesPage = () => {
           <IconButton onClick={onOpen} >
             <DeleteIcon />
           </IconButton>
-          <IconButton>
+          <IconButton color='info'>
             <EditIcon />
           </IconButton>
         </td>
@@ -50,34 +48,44 @@ const TablesPage = () => {
 
   return (
     <DashboardLayout>
+      <Grid container direction='column' item md={12} xs={12} sx={{ px: 0.5 }}>
+        <TableContainer
+          tableTitle='Residents Table'
+          tableHeader={
+            <TableRow>
+              <th align='left' className='column-header'>FAMILY NAMES</th>
+              <th align='left' className='column-header'>MEMBERS</th>
+              <th align='left' className='column-header'>LATEST PAYMENT</th>
+              <th align='left' className='column-header'>TYPE</th>
+              <th align='left' className='column-header'>ACTION</th>
+            </TableRow>
+          }
+        >
+          <RowComponent />
+          <RowComponent />
+          <RowComponent />
+          <RowComponent />
+          <RowComponent />
+        </TableContainer>
 
-      <Grid container item md={12} xs={12} sx={{ px: 0.5 }}>
-        <div className='relative top-0 flex-1'>
-          <div className='bg-blue-500 pl-4 flex h-[60px] w-[98%] mx-auto relative top-3 z-10 rounded-lg shadow-lg'>
-            <h6 className='table-header-text'>Residents Table</h6>
-          </div>
-
-          <div className='top-7 bg-white min-h-[100px] w-full absolute pt-16 overflow-y-auto shadow-md rounded-xl'  >
-            <Table >
-              <TableHead>
-                <TableRow className='w-full border-b border-gray-300 '>
-                  <th align='left' className='column-header'>FAMILY NAMES</th>
-                  <th align='left' className='column-header'>MEMBERS</th>
-                  <th align='left' className='column-header'>LATEST PAYMENT</th>
-                  <th align='left' className='column-header'>TYPE</th>
-                  <th align='left' className='column-header'>ACTION</th>
-                </TableRow>
-              </TableHead>
-
-              <TableBody>
-                <RowComponent />
-
-              </TableBody>
-
-            </Table>
-          </div>
-
-        </div>
+      <TableContainer
+          tableTitle='Residents Table'
+          tableHeader={
+            <TableRow>
+              <th align='left' className='column-header'>FAMILY NAMES</th>
+              <th align='left' className='column-header'>MEMBERS</th>
+              <th align='left' className='column-header'>LATEST PAYMENT</th>
+              <th align='left' className='column-header'>TYPE</th>
+              <th align='left' className='column-header'>ACTION</th>
+            </TableRow>
+          }
+        >
+          <RowComponent />
+          <RowComponent />
+          <RowComponent />
+          <RowComponent />
+          <RowComponent />
+        </TableContainer>
 
       </Grid>
 

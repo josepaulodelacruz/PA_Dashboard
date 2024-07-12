@@ -69,9 +69,18 @@ const DashboardPage = () => {
         </Grid>
 
         <Grid container item md={12} xs={12} direction='row' spacing={3} style={{ padding: '2rem 0 0 1rem' }}>
-          <ChartCard backgroundValue={linearGradient(gradients.info.main, gradients.info.state)}/>
-          <ChartCard backgroundValue={linearGradient(gradients.primary.main, gradients.primary.state)}/>
-          <ChartCard backgroundValue={linearGradient(gradients.success.main, gradients.success.state)}/>
+          <ChartCard
+            title="Website Views"
+            subTitle="2,302 Views"
+            backgroundValue={linearGradient(gradients.info.main, gradients.info.state)} />
+          <ChartCard
+            title="Website Views"
+            subTitle="2,302 Views"
+            backgroundValue={linearGradient(gradients.primary.main, gradients.primary.state)}/>
+          <ChartCard
+            title="Website Views"
+            subTitle="2,302 Views"
+            backgroundValue={linearGradient(gradients.success.main, gradients.success.state)}/>
         </Grid>
 
         <Grid container item md={12} xs={12} direction='row' spacing={3} style={{ padding: '1rem 0 0 1rem' }} >
