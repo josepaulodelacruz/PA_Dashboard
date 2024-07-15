@@ -1,10 +1,11 @@
 import Sidenav from "@/Components/Sidenav"
 import Navbar from '@/Components/Navbar'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { routes } from '@/routes'
 import { RouteModel } from "@/Types"
 import useToggleDrawer from "@/Hooks/Sidenav/useToggleDrawer"
+import { ScrollToTop } from "@/Utils"
 
 const TemplateContainer = () => {
   const location = useLocation()
@@ -52,17 +53,20 @@ const TemplateContainer = () => {
 
 
   return (
-    <div className={`grid h-screen transition-all  duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[18%_82%]' : 'xl:grid-cols-[0_100%]'}`}>
+    <>
+      <div className={`grid h-screen transition-all  duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[18%_82%]' : 'xl:grid-cols-[0_100%]'}`}>
 
-      <Sidenav />
+        <Sidenav />
 
-      <div ref={scrollableRef} className="overflow-auto">
-        <Navbar isScrolled={isScrolled} route={routeObject} />
-        <Outlet />
+        <div ref={scrollableRef} className="overflow-auto">
+          <Navbar isScrolled={isScrolled} route={routeObject} />
+          <Outlet />
+
+        </div>
+
 
       </div>
-
-    </div>
+    </>
 
   )
 }

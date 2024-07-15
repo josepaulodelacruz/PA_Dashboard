@@ -12,7 +12,7 @@ const routes: RouteModel[] = [
     name: 'Dashboard',
     key: 'dashboard',
     icon: <DashboardIcon fontSize='small'  sx={{marginRight: '10px', color: '#FFF'}}>dashboard</DashboardIcon>,
-    route: '/',
+    route: '/dashboard',
     component: <DashboardPage />
   },
   {
@@ -20,7 +20,7 @@ const routes: RouteModel[] = [
     name: 'Tables',
     key: 'tables',
     icon: <TablesIcon fontSize='small' sx={{marginRight: '10px', color: "#FFF"}}>Tables</TablesIcon>,
-    route: '/tables',
+    route: '/dashboard/tables',
     component: <TablesPage />
   },
 ];
