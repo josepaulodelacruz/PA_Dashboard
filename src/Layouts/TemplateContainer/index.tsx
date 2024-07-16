@@ -1,6 +1,6 @@
 import Sidenav from "@/Components/Sidenav"
 import Navbar from '@/Components/Navbar'
-import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { routes } from '@/routes'
 import { RouteModel } from "@/Types"
@@ -59,6 +59,8 @@ const TemplateContainer = () => {
         <Sidenav />
 
         <div ref={scrollableRef} className="overflow-auto">
+          <ScrollToTop scrollRef={scrollableRef} />
+          
           <Navbar isScrolled={isScrolled} route={routeObject} />
           <Outlet />
 
