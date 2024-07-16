@@ -1,5 +1,4 @@
-import { ScrollToTop } from "@/Utils"
-import { Outlet, ScrollRestoration } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 
 const RootLayout = () => {
   return (
