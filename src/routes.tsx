@@ -3,8 +3,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import TablesIcon from '@mui/icons-material/TableRows'
  
 //Pages
-import DashboardPage from '@/pages/Dashboard'
-import TablesPage from "@/pages/Tables"
+import DashboardPage from '@/Pages/Dashboard'
+import TablesPage from "@/Pages/Tables"
 
 const routes: RouteModel[] = [
   {
