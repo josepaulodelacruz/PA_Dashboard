@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import linearGradient from '@/assets/theme/functions/linearGradient';
 import { useTheme } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
+import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
 
 interface SidenavItemProps {
   name: string;
@@ -13,6 +14,7 @@ const SidenavItem = ({ icon, name, route }: SidenavItemProps) => {
   const location = useLocation();
   const theme = useTheme();
   const { gradients } = theme.palette as { gradients?: any };
+  const { isOpen } = useToggleDrawer();
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -41,7 +43,14 @@ const SidenavItem = ({ icon, name, route }: SidenavItemProps) => {
     >
       <div className='p-[0.025rem] flex items-center'>
         {icon}
-        <span className='text-white font-normal ml-2' style={{ fontSize: '0.875rem' }}>
+        <span className='text-white font-normal ml-2'
+          style={{
+            fontSize: '0.875rem',
+            transform: isOpen ? 'translateX(0px)' : 'translateX(-10px)',
+            opacity: isOpen ? 1 : 0,
+            transition: 'transform 0.3s ease, opacity 0.3s ease',
+          }}
+        >
           {name}
         </span>
       </div>

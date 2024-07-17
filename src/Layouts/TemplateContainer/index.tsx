@@ -54,9 +54,9 @@ const TemplateContainer = () => {
 
   return (
     <>
-      <div className={`grid h-screen transition-all  duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[18%_82%]' : 'xl:grid-cols-[0_100%]'}`}>
+      <div className={`group grid h-screen transition-all  duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[18%_auto]' : 'xl:grid-cols-[110px_auto]'}`}>
 
-        <Sidenav />
+        <Sidenav/>
 
         <div ref={scrollableRef} className="overflow-auto">
           <ScrollToTop scrollRef={scrollableRef} />

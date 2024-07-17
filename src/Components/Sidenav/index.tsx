@@ -28,7 +28,7 @@ const Sidenav = ({ classNames }: SidenavProps) => {
   }
 
   const _handleDrawerEvent = () => {
-    if(isMobile) {
+    if (isMobile) {
       _toggleDrawer.isClosed()
     }
   }
@@ -84,6 +84,12 @@ const Sidenav = ({ classNames }: SidenavProps) => {
               whiteSpace="nowrap" // Prevent text from wrapping
               overflow="hidden" // Hide overflow text
               textOverflow="ellipsis" // Add ellipsis for overflow text
+              style={{
+                fontSize: '0.875rem',
+                transform: _toggleDrawer.isOpen ? 'translateX(0px)' : 'translateX(-10px)',
+                opacity: _toggleDrawer.isOpen ? 1 : 0,
+                transition: 'transform 0.3s ease, opacity 0.3s ease',
+              }}
             >
               App Name
             </Typography>
@@ -127,7 +133,7 @@ const Sidenav = ({ classNames }: SidenavProps) => {
         >
           <div
             style={{
-              height: '20px',
+              height: '30px',
               width: '30px',
               backgroundColor: 'white',
               borderRadius: '4px', // Added to make it look better
@@ -141,6 +147,12 @@ const Sidenav = ({ classNames }: SidenavProps) => {
             whiteSpace="nowrap" // Prevent text from wrapping
             overflow="hidden" // Hide overflow text
             textOverflow="ellipsis" // Add ellipsis for overflow text
+            style={{
+              fontSize: '0.875rem',
+              transform: _toggleDrawer.isOpen ? 'translateX(0px)' : 'translateX(-10px)',
+              opacity: _toggleDrawer.isOpen ? 1 : 0,
+              transition: 'transform 0.3s ease, opacity 0.3s ease',
+            }}
           >
             App Name
           </Typography>
