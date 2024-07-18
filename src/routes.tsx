@@ -5,6 +5,9 @@ import TablesIcon from '@mui/icons-material/TableRows'
 //Pages
 import DashboardPage from '@/Pages/Dashboard'
 import TablesPage from "@/Pages/Tables"
+import RegisterPage from "./Pages/Register"
+
+//authRoutes
 
 const routes: RouteModel[] = [
   {
@@ -25,5 +28,16 @@ const routes: RouteModel[] = [
   },
 ];
 
-export { routes }
+const authRoutes: RouteModel[] = [
+  {
+    type: 'collapse',
+    name: 'Register',
+    key: 'register',
+    icon: <DashboardIcon fontSize='small'  sx={{marginRight: '10px', color: '#FFF'}}>dashboard</DashboardIcon>,
+    route: '/register',
+    component: <RegisterPage />
+  }
+]
+
+export { routes, authRoutes }
 
