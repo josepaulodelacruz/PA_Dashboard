@@ -25,10 +25,7 @@ const AuthLayout = ({ children }: AuthLayout) => {
         },
       })}
     >
-
       {children}
-
-
     </Box>
 
 
