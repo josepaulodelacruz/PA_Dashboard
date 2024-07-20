@@ -7,13 +7,14 @@ interface BorderedButtonProps {
   backgroundValue?: string
   children?: ReactNode
   onClick?: () => void,
-
+  style?: React.CSSProperties,
 }
 
 const BorderedButton = ({ 
   backgroundValue = 'transparent', 
   children,
   onClick,
+  style,
 }: BorderedButtonProps) => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
@@ -25,6 +26,7 @@ const BorderedButton = ({
       onClick={onClick!}
       variant='outlined'
       size='small'
+      style={style!}
       sx={{
         background: backgroundValue,
         borderColor: gradients.dark.main,

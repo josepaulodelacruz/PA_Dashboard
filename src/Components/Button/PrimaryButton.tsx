@@ -7,10 +7,11 @@ import { ReactNode } from "react"
 interface PrimaryButtonProps {
   backgroundValue?: string
   children?: ReactNode
-
+  className?: string
+  style?: React.CSSProperties
 }
 
-const PrimaryButton = ({ backgroundValue, children } : PrimaryButtonProps) => {
+const PrimaryButton = ({ style, backgroundValue, children, className } : PrimaryButtonProps) => {
 
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
@@ -19,7 +20,9 @@ const PrimaryButton = ({ backgroundValue, children } : PrimaryButtonProps) => {
   let defaultLabel = children ?? 'OKAY';
 
   return (
-    <Button size='small' sx={{background: defaultBackgroundColor, color: '#fff'}}>
+    <Button
+      style={style!}
+      className={className!} size='small' sx={{background: defaultBackgroundColor, color: '#fff'}}>
       {defaultLabel}
     </Button>
   )
