@@ -34,11 +34,12 @@ const TablesPage = () => {
           <SubSpan >RENT</SubSpan>
         </td>
         <td className='whitespace-nowrap'>
-          <IconButton onClick={onOpen} >
-            <DeleteIcon />
-          </IconButton>
+
           <IconButton color='info'>
             <EditIcon />
+          </IconButton>
+          <IconButton color='error' onClick={onOpen} >
+            <DeleteIcon />
           </IconButton>
         </td>
       </TableRow>
@@ -68,7 +69,7 @@ const TablesPage = () => {
           <RowComponent />
         </TableContainer>
 
-      <TableContainer
+        <TableContainer
           tableTitle='Residents Table'
           tableHeader={
             <TableRow>
