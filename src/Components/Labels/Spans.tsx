@@ -13,15 +13,16 @@ const SpanTheme = () => {
 
 interface MainSpanProps {
   children: ReactNode,
-  
+  style?: React.CSSProperties,
+  className?: string,
 }
 
-const MainSpan = ({ children } : MainSpanProps ) => {
+const MainSpan = ({ children, style, className } : MainSpanProps ) => {
 
   const textTheme = SpanTheme()
 
   return (
-    <h6 className='text-[1rem] font-bold' style={{ color: textTheme.textColor }} >
+    <h6 className={`text-[1rem] font-bold ${className}`} style={{ color: textTheme.textColor, ...style! }} >
       {children}
     </h6>
   )
@@ -29,16 +30,18 @@ const MainSpan = ({ children } : MainSpanProps ) => {
 
 interface SubSpanProps {
   children: ReactNode
-  className?: string 
+  className?: string ,
+  style?: React.CSSProperties
 }
 
 const SubSpan = ({ 
   children,
-  className = 'text-[0.75rem] font-light'
+  style,
+  className = 'text-[0.75rem] font-light',
 }: SubSpanProps) => {
   const textTheme = SpanTheme();
   return (
-    <span className={className} style={{ color: textTheme.subTextColor }}>
+    <span className={className} style={{ color: textTheme.subTextColor, ...style! }}>
       {children}
     </span>
   );

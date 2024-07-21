@@ -1,4 +1,4 @@
-import AuthLayout from "@/Layoutn/AuthLayout"
+import AuthLayout from "@/Layouts/AuthLayout"
 import linearGradient from "@/assets/theme/functions/linearGradient"
 import { useTheme } from "@mui/material/styles"
 import IconButton from '@/Components/Button/IconButton'
@@ -8,6 +8,7 @@ import InputTextField from "@/Components/InputTextField"
 import PrimaryButton from "@/Components/Button/PrimaryButton"
 import { Link } from 'react-router-dom'
 import { ArrowBackIos } from "@mui/icons-material"
+import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
 
 const LoginPage = () => {
   const theme = useTheme()
@@ -21,7 +22,7 @@ const LoginPage = () => {
         <div className="w-full h-[250px] bg-gray-300 rounded-lg relative" />
 
         <div
-          className="self-center relative justify-center top-[-100px] z-10 h-[400px] w-[350px]" >
+          className="self-center relative justify-center top-[-100px] z-10 h-[380px] w-[350px]" >
 
           <div style={{ background: backgroundValue }} className="flex flex-col justify-center items-center w-[320px] rounded-lg shadow-lg mx-auto h-[100px] z-10 relative" >
             <h3 className="text-lg font-semibold text-white">Login in with</h3>
@@ -39,25 +40,31 @@ const LoginPage = () => {
 
           <div className="absolute h-full w-full bg-white rounded-xl shadow-xl top-5 pt-24 px-4 flex flex-col " >
 
-            <div className="flex-grow">
-              <InputTextField placeholder="Email" label='Username' />
-              <InputTextField placeholder="Enter Password" label="Password" />
+            <div className="">
+              <div className="py-2">
+                <InputTextField placeholder="Email" label='Username' />
+              </div>
+              <div className="py-2">
+                <InputTextField placeholder="Enter Password" label="Password" />
+              </div>
             </div>
 
-            <div className="flex flex-row justify-between">
-              <Link to='/' className="items-center flex text-sm underline " >
-                <ArrowBackIos sx={{ fontSize: '12px' }} />
-                Back to Login
+
+            <PrimaryButton
+              backgroundValue={backgroundValue}
+              style={{ marginTop: '1rem', marginBottom: '1rem', padding: '0.55rem' }}
+            >
+              LOGIN
+            </PrimaryButton>
+
+
+            <div className="self-center flex-row flex items-center ">
+              <SubSpan style={{paddingRight: '5px'}}>Don't have an account? </SubSpan>
+              <Link  to='/register'>
+                <MainSpan style={{color: backgroundValue, textDecoration: 'underline', fontSize: '0.90rem'}}>Register Here</MainSpan>
               </Link>
-
-              <PrimaryButton
-                backgroundValue={backgroundValue}
-                style={{ marginTop: '1rem', marginBottom: '1rem', padding: '0.55rem' }}
-              >
-                LOGIN
-              </PrimaryButton>
-
             </div>
+
 
           </div>
         </div>
