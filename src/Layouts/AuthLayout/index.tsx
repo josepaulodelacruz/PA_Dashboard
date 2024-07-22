@@ -16,7 +16,7 @@ const AuthLayout = ({ children }: AuthLayout) => {
       px={1.5}
       display='flex'
       flexDirection='column'
-      height={'100vh'}
+      height='100vh'
       sx={({ breakpoints, transitions }) => ({
         paddingTop: '0.5rem',
         position: "relative",
@@ -28,14 +28,14 @@ const AuthLayout = ({ children }: AuthLayout) => {
         },
       })}
     >
-      {children}
-      <div className="flex flex-auto items-end justify-between mb-10 px-20">
+      <div className="flex-1 flex">
+        {children}
+      </div>
+      <div className="flex items-center justify-between ">
 
-        <div className="flex-[1]">
-          <MainSpan style={{fontSize: '12px'}}>© 2024, made by JPDC.Inc. </MainSpan>
-        </div>
+        <MainSpan style={{fontSize: '12px', whiteSpace: 'nowrap'}}>© 2024, made by JPDC.Inc. </MainSpan>
 
-        <div className="flex flex-row flex-[0.35] justify-between">
+        <div className="flex flex-row items-start ">
           <Link to='/dashboard'> <MainSpan style={{fontSize: '0.85rem', textDecoration: 'underline'}}>Home</MainSpan> </Link>
           <Link to='/dashboard'> <MainSpan style={{fontSize: '0.85rem', textDecoration: 'underline'}}>Blog</MainSpan> </Link>
           <Link to='/dashboard'> <MainSpan style={{fontSize: '0.85rem', textDecoration: 'underline'}}>Terms & Condition</MainSpan> </Link>

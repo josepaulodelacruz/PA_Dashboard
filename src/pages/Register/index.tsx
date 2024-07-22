@@ -17,11 +17,12 @@ const RegisterPage = () => {
 
   return (
     <AuthLayout>
-      <div className="flex flex-col ">
-        <div className="w-full h-[250px] bg-gray-300 rounded-lg relative" />
+      <div className="flex flex-col flex-grow relative justify-center ">
+
+        <div className="bg-gray-300 h-[300px] w-full absolute top-[0]"/>
 
         <div
-          className="self-center relative justify-center top-[-100px] z-10 h-[400px] w-[350px]" >
+          className="self-center relative justify-center top-[0] z-10 h-[400px] w-[350px]" >
 
           <div style={{ background: backgroundValue }} className="flex flex-col justify-center items-center w-[320px] rounded-lg shadow-lg mx-auto h-[100px] z-10 relative" >
             <h3 className="text-lg font-semibold text-white">Sign up with</h3>
@@ -51,7 +52,7 @@ const RegisterPage = () => {
             </div>
 
             <div className="flex flex-row justify-between">
-              <Link to='/' className="items-center flex text-sm underline " >
+              <Link to='/login' className="items-center flex text-sm underline " >
                 <ArrowBackIos sx={{ fontSize: '12px' }} />
                 Back to Login
               </Link>

@@ -7,7 +7,6 @@ import FacebookIcon from '@mui/icons-material/FacebookOutlined'
 import InputTextField from "@/Components/InputTextField"
 import PrimaryButton from "@/Components/Button/PrimaryButton"
 import { Link } from 'react-router-dom'
-import { ArrowBackIos } from "@mui/icons-material"
 import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
 
 const LoginPage = () => {
@@ -18,11 +17,12 @@ const LoginPage = () => {
 
   return (
     <AuthLayout>
-      <div className="flex flex-col ">
-        <div className="w-full h-[250px] bg-gray-300 rounded-lg relative" />
+      <div className="flex flex-col justify-center flex-grow relative ">
 
+        <div className="bg-gray-300 h-[300px] w-full absolute top-[0]"/>
+        
         <div
-          className="self-center relative justify-center top-[-100px] z-10 h-[380px] w-[350px]" >
+          className="self-center relative justify-center z-10 h-[380px] w-[350px]" >
 
           <div style={{ background: backgroundValue }} className="flex flex-col justify-center items-center w-[320px] rounded-lg shadow-lg mx-auto h-[100px] z-10 relative" >
             <h3 className="text-lg font-semibold text-white">Login in with</h3>

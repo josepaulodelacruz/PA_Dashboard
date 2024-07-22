@@ -3,10 +3,10 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import TablesIcon from '@mui/icons-material/TableRows'
 
 //Pages
-import DashboardPage from '@/pages/Dashboard'
-import TablesPage from "@/pages/Tables"
-import RegisterPage from "@/pages/Register"
-import LoginPage from "@/pages/Login"
+import DashboardPage from '@/Pages/Dashboard'
+import TablesPage from "@/Pages/Tables"
+import RegisterPage from "@/Pages/Register"
+import LoginPage from "@/Pages/Login"
 
 //authRoutes
 
