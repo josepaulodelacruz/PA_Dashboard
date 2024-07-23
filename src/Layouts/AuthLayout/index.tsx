@@ -31,11 +31,11 @@ const AuthLayout = ({ children }: AuthLayout) => {
       <div className="flex-1 flex">
         {children}
       </div>
-      <div className="flex items-center justify-between ">
+      <div className="flex flex-col md:flex-row items-center justify-between md:px-24 px-2 md:pb-10">
 
-        <MainSpan style={{fontSize: '12px', whiteSpace: 'nowrap'}}>© 2024, made by JPDC.Inc. </MainSpan>
+        <MainSpan style={{fontSize: '12px'}}>© 2024, made by JPDC.Inc. </MainSpan>
 
-        <div className="flex flex-row items-start ">
+        <div className="flex flex-row items-center  pb-2 justify-between md:justify-end gap-4 md:space-x-2">
           <Link to='/dashboard'> <MainSpan style={{fontSize: '0.85rem', textDecoration: 'underline'}}>Home</MainSpan> </Link>
           <Link to='/dashboard'> <MainSpan style={{fontSize: '0.85rem', textDecoration: 'underline'}}>Blog</MainSpan> </Link>
           <Link to='/dashboard'> <MainSpan style={{fontSize: '0.85rem', textDecoration: 'underline'}}>Terms & Condition</MainSpan> </Link>

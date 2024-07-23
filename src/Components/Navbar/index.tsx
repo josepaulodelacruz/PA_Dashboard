@@ -70,15 +70,12 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
 
         <div className='flex flex-row items-center w-full justify-between  sm:justify-end py-2 sm:p-0'>
           <Box
-            sx={{
-              color: 'black',
-              '& > :not(style)': { m: 0, width: '22ch' },
-            }} component='form'
-
+            component='form'
             noValidate
             autoComplete="off"
+            className='w-1/2 flex justify-end'
           >
-            <TextField id="outlined-basic" size='small' label="Search" variant="outlined" />
+            <TextField fullWidth={false} id="outlined-basic" size='small' label="Search" variant="outlined" />
           </Box>
           <div  className='justify-end'>
             <SideMenuToggleIcon onClick={_handleSidebarToggle} fontSize='small'  style={{ color: colorIcon, marginLeft: '1rem' }} />
