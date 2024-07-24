@@ -10,6 +10,9 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import { RouteModel } from '@/Types'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+
 
 interface NavbarProps {
   isScrolled: boolean,
@@ -17,6 +20,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ isScrolled, route }: NavbarProps) => {
+  const { pathname }= useLocation()
   const theme = useTheme()
   const store = useToggleDrawer();
   let colorIcon = theme.palette.grey[500]
@@ -32,6 +36,11 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
     }
     return null;
   };
+
+  useEffect(() => {
+    
+
+  }, [pathname])
 
   const _handleSidebarToggle = () => {
     store.isToggled()
@@ -57,11 +66,11 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
       }} elevation={4}>
       <nav className='flex sm:flex-row flex-col px-4 md:justify-between items-start md:items-center'>
 
-        <div className='flex flex-col'>
+        <div className='flex flex-col transition duration-300 translate-y-0'>
           <div className='flex flex-row items-center'>
             <IconComponent name={route.name} style={{ color: colorIcon, fontSize: '16px' }} />
             <div className='text-sm' style={{ color: '#344767' }}>
-              <span className='px-2'>/</span>
+              <span className='px-2 items-center'>/</span>
               <span>{route.name}</span>
             </div >
           </div>

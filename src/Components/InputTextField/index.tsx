@@ -13,11 +13,11 @@ const InputTextField = ({
     <TextField
       InputLabelProps={{
         shrink: true,
-        style: { fontSize: '20px'}
+        style: { fontSize: '16px', lineHeight: '1rem'}
         
       }}
       inputProps={{
-        style: { fontSize: '16px' }
+        style: { fontSize: '14px' }
       }}
       placeholder={placeholder!}
       fullWidth size='small' variant='standard' label={label!} sx={{ marginY: 1.2 }} />

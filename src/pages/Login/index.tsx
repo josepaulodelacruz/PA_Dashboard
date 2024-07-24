@@ -61,7 +61,7 @@ const LoginPage = () => {
             <div className="self-center flex-row flex items-center ">
               <SubSpan style={{paddingRight: '5px'}}>Don't have an account? </SubSpan>
               <Link  to='/register'>
-                <MainSpan style={{color: backgroundValue, textDecoration: 'underline', fontSize: '0.90rem'}}>Register Here</MainSpan>
+                <MainSpan style={{color: backgroundValue, textDecoration: 'underline', fontSize: '0.70rem'}}>Register Here</MainSpan>
               </Link>
             </div>
 
