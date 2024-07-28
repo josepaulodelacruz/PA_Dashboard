@@ -35,10 +35,10 @@ const UserHome = () => {
             <MainSpan className='text-sm'>Admin@email.com</MainSpan>
           </TableBodyLabel>
           <TableBodyLabel>
-            <MainSpan className='text-sm'>Jose Paulo</MainSpan>
+            <MainSpan className='text-sm whitespace-nowrap'>Jose Paulo</MainSpan>
           </TableBodyLabel>
           <TableBodyLabel>
-            <MainSpan>July 28th, 2024 10:00am</MainSpan>
+            <SubSpan className='whitespace-nowrap text-sm'>July 28th, 2024 10:00am</SubSpan>
           </TableBodyLabel>
 
         </TableRows>
