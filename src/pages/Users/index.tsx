@@ -1,14 +1,13 @@
 
-import { Link, Outlet } from 'react-router-dom'
+import DashboardLayout from '@/Layouts/DashboardLayout'
+import { Outlet } from 'react-router-dom'
 
 
 const UsersPage = () => {
   return (
-    <>
-      <Link to='/dashboard/users/add'>Add USer</Link>
-
-    <Outlet />
-    </>
+    <DashboardLayout>
+      <Outlet />
+    </DashboardLayout>
   )
 }
 

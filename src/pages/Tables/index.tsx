@@ -61,6 +61,7 @@ const TablesPage = () => {
               <th align='left' className='column-header'>ACTION</th>
             </TableRow>
           }
+          
         >
           <RowComponent />
           <RowComponent />

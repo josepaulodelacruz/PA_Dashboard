@@ -28,11 +28,21 @@ const SidenavItem = ({ icon, name, route }: SidenavItemProps) => {
     setIsHovered(false);
   };
 
+
+  const _isRouteHighlighted = () => {
+    const modifiedString = route.replace(/^\/dashboard\//, "")
+    const comparingString = location.pathname.replace(/^\/dashboard\//, "")
+    if(comparingString.includes(modifiedString)) {
+      return true
+    }
+    return false
+  }
+
   return (
     <div
       className='py-[0.5rem] px-[0.925rem] my-[0.09375rem] mx-[1rem] mb-2 flex items-center border-stone-100 rounded-[0.375rem]'
       style={{
-        background: route === location.pathname ? backgroundValue : isHovered ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
+        background: _isRouteHighlighted() ? backgroundValue : isHovered ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
         transition: 'background 0.3s ease',
         whiteSpace: 'nowrap', // Prevent text wrapping
         overflow: 'hidden',   // Hide overflowing text

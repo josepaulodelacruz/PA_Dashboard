@@ -1,6 +1,7 @@
 import { RouteModel } from "./Types"
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import TablesIcon from '@mui/icons-material/TableRows'
+import PeopleIcon from '@mui/icons-material/People'
 
 //Pages
 import DashboardPage from '@/Pages/Dashboard'
@@ -8,8 +9,11 @@ import TablesPage from "@/Pages/Tables"
 import RegisterPage from "@/Pages/Register"
 import LoginPage from "@/Pages/Login"
 import UsersPage from "./Pages/Users"
+import StringRoutes from "./Constants/stringRoutes"
 
 //authRoutes
+
+const stringRoutes = new StringRoutes();
 
 const routes: RouteModel[] = [
   {
@@ -17,7 +21,7 @@ const routes: RouteModel[] = [
     name: 'Dashboard',
     key: 'dashboard',
     icon: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>dashboard</DashboardIcon>,
-    route: '/dashboard/home',
+    route: stringRoutes.dashboard,
     component: <DashboardPage />
   },
   {
@@ -25,15 +29,15 @@ const routes: RouteModel[] = [
     name: 'Tables',
     key: 'tables',
     icon: <TablesIcon fontSize='small' sx={{ marginRight: '10px', color: "#FFF" }}>Tables</TablesIcon>,
-    route: '/dashboard/tables',
+    route: stringRoutes.tables,
     component: <TablesPage />
   },
   {
     type: 'collapse',
     name: 'Users',
-    key: 'tables',
-    icon: <TablesIcon fontSize='small' sx={{ marginRight: '10px', color: "#FFF" }}>Tables</TablesIcon>,
-    route: '/dashboard/users',
+    key: 'user',
+    icon: <PeopleIcon fontSize='small' sx={{ marginRight: '10px', color: "#FFF" }}>Tables</PeopleIcon>,
+    route: stringRoutes.user_home,
     component: <UsersPage />
   },
 ];

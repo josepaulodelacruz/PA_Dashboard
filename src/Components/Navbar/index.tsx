@@ -1,6 +1,7 @@
 import Paper from '@mui/material/Paper'
 import HomeIcon from '@mui/icons-material/Home'
 import TablesIcon from '@mui/icons-material/TableRows'
+import PeopleIcon from '@mui/icons-material/People'
 import ProfileIcon from '@mui/icons-material/Person'
 import SettingIcon from '@mui/icons-material/Settings'
 import NotificationIcon from '@mui/icons-material/NotificationImportant'
@@ -33,6 +34,8 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
       return <HomeIcon fontSize='small' style={style} />;
     } else if (name === 'Tables') {
       return <TablesIcon fontSize='small' style={style} />;
+    } else if (name === 'Users') {
+      return <PeopleIcon fontSize='small' style={style} />;
     }
     return null;
   };
@@ -70,8 +73,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
           <div className='flex flex-row items-center'>
             <IconComponent name={route.name} style={{ color: colorIcon, fontSize: '16px' }} />
             <div className='text-sm' style={{ color: '#344767' }}>
-              <span className='px-2 items-center'>/</span>
-              <span>{route.name}</span>
+              <span style={{paddingLeft: '10px'}}>{route.name}</span>
             </div >
           </div>
           <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{route.name}</span>
