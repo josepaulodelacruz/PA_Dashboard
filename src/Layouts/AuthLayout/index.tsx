@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 import Box from '@mui/material/Box'
-import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
+import { MainSpan } from "@/Components/Labels/Spans"
 import { Link } from 'react-router-dom'
 
 

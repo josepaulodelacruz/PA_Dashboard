@@ -61,7 +61,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
     store.isToggled()
   }
 
-  const _handleNavigateBack = (index) => {
+  const _handleNavigateBack = () => {
     navigate(-1)
   }
 
@@ -92,7 +92,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
                 navRoute?.pathItems.map((item, index) => {
                   return (
                     <div key={index}>
-                      <span onClick={() => index < navRoute.pathItems.length - 1 ? _handleNavigateBack(index) : null} style={{ paddingLeft: '5px', cursor: 'pointer' }}>
+                      <span onClick={() => index < navRoute.pathItems.length - 1 ? _handleNavigateBack() : null} style={{ paddingLeft: '5px', cursor: 'pointer' }}>
                          {item}{index < navRoute.pathItems.length - 1 ? ' /' : ''}
                       </span>
                     </div>
