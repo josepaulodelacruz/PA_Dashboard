@@ -30,8 +30,8 @@ const SidenavItem = ({ icon, name, route }: SidenavItemProps) => {
 
 
   const _isRouteHighlighted = () => {
-    const modifiedString = route.replace(/^\/dashboard\//, "")
-    const comparingString = location.pathname.replace(/^\/dashboard\//, "")
+    const modifiedString = route.replace(/^\/dashboard\//, "").toLowerCase()
+    const comparingString = location.pathname.replace(/^\/dashboard\//, "").toLowerCase()
     if(comparingString.includes(modifiedString)) {
       return true
     }

@@ -5,7 +5,7 @@ class StringRoutes {
   tables = '/dashboard/tables'
 
   user_home = '/dashboard/users'
-  user_home_add = '/dashboard/users/add'
+  user_home_add = '/dashboard/users/form'
 }
 
 export default StringRoutes

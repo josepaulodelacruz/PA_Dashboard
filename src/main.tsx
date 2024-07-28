@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
-import { authRoutes } from './routes.tsx'
-import TemplateContainer from './Layouts/TemplateContainer/index.tsx'
-import DashboardPage from './Pages/Dashboard/index.tsx'
-import TablesPage from './Pages/Tables/index.tsx'
-import UsersPage from './Pages/Users/index.tsx'
-import UserHome from './Pages/Users/SubRoutes/UserHome'
+import { authRoutes } from '@/routes.tsx'
+import TemplateContainer from '@/Layouts/TemplateContainer/index.tsx'
+import DashboardPage from '@/pages/Dashboard/index.tsx'
+import TablesPage from '@/pages/Tables/index.tsx'
+import UsersPage from '@/pages/Users/index.tsx'
+import UserHome from '@/pages/Users/SubRoutes/UserHome'
 
 import StringRoutes from '@/Constants/stringRoutes.tsx'
+import UserFormPage from './pages/Users/SubRoutes/UserFormPage.tsx'
 
 const stringRoutes = new StringRoutes()
 
@@ -30,7 +31,7 @@ const router = createBrowserRouter(
         <Route path={stringRoutes.tables} element={<TablesPage />}/>
         <Route path={stringRoutes.user_home} element={<UsersPage />}>
           <Route path={stringRoutes.user_home} element={<UserHome/>} />
-          <Route path={stringRoutes.user_home_add} element={<div>USER ADD</div>} />
+          <Route path={`${stringRoutes.user_home_add}`} element={<UserFormPage />}/>
         </Route>
       </Route>
     </Route>

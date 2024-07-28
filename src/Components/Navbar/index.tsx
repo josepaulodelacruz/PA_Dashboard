@@ -9,10 +9,10 @@ import SideMenuToggleIcon from '@mui/icons-material/Menu'
 import { useTheme } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import { RouteModel } from '@/Types'
+import { RouteModel, NavRoute } from '@/Types'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
-import { useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useLayoutEffect, useState } from 'react'
 
 
 interface NavbarProps {
@@ -21,7 +21,9 @@ interface NavbarProps {
 }
 
 const Navbar = ({ isScrolled, route }: NavbarProps) => {
-  const { pathname }= useLocation()
+  const [navRoute, setNavRoute] = useState<NavRoute>();
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
   const theme = useTheme()
   const store = useToggleDrawer();
   let colorIcon = theme.palette.grey[500]
@@ -40,8 +42,18 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
     return null;
   };
 
-  useEffect(() => {
-    
+  useLayoutEffect(() => {
+    const comparingString = pathname.replace(/^\/dashboard\//, "").toLowerCase()
+    const routeString = comparingString.split('/')
+    const capitalizeRouteString = routeString.map((route) => {
+      return route.charAt(0).toUpperCase() + route.slice(1)
+    })
+
+    setNavRoute({
+      path: comparingString,
+      name: capitalizeRouteString[capitalizeRouteString.length - 1],
+      pathItems: capitalizeRouteString
+    })
 
   }, [pathname])
 
@@ -49,6 +61,9 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
     store.isToggled()
   }
 
+  const _handleNavigateBack = (index) => {
+    navigate(-1)
+  }
 
   return (
     <Paper
@@ -69,14 +84,24 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
       }} elevation={4}>
       <nav className='flex sm:flex-row flex-col px-4 md:justify-between items-start md:items-center'>
 
-        <div className='flex flex-col transition duration-300 translate-y-0'>
+        <div className='flex flex-col transition duration-300 translate-y-0 w-full'>
           <div className='flex flex-row items-center'>
             <IconComponent name={route.name} style={{ color: colorIcon, fontSize: '16px' }} />
-            <div className='text-sm' style={{ color: '#344767' }}>
-              <span style={{paddingLeft: '10px'}}>{route.name}</span>
-            </div >
+            <div className='text-sm flex flex-row flex-1 items-center' style={{ color: '#344767' }}>
+              {
+                navRoute?.pathItems.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <span onClick={() => index < navRoute.pathItems.length - 1 ? _handleNavigateBack(index) : null} style={{ paddingLeft: '5px', cursor: 'pointer' }}>
+                         {item}{index < navRoute.pathItems.length - 1 ? ' /' : ''}
+                      </span>
+                    </div>
+                  )
+                })
+              }
+            </div>
           </div>
-          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{route.name}</span>
+          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{navRoute?.name}</span>
         </div>
 
         <div className='flex flex-row items-center w-full justify-between  sm:justify-end py-2 sm:p-0'>
@@ -88,8 +113,8 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
           >
             <TextField fullWidth={false} id="outlined-basic" size='small' label="Search" variant="outlined" />
           </Box>
-          <div  className='justify-end'>
-            <SideMenuToggleIcon onClick={_handleSidebarToggle} fontSize='small'  style={{ color: colorIcon, marginLeft: '1rem' }} />
+          <div className='justify-end'>
+            <SideMenuToggleIcon onClick={_handleSidebarToggle} fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <ProfileIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <SettingIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <NotificationIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
