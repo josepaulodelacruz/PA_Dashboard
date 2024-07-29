@@ -13,15 +13,13 @@ import StringRoutes from "@/Constants/stringRoutes"
 
 //authRoutes
 
-const stringRoutes = new StringRoutes();
-
 const routes: RouteModel[] = [
   {
     type: 'collapse',
     name: 'Dashboard',
     key: 'dashboard',
     icon: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>dashboard</DashboardIcon>,
-    route: stringRoutes.dashboard,
+    route: StringRoutes.dashboard,
     component: <DashboardPage />
   },
   {
@@ -29,7 +27,7 @@ const routes: RouteModel[] = [
     name: 'Tables',
     key: 'tables',
     icon: <TablesIcon fontSize='small' sx={{ marginRight: '10px', color: "#FFF" }}>Tables</TablesIcon>,
-    route: stringRoutes.tables,
+    route: StringRoutes.tables,
     component: <TablesPage />
   },
   {
@@ -37,7 +35,7 @@ const routes: RouteModel[] = [
     name: 'Users',
     key: 'user',
     icon: <PeopleIcon fontSize='small' sx={{ marginRight: '10px', color: "#FFF" }}>Tables</PeopleIcon>,
-    route: stringRoutes.user_home,
+    route: StringRoutes.user_home,
     component: <UsersPage />
   },
 ];
@@ -48,7 +46,7 @@ const authRoutes: RouteModel[] = [
     name: 'Login',
     key: 'login',
     icon: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>dashboard</DashboardIcon>,
-    route: '/login',
+    route: StringRoutes.login,
     component: <LoginPage />
   },
   {
@@ -56,7 +54,7 @@ const authRoutes: RouteModel[] = [
     name: 'Register',
     key: 'register',
     icon: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>dashboard</DashboardIcon>,
-    route: '/register',
+    route: StringRoutes.register,
     component: <RegisterPage />
   }
 ]

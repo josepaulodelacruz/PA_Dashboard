@@ -13,8 +13,6 @@ import UserHome from '@/pages/Users/SubRoutes/UserHome'
 import StringRoutes from '@/Constants/stringRoutes.tsx'
 import UserFormPage from './pages/Users/SubRoutes/UserFormPage.tsx'
 
-const stringRoutes = new StringRoutes()
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />} >
@@ -26,12 +24,12 @@ const router = createBrowserRouter(
         
       }
 
-      <Route path={stringRoutes.dashboard} element={<TemplateContainer/>}>
-        <Route path={stringRoutes.dashboard} element={<DashboardPage/>}/>
-        <Route path={stringRoutes.tables} element={<TablesPage />}/>
-        <Route path={stringRoutes.user_home} element={<UsersPage />}>
-          <Route path={stringRoutes.user_home} element={<UserHome/>} />
-          <Route path={`${stringRoutes.user_home_add}`} element={<UserFormPage />}/>
+      <Route path={StringRoutes.dashboard} element={<TemplateContainer/>}>
+        <Route path={StringRoutes.dashboard} element={<DashboardPage/>}/>
+        <Route path={StringRoutes.tables} element={<TablesPage />}/>
+        <Route path={StringRoutes.user_home} element={<UsersPage />}>
+          <Route path={StringRoutes.user_home} element={<UserHome/>} />
+          <Route path={`${StringRoutes.user_home_add}`} element={<UserFormPage />}/>
         </Route>
       </Route>
     </Route>

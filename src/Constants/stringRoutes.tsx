@@ -1,11 +1,14 @@
 class StringRoutes {
 
-  dashboard = '/dashboard'
+  static login = '/login'
+  static register = '/register'
 
-  tables = '/dashboard/tables'
+  static dashboard = '/dashboard'
 
-  user_home = '/dashboard/users'
-  user_home_add = '/dashboard/users/form'
+  static tables = '/dashboard/tables'
+
+  static user_home = '/dashboard/users'
+  static user_home_add = '/dashboard/users/form'
 }
 
 export default StringRoutes

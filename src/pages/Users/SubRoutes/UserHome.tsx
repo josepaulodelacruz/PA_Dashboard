@@ -11,7 +11,7 @@ import StringRoutes from '@/Constants/stringRoutes'
 
 const UserHome = () => {
   const navigate = useNavigate()
-  const routes = new StringRoutes()
+
   return (
     <Grid container direction='column' item md={12} xs={12} sx={{ px: 0.5 }}>
       <TableContainer
@@ -25,7 +25,7 @@ const UserHome = () => {
           </TableRows>
         }
         tableHeaderAction={
-          <BorderedButton onClick={() => navigate(routes.user_home_add)} style={{ height: '30px', borderColor: 'white' }}>
+          <BorderedButton onClick={() => navigate(StringRoutes.user_home_add)} style={{ height: '30px', borderColor: 'white' }}>
             <SubSpan className='text-sm text-white' style={{ color: 'white' }}>Add User</SubSpan>
           </BorderedButton>
         }
