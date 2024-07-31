@@ -14,9 +14,10 @@ import './index.css'
 
 interface SidenavProps {
   classNames?: string
+  onLogout?: () => void,
 }
 
-const Sidenav = ({ classNames }: SidenavProps) => {
+const Sidenav = ({ classNames, onLogout }: SidenavProps) => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen size is mobile
@@ -102,7 +103,8 @@ const Sidenav = ({ classNames }: SidenavProps) => {
           <hr className='divider' />
           <SidenavItem
             onClick={() => {
-              alert('logout')
+              _toggleDrawer.isClosed()
+              onLogout!()
             }}
             icon={<LogoutIcon style={{ color: 'fff' }} />} name={"Logout"} route={'/logout'} />
           <div className='mb-3' />
@@ -173,8 +175,7 @@ const Sidenav = ({ classNames }: SidenavProps) => {
         <div className='cursor-pointer'>
           <SidenavItem
             onClick={() => {
-
-              alert("TESTING")
+              onLogout!()
             }}
             icon={<LogoutIcon style={{ color: 'fff' }} />} name={"Logout"} route={'/logout'} />
 

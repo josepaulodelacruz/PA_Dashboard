@@ -1,6 +1,5 @@
 
 import Grid from '@mui/material/Grid'
-import TestModal from '@/Components/Modal/TestModal'
 import DashboardLayout from "@/Layouts/DashboardLayout"
 import TableContainer from '@/Components/Table/TableContainer'
 import TableRow from '@mui/material/TableRow'
@@ -11,12 +10,13 @@ import { SubSpan } from '@/Components/Labels/Spans'
 import IconButton from '@/Components/Button/IconButton'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import useTestModal from '@/Hooks/Test'
+import useGenericModal from '@/Hooks/GenericModal'
 import '@/index.css'
+import GenericModal from '@/Components/Modal/GenericModal'
 
 const TablesPage = () => {
 
-  const { isOpen, onClose, onOpen } = useTestModal()
+  const { isOpen, onClose, onOpen } = useGenericModal()
 
   const RowComponent = () => {
     return (
@@ -91,7 +91,9 @@ const TablesPage = () => {
 
       </Grid>
 
-      <TestModal
+      <GenericModal
+        title="Delete an item."
+        label="Are you sure you want to delete this item?"
         isOpen={isOpen}
         onClose={onClose}
       />

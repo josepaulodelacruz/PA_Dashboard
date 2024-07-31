@@ -6,10 +6,12 @@ import { routes } from '@/routes'
 import { RouteModel } from "@/Types"
 import useToggleDrawer from "@/Hooks/Sidenav/useToggleDrawer"
 import { ScrollToTop } from "@/Utils"
+import GenericModal from "@/Components/Modal/GenericModal"
 
 const TemplateContainer = () => {
   const location = useLocation()
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
+  const [isLogout, setIsLogout] = useState<boolean>(false)
   const scrollableRef = useRef<any>(null);
   const [routeObject, setRouteObject] = useState<RouteModel>(routes[0])
   const _toggleSidebar = useToggleDrawer()
@@ -50,12 +52,18 @@ const TemplateContainer = () => {
     }
   }, []);
 
+  const _handleLogout = () => {
+    setIsLogout(true)
+  }
+
 
   return (
     <>
       <div className={`group grid h-screen transition-all  duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[18%_auto]' : 'xl:grid-cols-[110px_auto]'}`}>
 
-        <Sidenav/>
+        <Sidenav
+          onLogout={_handleLogout}
+        />
 
         <div ref={scrollableRef} className="overflow-auto">
           <ScrollToTop scrollRef={scrollableRef} />
@@ -64,6 +72,13 @@ const TemplateContainer = () => {
           <Outlet />
 
         </div>
+
+        <GenericModal 
+          isOpen={isLogout}
+          onClose={() => setIsLogout(false)}
+          title="Logout!"
+          label="Are you sure you want to logout?"
+        />
 
 
       </div>
