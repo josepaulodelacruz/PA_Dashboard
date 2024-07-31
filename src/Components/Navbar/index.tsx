@@ -92,7 +92,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
                 navRoute?.pathItems.map((item, index) => {
                   return (
                     <div key={index}>
-                      <span onClick={() => index < navRoute.pathItems.length - 1 ? _handleNavigateBack() : null} style={{ paddingLeft: '5px', cursor: 'pointer' }}>
+                      <span className='hover:text-blue' onClick={() => index < navRoute.pathItems.length - 1 ? _handleNavigateBack() : null} style={{ paddingLeft: '5px', cursor: 'pointer' }}>
                          {item}{index < navRoute.pathItems.length - 1 ? ' /' : ''}
                       </span>
                     </div>

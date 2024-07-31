@@ -15,7 +15,6 @@ const TemplateContainer = () => {
   const _toggleSidebar = useToggleDrawer()
   const _isSidebarOpen = _toggleSidebar.isOpen
 
-
   const handleScroll = () => {
     if (scrollableRef.current) {
       if (scrollableRef.current.scrollTop > 0) {

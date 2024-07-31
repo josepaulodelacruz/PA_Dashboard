@@ -9,6 +9,7 @@ import linearGradient from '@/assets/theme/functions/linearGradient'
 import SidenavItem from './SidenavItem'
 import Drawer from '@mui/material/Drawer'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
+import LogoutIcon from '@mui/icons-material/Logout'
 import './index.css'
 
 interface SidenavProps {
@@ -97,7 +98,14 @@ const Sidenav = ({ classNames }: SidenavProps) => {
 
           <hr className="divider" />
 
-          <List>{renderRoutes}</List>
+          <List className='flex-grow overflow-auto'>{renderRoutes}</List>
+          <hr className='divider' />
+          <SidenavItem
+            onClick={() => {
+              alert('logout')
+            }}
+            icon={<LogoutIcon style={{ color: 'fff' }} />} name={"Logout"} route={'/logout'} />
+          <div className='mb-3' />
         </Box>
       </Drawer>
     )
@@ -160,7 +168,19 @@ const Sidenav = ({ classNames }: SidenavProps) => {
 
         <hr className="divider" />
 
-        <List>{renderRoutes}</List>
+        <List className='flex-grow overflow-auto'>{renderRoutes}</List>
+        <hr className='divider' />
+        <div className='cursor-pointer'>
+          <SidenavItem
+            onClick={() => {
+
+              alert("TESTING")
+            }}
+            icon={<LogoutIcon style={{ color: 'fff' }} />} name={"Logout"} route={'/logout'} />
+
+        </div>
+
+        <div className='mb-3' />
       </Paper>
     </Box>
   )

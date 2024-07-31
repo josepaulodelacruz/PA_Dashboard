@@ -8,9 +8,10 @@ interface SidenavItemProps {
   name: string;
   icon: React.ReactNode;
   route: string;
+  onClick?: () => void,
 }
 
-const SidenavItem = ({ icon, name, route }: SidenavItemProps) => {
+const SidenavItem = ({ icon, name, route, onClick }: SidenavItemProps) => {
   const location = useLocation();
   const theme = useTheme();
   const { gradients } = theme.palette as { gradients?: any };
@@ -40,6 +41,7 @@ const SidenavItem = ({ icon, name, route }: SidenavItemProps) => {
 
   return (
     <div
+      onClick={onClick!}
       className='py-[0.5rem] px-[0.925rem] my-[0.09375rem] mx-[1rem] mb-2 flex items-center border-stone-100 rounded-[0.375rem]'
       style={{
         background: _isRouteHighlighted() ? backgroundValue : isHovered ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
