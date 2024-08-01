@@ -6,11 +6,24 @@ import BorderedButton from '@/Components/Button/BorderedButton'
 import '@/index.css'
 import { MainSpan, SubSpan } from '@/Components/Labels/Spans'
 import { TableBodyLabel, TableHeaderLabel } from '@/Components/Table/TableLabel'
-import { useNavigate  } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import StringRoutes from '@/Constants/stringRoutes'
 
 const UserHome = () => {
   const navigate = useNavigate()
+
+  const RowComponent = () =>
+    <TableRows className='w-full border-b' >
+      <TableBodyLabel>
+        <MainSpan className='text-sm'>Admin@email.com</MainSpan>
+      </TableBodyLabel>
+      <TableBodyLabel>
+        <MainSpan className='text-sm whitespace-nowrap'>Jose Paulo</MainSpan>
+      </TableBodyLabel>
+      <TableBodyLabel>
+        <SubSpan className='whitespace-nowrap text-sm'>July 28th, 2024 10:00am</SubSpan>
+      </TableBodyLabel>
+    </TableRows>
 
   return (
     <Grid container direction='column' item md={12} xs={12} sx={{ px: 0.5 }}>
@@ -30,18 +43,9 @@ const UserHome = () => {
           </BorderedButton>
         }
       >
-        <TableRows className='w-full border-b' >
-          <TableBodyLabel>
-            <MainSpan className='text-sm'>Admin@email.com</MainSpan>
-          </TableBodyLabel>
-          <TableBodyLabel>
-            <MainSpan className='text-sm whitespace-nowrap'>Jose Paulo</MainSpan>
-          </TableBodyLabel>
-          <TableBodyLabel>
-            <SubSpan className='whitespace-nowrap text-sm'>July 28th, 2024 10:00am</SubSpan>
-          </TableBodyLabel>
+        <RowComponent />
+        <RowComponent />
 
-        </TableRows>
       </TableContainer>
 
     </Grid>
