@@ -19,14 +19,12 @@ const UsersPage = () => {
       >
         <CSSTransition 
           key={location.pathname}
-          
           classNames='fade' 
           unmountOnExit
           nodeRef={ref}
           timeout={300}>
           <div ref={ref}>
             {currentOutlet}
-
           </div>
         </CSSTransition>
 

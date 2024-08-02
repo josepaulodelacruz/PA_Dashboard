@@ -13,7 +13,7 @@ const LoginPage = () => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
 
-  let backgroundValue = linearGradient(gradients.info.main, gradients.info.state)
+  let backgroundValue = linearGradient(gradients.info.main, gradients.info.state);
 
   return (
     <AuthLayout>
@@ -48,7 +48,6 @@ const LoginPage = () => {
                 <InputTextField placeholder="Enter Password" label="Password" />
               </div>
             </div>
-
 
             <PrimaryButton
               backgroundValue={backgroundValue}

@@ -2,7 +2,7 @@
 const UserFormPage = () => {
   return (
     <div>
-      User Form
+      User Form 
     </div>
   )
 }
