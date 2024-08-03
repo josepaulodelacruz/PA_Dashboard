@@ -8,19 +8,25 @@ import InputTextField from "@/Components/InputTextField"
 import PrimaryButton from "@/Components/Button/PrimaryButton"
 import { Link } from 'react-router-dom'
 import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
+import useTestApi from "@/Hooks/Test/useTestApi"
 
 const LoginPage = () => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
+  const { data, refetch } = useTestApi()
 
   let backgroundValue = linearGradient(gradients.info.main, gradients.info.state);
+
+  const _handleLogin = () => {
+    refetch().then((response) => console.log(response.data))
+  }
 
   return (
     <AuthLayout>
       <div className="flex flex-col justify-center flex-grow relative ">
 
         <div className="bg-gray-300 h-[300px] w-full absolute top-[0]"/>
-        
+
         <div
           className="self-center relative justify-center z-10 h-[380px] w-[350px]" >
 
@@ -50,6 +56,7 @@ const LoginPage = () => {
             </div>
 
             <PrimaryButton
+              onClick={_handleLogin}
               backgroundValue={backgroundValue}
               style={{ marginTop: '1rem', marginBottom: '1rem', padding: '0.55rem' }}
             >

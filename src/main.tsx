@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
@@ -13,23 +14,33 @@ import UserHome from '@/Pages/Users/SubRoutes/UserHome'
 import StringRoutes from '@/Constants/stringRoutes.tsx'
 import UserFormPage from '@/Pages/Users/SubRoutes/UserFormPage.tsx'
 
+
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10 * (60 * 1000), // 10 mins
+      cacheTime: 15 * (60 * 1000), // 15 mins
+    },
+  },
+});
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />} >
 
       {
         authRoutes.map((route) => {
-          return <Route key={route.key} element={route.component} path={route.route}/>
+          return <Route key={route.key} element={route.component} path={route.route} />
         })
-        
+
       }
 
-      <Route path={StringRoutes.dashboard} element={<TemplateContainer/>}>
-        <Route path={StringRoutes.dashboard} element={<DashboardPage/>}/>
-        <Route path={StringRoutes.tables} element={<TablesPage />}/>
+      <Route path={StringRoutes.dashboard} element={<TemplateContainer />}>
+        <Route path={StringRoutes.dashboard} element={<DashboardPage />} />
+        <Route path={StringRoutes.tables} element={<TablesPage />} />
         <Route path={StringRoutes.user_home} element={<UsersPage />}>
-          <Route path={StringRoutes.user_home} element={<UserHome/>} />
-          <Route path={`${StringRoutes.user_home_add}`} element={<UserFormPage />}/>
+          <Route path={StringRoutes.user_home} element={<UserHome />} />
+          <Route path={`${StringRoutes.user_home_add}`} element={<UserFormPage />} />
         </Route>
       </Route>
     </Route>
@@ -38,6 +49,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider future={{ v7_startTransition: true }} router={router} />
+    <QueryClientProvider client={client} >
+      <RouterProvider future={{ v7_startTransition: true }} router={router} />
+    </QueryClientProvider>
   </React.StrictMode>,
 )

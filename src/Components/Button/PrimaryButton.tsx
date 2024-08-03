@@ -9,9 +9,10 @@ interface PrimaryButtonProps {
   children?: ReactNode
   className?: string
   style?: React.CSSProperties
+  onClick?: () => void,
 }
 
-const PrimaryButton = ({ style, backgroundValue, children, className } : PrimaryButtonProps) => {
+const PrimaryButton = ({ style, backgroundValue, children, className, onClick } : PrimaryButtonProps) => {
 
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
@@ -21,6 +22,7 @@ const PrimaryButton = ({ style, backgroundValue, children, className } : Primary
 
   return (
     <Button
+      onClick={onClick!}
       style={style!}
       className={className!} size='small' sx={{background: defaultBackgroundColor, color: '#fff'}}>
       {defaultLabel}

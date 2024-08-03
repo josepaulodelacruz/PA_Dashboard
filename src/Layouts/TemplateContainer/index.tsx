@@ -59,7 +59,7 @@ const TemplateContainer = () => {
 
   return (
     <>
-      <div className={`group grid h-screen transition-all  duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[18%_auto]' : 'xl:grid-cols-[110px_auto]'}`}>
+      <div className={`group grid h-screen transition-all duration-300 grid-cols[100%] ${_isSidebarOpen ? 'xl:grid-cols-[18%_auto]' : 'xl:grid-cols-[110px_auto]'}`}>
 
         <Sidenav
           onLogout={_handleLogout}
@@ -79,7 +79,6 @@ const TemplateContainer = () => {
           title="Logout!"
           label="Are you sure you want to logout?"
         />
-
 
       </div>
     </>
