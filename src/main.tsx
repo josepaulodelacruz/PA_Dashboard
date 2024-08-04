@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import App from './App.tsx'
-import './index.css'
+import '@/index.css'
 import { authRoutes } from '@/routes.tsx'
 import TemplateContainer from '@/Layouts/TemplateContainer/index.tsx'
-import DashboardPage from '@/Pages/Dashboard/index.tsx'
-import TablesPage from '@/Pages/Tables/index.tsx'
-import UsersPage from '@/Pages/Users/index.tsx'
-import UserHome from '@/Pages/Users/SubRoutes/UserHome'
+import DashboardPage from '@/pages/Dashboard/index.tsx'
+import TablesPage from '@/pages/Tables/index.tsx'
+import UsersPage from '@/pages/Users/index.tsx'
+import UserHome from '@/pages/Users/SubRoutes/UserHome'
 
 import StringRoutes from '@/Constants/stringRoutes.tsx'
-import UserFormPage from '@/Pages/Users/SubRoutes/UserFormPage.tsx'
+import UserFormPage from '@/pages/Users/SubRoutes/UserFormPage.tsx'
 
 
 const client = new QueryClient({

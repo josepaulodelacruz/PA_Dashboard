@@ -3,9 +3,8 @@ import Box from '@mui/material/Box'
 import { MainSpan } from "@/Components/Labels/Spans"
 import { Link } from 'react-router-dom'
 
-
 interface AuthLayout {
-  children?: ReactNode
+  children?: ReactNode,
 }
 
 const AuthLayout = ({ children }: AuthLayout) => {

@@ -25,6 +25,7 @@ const GenericModal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
       closeAfterTransition
+      
     >
       <Grow in={isOpen} mountOnEnter unmountOnExit>
         <div className='flex items-center justify-center min-h-screen' onClick={onClose}>
