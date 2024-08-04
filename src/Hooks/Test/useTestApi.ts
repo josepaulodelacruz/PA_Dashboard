@@ -4,7 +4,7 @@ import client from '@/config/client'
 
 const useTestApi = () =>
   useQuery({
-    queryFn: () => client.get('/WeatherForecast'),
+    queryFn: () => client.get('/api/auth'),
     select: (response) => {
       return response.data
     },

@@ -13,12 +13,12 @@ import useTestApi from "@/Hooks/Test/useTestApi"
 const LoginPage = () => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
-  const { data, refetch } = useTestApi()
+  const { refetch } = useTestApi()
 
   let backgroundValue = linearGradient(gradients.info.main, gradients.info.state);
 
   const _handleLogin = () => {
-    refetch().then((response) => console.log(response.data))
+    refetch()
   }
 
   return (

@@ -19,7 +19,7 @@ const RegisterPage = () => {
     <AuthLayout>
       <div className="flex flex-col flex-grow relative justify-center ">
 
-        <div className="bg-gray-300 h-[300px] w-full absolute top-[0]"/>
+        <div className="bg-gray-300 h-[300px] w-full absolute top-[0]" />
 
         <div
           className="self-center relative justify-center top-[0] z-10 h-[400px] w-[350px]" >
@@ -41,9 +41,12 @@ const RegisterPage = () => {
           <div className="absolute h-full w-full bg-white rounded-xl shadow-xl top-5 pt-24 px-4 flex flex-col " >
 
             <div className="flex-grow">
-              <InputTextField placeholder="Email" label='Email' />
-              <InputTextField placeholder="Enter Password" label="Password" />
-              <InputTextField placeholder="Enter Confirm Password" label='Confirm Password' />
+
+              <form>
+                <InputTextField placeholder="Email" label='Email' />
+                <InputTextField placeholder="Enter Password" label="Password" />
+                <InputTextField placeholder="Enter Confirm Password" label='Confirm Password' />
+              </form>
 
               <span className="flex items-center text-[0.75rem] text-gray-500 mt-2">
                 <input type='checkbox' style={{ marginRight: '0.40rem' }} />
