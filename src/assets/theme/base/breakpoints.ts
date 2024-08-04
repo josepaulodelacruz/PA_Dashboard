@@ -21,7 +21,4 @@ const breakpoints: Breakpoints = {
   }
 }
 
-console.log(breakpoints.values.xxl)
-
-
 export default breakpoints
