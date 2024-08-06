@@ -4,11 +4,11 @@ import TablesIcon from '@mui/icons-material/TableRows'
 import PeopleIcon from '@mui/icons-material/People'
 
 //Pages
-import DashboardPage from '@/pages/Dashboard'
-import TablesPage from "@/pages/Tables"
-import RegisterPage from "@/pages/Register"
-import LoginPage from "@/pages/Login"
-import UsersPage from "@/pages/Users"
+import DashboardPage from '@/Pages/Dashboard'
+import TablesPage from "@/Pages/Tables"
+import RegisterPage from "@/Pages/Register"
+import LoginPage from "@/Pages/Login"
+import UsersPage from "@/Pages/Users"
 import StringRoutes from "@/Constants/stringRoutes"
 
 //authRoutes

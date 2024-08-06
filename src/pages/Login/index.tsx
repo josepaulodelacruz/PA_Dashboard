@@ -11,6 +11,7 @@ import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
 import useTestApi from "@/Hooks/Test/useTestApi"
 import { useState } from 'react'
 import CircularProgress from "@mui/material/CircularProgress"
+import LoadingHud from "@/Components/Modal/LoadingHud"
 
 const LoginPage = () => {
   const theme = useTheme()
@@ -65,11 +66,10 @@ const LoginPage = () => {
               onClick={_handleLogin}
               backgroundValue={backgroundValue}
               style={{ marginTop: '1rem', marginBottom: '1rem', padding: '0.55rem' }}
-              
             >
-              { isLoading ? 
-                  <CircularProgress size={20} color='inherit' />
-                  : "Login"
+              {isLoading ?
+                <CircularProgress size={20} color='inherit' />
+                : "Login"
               }
             </PrimaryButton>
 
@@ -84,8 +84,13 @@ const LoginPage = () => {
 
           </div>
         </div>
+
+
       </div>
 
+      <LoadingHud
+        isLoading={isLoading}
+      />
     </AuthLayout>
   )
 }
