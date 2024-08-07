@@ -1,8 +1,14 @@
+import TableContainer from "@/Components/Table/TableContainer"
 
 const UserFormPage = () => {
   return (
     <div>
-      User Form 
+      <TableContainer
+        tableTitle='Input User Details'
+
+      >
+      </TableContainer>
+
     </div>
   )
 }

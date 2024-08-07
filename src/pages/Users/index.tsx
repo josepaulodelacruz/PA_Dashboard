@@ -3,7 +3,7 @@ import DashboardLayout from '@/Layouts/DashboardLayout'
 
 import { useOutlet, useLocation } from 'react-router-dom'
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
-import '../../index.css'
+import '@/index.css'
 import { useRef } from 'react'
 
 const UsersPage = () => {

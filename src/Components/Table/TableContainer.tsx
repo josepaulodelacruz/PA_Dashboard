@@ -21,6 +21,7 @@ const TableContainer: React.FC<TableContainerProps> = ({
   const { gradients } = theme.palette as { gradients?: any }
 
   let backgroundValue = linearGradient(gradients.info.main, gradients.info.state)
+
   return (
 
     <>
