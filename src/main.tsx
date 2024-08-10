@@ -5,6 +5,7 @@ import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } 
 import App from './App.tsx'
 import '@/index.css'
 import { authRoutes } from '@/routes.tsx'
+import AuthLayout from '@/Layouts/AuthLayout/index.tsx';
 import TemplateContainer from '@/Layouts/TemplateContainer/index.tsx'
 import DashboardPage from '@/Pages/Dashboard/index.tsx'
 import TablesPage from '@/Pages/Tables/index.tsx'
@@ -28,12 +29,15 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />} >
 
-      {
-        authRoutes.map((route) => {
-          return <Route key={route.key} element={route.component} path={route.route} />
-        })
+      <Route path='/auth' element={<AuthLayout />}>
+        {
+          authRoutes.map((route) => {
+            return <Route key={route.key} element={route.component} path={route.route} />
+          })
+        }
 
-      }
+
+      </Route>
 
       <Route path={StringRoutes.dashboard} element={<TemplateContainer />}>
         <Route path={StringRoutes.dashboard} element={<DashboardPage />} />

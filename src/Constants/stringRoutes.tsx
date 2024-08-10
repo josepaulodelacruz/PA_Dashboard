@@ -1,7 +1,7 @@
 class StringRoutes {
 
-  static login = '/login'
-  static register = '/register'
+  static login = '/auth/login'
+  static register = '/auth/register'
 
   static dashboard = '/dashboard'
 
