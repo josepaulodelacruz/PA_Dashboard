@@ -14,6 +14,8 @@ import UserHome from '@/Pages/Users/SubRoutes/UserHome'
 
 import StringRoutes from '@/Constants/stringRoutes.tsx'
 import UserFormPage from '@/Pages/Users/SubRoutes/UserFormPage.tsx'
+import ProfilePage from '@/Pages/Profile/index.tsx';
+import Profile from '@/Pages/Profile/SubRoutes/Profile'
 
 
 const client = new QueryClient({
@@ -45,6 +47,10 @@ const router = createBrowserRouter(
         <Route path={StringRoutes.user_home} element={<UsersPage />}>
           <Route path={StringRoutes.user_home} element={<UserHome />} />
           <Route path={`${StringRoutes.user_home_add}`} element={<UserFormPage />} />
+        </Route>
+
+        <Route path={StringRoutes.profile_home} element={<ProfilePage />}>
+          <Route path={StringRoutes.profile_home} element={<Profile />}/>
         </Route>
       </Route>
     </Route>

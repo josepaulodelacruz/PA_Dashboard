@@ -9,6 +9,8 @@ class StringRoutes {
 
   static user_home = '/dashboard/users'
   static user_home_add = '/dashboard/users/form'
+
+  static profile_home = '/dashboard/profile'
 }
 
 export default StringRoutes

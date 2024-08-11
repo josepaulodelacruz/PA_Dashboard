@@ -5,7 +5,6 @@ const UserFormPage = () => {
     <div>
       <TableContainer
         tableTitle='Input User Details'
-
       >
       </TableContainer>
 

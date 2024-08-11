@@ -11,8 +11,9 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import { RouteModel, NavRoute } from '@/Types'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, NavLink } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
+import StringRoutes from '@/Constants/stringRoutes'
 
 
 interface NavbarProps {
@@ -93,7 +94,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
                   return (
                     <div key={index}>
                       <span className='hover:text-blue' onClick={() => index < navRoute.pathItems.length - 1 ? _handleNavigateBack() : null} style={{ paddingLeft: '5px', cursor: 'pointer' }}>
-                         {item}{index < navRoute.pathItems.length - 1 ? ' /' : ''}
+                        {item}{index < navRoute.pathItems.length - 1 ? ' /' : ''}
                       </span>
                     </div>
                   )
@@ -115,7 +116,10 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
           </Box>
           <div className='justify-end'>
             <SideMenuToggleIcon onClick={_handleSidebarToggle} fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
-            <ProfileIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
+            <NavLink to={StringRoutes.profile_home}>
+              <ProfileIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
+            </NavLink>
+
             <SettingIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
             <NotificationIcon fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
           </div>
