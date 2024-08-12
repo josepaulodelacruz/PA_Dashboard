@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper'
 import CameraIcon from '@mui/icons-material/CameraEnhance'
 import IconButton from '@/Components/Button/IconButton'
 import { MainSpan, SubSpan } from '@/Components/Labels/Spans'
+import LineDivider from '@/Components/LineDivider'
 
 const Profile = () => {
   const theme = useTheme()
@@ -15,7 +16,7 @@ const Profile = () => {
 
 
   return (
-    <div className="flex flex-col relative ">
+    <div className="flex flex-col relative px-1 ">
       <Paper className='h-[280px] w-full rounded-md' sx={{ background: coverBackground }}>
         <BorderedButton style={{ float: 'right', padding: '0.6rem', color: 'white', borderColor: 'white', marginTop: '1rem', marginRight: '1rem' }} >
           <CameraIcon fontSize='small' style={{marginRight: '0.4rem'}}/>
@@ -35,6 +36,7 @@ const Profile = () => {
 
             <IconButton
               style={{
+                border: '3px solid white',
                 background: iconColor,
                 color: '#fff',
                 padding: '0.7rem',
@@ -49,7 +51,9 @@ const Profile = () => {
           <MainSpan className='text-center'>Jose Paulo M. Dela Cruz</MainSpan>
           <SubSpan className='flex justify-center text-sm'>Software Engineer</SubSpan>
 
-          <hr />
+          <div className='pt-3'>
+            <LineDivider />
+          </div>
 
           <div className='h-[400px]'></div>
         </div>
