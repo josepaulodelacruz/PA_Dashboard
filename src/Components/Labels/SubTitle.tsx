@@ -1,16 +1,12 @@
 
-import { useTheme } from "@mui/material"
-
 interface SubTitleLabelProps {
   children: React.ReactNode,
+  style?: React.CSSProperties
 }
 
-const SubTitleLabel = ({ children } : SubTitleLabelProps) => {
-  const theme = useTheme();
-  const { text } = theme.palette as { text?: any }
-
+const SubTitleLabel = ({ children, style } : SubTitleLabelProps) => {
   return (
-    <div className="text-xs font-light" style={{color: text.main}}>
+    <div className="text-[0.6rem] text-black font-light" style={style!}>
       {children}
     </div>
 

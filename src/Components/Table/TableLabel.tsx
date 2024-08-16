@@ -20,7 +20,7 @@ interface TableMainSubProps {
 
 const TableHeaderLabel: React.FC<TableHeaderLabelProps> = ({ title, align = 'left', width }) => {
   return (
-    <th style={{textAlign: align, width: width!}} className='column-header'>{title}</th>
+    <th style={{fontSize: '0.70rem', textAlign: align, width: width!, color: 'black', fontWeight: '600'}} className='column-header text-black'>{title}</th>
  )
 }
 

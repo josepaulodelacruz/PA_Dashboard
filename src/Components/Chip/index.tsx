@@ -1,9 +1,9 @@
-import { SubSpan } from "../Labels/Spans"
+import SubTitleLabel from "../Labels/SubTitle"
 
 const Chip = () => {
   return (
-    <div className="inline-flex mr-1 border p-1 rounded-sm">
-      <SubSpan className="text-xs font-light">CORE</SubSpan>
+    <div className="inline-flex mr-1 border border-black p-1 rounded-sm">
+      <SubTitleLabel>CORE</SubTitleLabel>
     </div>
   )
 

@@ -1,5 +1,5 @@
 import TableContainer from '@/Components/Table/TableContainer'
-import { MainSpan } from '@/Components/Labels/Spans'
+import { MainSpan, SubSpan } from '@/Components/Labels/Spans'
 import LineDivider from "@/Components/LineDivider";
 import SubTitleLabel from '@/Components/Labels/SubTitle';
 import List from '@mui/material/List'
@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import { TableHeaderLabel } from '@/Components/Table/TableLabel';
 import CheckBox from '@mui/material/Checkbox'
 import useViewProjectMutation from '@/Hooks/Projects/useViewProjectMutation';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { UnitModel } from '@/Types';
 
 const ViewProjectPage = () => {
@@ -17,6 +17,7 @@ const ViewProjectPage = () => {
   const { mutateAsync: viewProject } = useViewProjectMutation()
   const [models, setModels] = useState<UnitModel[]>([])
   const [currentSelectedModel, setCurrentSelectedModel] = useState("")
+  const navigate = useNavigate()
   let { id } = useParams()
 
 
@@ -27,8 +28,11 @@ const ViewProjectPage = () => {
 
       if (response.data.status) {
         const data = response.data.data as UnitModel[]
-        setModels(data)
-        setCurrentSelectedModel(data[0].model_name)
+        if (data.length > 0) {
+          setModels(data)
+          setCurrentSelectedModel(data[0].model_name)
+          return
+        }
       }
     }
 
@@ -43,7 +47,7 @@ const ViewProjectPage = () => {
         <ListItemButton
           onClick={() => setCurrentSelectedModel(unit.model_name)}
           selected={currentSelectedModel === unit.model_name}>
-          <MainSpan>{unit.model_name}</MainSpan>
+          <SubSpan>{unit.model_name}</SubSpan>
         </ListItemButton>
         <LineDivider />
       </>
@@ -76,23 +80,21 @@ const ViewProjectPage = () => {
               </Tabs>
             }
             tableHeader={
-              <TableRow >
-                <TableHeaderLabel width="5%" align="left" title="ACTION" />
+              <TableRow className='border-b' >
+                <TableHeaderLabel width="5%" align="left" title="Applicable" />
                 <TableHeaderLabel width="10%" align="center" title="ID" />
                 <TableHeaderLabel width="15%" align="center" title="Group" />
                 <TableHeaderLabel width="66%" align="center" title="Item" />
               </TableRow>
             }
           >
-            <TableRow>
+            <TableRow className='border-b'>
               <td align='center' className='column-header'>
                 <CheckBox />
               </td>
-              <td align="center" className='column-header'>1</td>
-              <td align="center" className='column-header'>LAYOUT</td>
-              <td align="center" className='column-header'>SETBACKS ACCORDING TO PLAN</td>
-
-
+              <td align="center" className='text-[0.60rem] text-black'>1</td>
+              <td align="center" className='text-[0.70rem] text-black'>Layout</td>
+              <td align="center" className='text-[0.70rem] text-black'>Setback according to plan</td>
             </TableRow>
 
 

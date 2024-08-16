@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import client from '@/Config/Client'
+import client from '@/Config/client'
 import { Project } from "@/Types";
 
 interface ProjectResponse {

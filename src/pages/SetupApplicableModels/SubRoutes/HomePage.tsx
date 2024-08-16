@@ -52,20 +52,21 @@ const HomePage = () => {
           </BorderedButton>
         }
         tableHeader={
-          <TableRow>
+          <TableRow className="border-b">
             <TableHeaderLabel title="ID" />
             <TableHeaderLabel title="GROUP" />
             <TableHeaderLabel title="DESCRIPTION" />
-            <TableHeaderLabel title="MODELS" />
-            <TableHeaderLabel title="HOUSETYPES" />
+            <TableHeaderLabel align="center" title="MODELS" />
+            <TableHeaderLabel align="center" title="HOUSETYPES" />
             <TableHeaderLabel title="ACTION" />
 
           </TableRow>
         }
       >
         {
-          projects.map((project) => (
+          projects.map((project, index) => (
             <RowComponent 
+              index={index}
               handleViewProjet={(project: Project) => _handleViewProject(project)}
               key={project.id} project={project}/>
           ))
@@ -76,8 +77,9 @@ const HomePage = () => {
 };
 
 const RowComponent = (props: any & Project) => {
-  const { project } = props;
-  return <TableRow className="border-b">
+  const { project, index } = props;
+  let rowColor = index % 2 === 1 ? '#f8f9fa' : 'transparent' 
+  return <TableRow className="border-b" style={{backgroundColor: rowColor}}>
     <td className="column-header">
       <SubSpan>{project.id}</SubSpan>
     </td>
@@ -85,21 +87,21 @@ const RowComponent = (props: any & Project) => {
       <SubTitleLabel>{project.description}</SubTitleLabel>
     </td>
     <td className="column-header">
-      <SubSpan>{project.description}</SubSpan>
+      <SubTitleLabel>{project.description}</SubTitleLabel>
     </td>
-    <td className="column-header w-[250px]">
+    <td align='center' className="column-header w-[250px]">
       <Chip />
       <Chip />
       <Chip />
     </td>
-    <td className="column-header flex-wrap w-[200px]">
+    <td align='center' className="column-header flex-wrap w-[200px]">
       <Chip />
     </td>
 
     <td className="column-header">
 
       <PrimaryButton onClick={() => props.handleViewProjet(project)}>
-        <span className="text-xs font-light">View</span>
+        <span className="text-[0.5rem] font-light">View</span>
       </PrimaryButton>
     </td>
 

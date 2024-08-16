@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
-import client from '@/Config/Client';
+import client from '@/Config/client';
 
 // Define the type for your mutation parameters
 type MutationParams = {
