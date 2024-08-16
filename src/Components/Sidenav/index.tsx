@@ -21,7 +21,7 @@ const Sidenav = ({ classNames, onLogout }: SidenavProps) => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen size is mobile
-  let backgroundValue = linearGradient(gradients.dark.main, gradients.dark.state)
+  let backgroundValue = linearGradient(gradients.primary.main, gradients.primary.state)
   let textColor = '#FFF'
   let _toggleDrawer = useToggleDrawer()
 
@@ -135,24 +135,27 @@ const Sidenav = ({ classNames, onLogout }: SidenavProps) => {
         <Box
           pb={2}
           pt={1.5}
-          px={4}
+          px={3}
           display="flex"
           justifyContent="flex-start"
           alignItems="center"
-          gap={2} // Space between the icon and the text
+          gap={1} // Space between the icon and the text
         >
           <div
             style={{
-              height: '30px',
-              width: '30px',
+              padding: '4px',
+              transition: '100ms ease-in',
               backgroundColor: 'white',
               borderRadius: '4px', // Added to make it look better
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
             }}
-          />
+          >Pm</div>
           <Typography
             color={textColor}
             display="block"
-            fontWeight="bold"
+            fontWeight="light"
             variant="h6"
             whiteSpace="nowrap" // Prevent text from wrapping
             overflow="hidden" // Hide overflow text
@@ -164,7 +167,7 @@ const Sidenav = ({ classNames, onLogout }: SidenavProps) => {
               transition: 'transform 0.3s ease, opacity 0.3s ease',
             }}
           >
-            App Name
+            PMDMTSWeb
           </Typography>
         </Box>
 

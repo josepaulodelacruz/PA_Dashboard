@@ -1,7 +1,7 @@
 import './index.css'
 
-const LineDivider = () => {
-  return <hr className="lineDivider"/>
+const LineDivider = (props: any) => {
+  return <hr style={props.style!}  className="lineDivider"/>
 }
 
 export default LineDivider

@@ -1,12 +1,13 @@
 import Sidenav from "@/Components/Sidenav"
 import Navbar from '@/Components/Navbar'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { routes } from '@/routes'
 import { RouteModel } from "@/Types"
 import useToggleDrawer from "@/Hooks/Sidenav/useToggleDrawer"
 import { ScrollToTop } from "@/Utils"
 import GenericModal from "@/Components/Modal/GenericModal"
+import StringRoutes from "@/Constants/stringRoutes"
 
 const TemplateContainer = () => {
   const location = useLocation()
@@ -16,6 +17,13 @@ const TemplateContainer = () => {
   const [routeObject, setRouteObject] = useState<RouteModel>(routes[0])
   const _toggleSidebar = useToggleDrawer()
   const _isSidebarOpen = _toggleSidebar.isOpen
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navigate(StringRoutes.dashboard);
+    }
+  }, [location.pathname, navigate]);
 
   const handleScroll = () => {
     if (scrollableRef.current) {
@@ -67,13 +75,13 @@ const TemplateContainer = () => {
 
         <div ref={scrollableRef} className="overflow-auto">
           <ScrollToTop scrollRef={scrollableRef} />
-          
+
           <Navbar isScrolled={isScrolled} route={routeObject} />
           <Outlet />
 
         </div>
 
-        <GenericModal 
+        <GenericModal
           isOpen={isLogout}
           onClose={() => setIsLogout(false)}
           title="Logout!"

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import linearGradient from '@/assets/theme/functions/linearGradient';
-import { useTheme } from '@mui/material/styles';
+//import { useTheme } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
 
@@ -13,13 +12,14 @@ interface SidenavItemProps {
 
 const SidenavItem = ({ icon, name, route, onClick }: SidenavItemProps) => {
   const location = useLocation();
-  const theme = useTheme();
-  const { gradients } = theme.palette as { gradients?: any };
+  //const theme = useTheme();
+  //const { gradients } = theme.palette as { gradients?: any };
   const { isOpen } = useToggleDrawer();
 
   const [isHovered, setIsHovered] = useState(false);
 
-  let backgroundValue = linearGradient(gradients.info.main, gradients.info.state);
+  //let backgroundValue = "#006442";
+  let backgroundValue = '#00573A'
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -31,8 +31,8 @@ const SidenavItem = ({ icon, name, route, onClick }: SidenavItemProps) => {
 
 
   const _isRouteHighlighted = () => {
-    const modifiedString = route.replace(/^\/dashboard\//, "").toLowerCase()
-    const comparingString = location.pathname.replace(/^\/dashboard\//, "").toLowerCase()
+    const modifiedString = route.replace(/^\/home\//, "").toLowerCase()
+    const comparingString = location.pathname.replace(/^\/home\//, "").toLowerCase()
     if(comparingString.includes(modifiedString)) {
       return true
     }

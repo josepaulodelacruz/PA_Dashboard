@@ -10,14 +10,14 @@ import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
 import { useState } from 'react'
 import CircularProgress from "@mui/material/CircularProgress"
 import LoadingHud from "@/Components/Modal/LoadingHud"
-import StringRoutes from "@/Constants/stringRoutes"
 
 const LoginPage = () => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
   const [isLoading, setIsLoading] = useState(false)
 
-  let backgroundValue = linearGradient(gradients.info.main, gradients.info.state);
+  let backgroundValue = linearGradient(gradients.primary.state, gradients.primary.main);
+  console.log(backgroundValue)
 
   const _handleLogin = () => {
     setIsLoading(true)
@@ -69,7 +69,7 @@ const LoginPage = () => {
 
         <div className="self-center flex-row flex items-center ">
           <SubSpan style={{ paddingRight: '5px' }}>Don't have an account? </SubSpan>
-          <Link to={StringRoutes.register}>
+          <Link to='/'>
             <MainSpan style={{ color: backgroundValue, textDecoration: 'underline', fontSize: '0.70rem' }}>Register Here</MainSpan>
           </Link>
         </div>

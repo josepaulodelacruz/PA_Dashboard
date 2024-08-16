@@ -27,8 +27,8 @@ const colors: any = {
   primary: {
     //main: "#e91e63",
     //focus: "#e91e63",
-    main: "#49a3f1",
-    focus: "#1A73E8",
+    main: "#006442",
+    focus: "#66a68d",
   },
 
   secondary: {
@@ -80,8 +80,10 @@ const colors: any = {
 
   gradients: {
     primary: {
-      main: "#EC407A",
-      state: "#D81B60",
+      //main: "#0bd08c",
+      //state: "#16a474",
+      state: "#077b44",
+      main: "#006442",
     },
 
     secondary: {

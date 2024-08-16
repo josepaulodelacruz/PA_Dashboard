@@ -8,6 +8,7 @@ interface BorderedButtonProps {
   children?: ReactNode
   onClick?: () => void,
   style?: React.CSSProperties,
+  isDisabled?: boolean
 }
 
 const BorderedButton = ({ 
@@ -15,6 +16,7 @@ const BorderedButton = ({
   children,
   onClick,
   style,
+  isDisabled = false,
 }: BorderedButtonProps) => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
@@ -23,6 +25,7 @@ const BorderedButton = ({
 
   return (
     <Button
+      disabled={isDisabled!}
       onClick={onClick!}
       variant='outlined'
       size='small'

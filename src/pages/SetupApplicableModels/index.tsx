@@ -1,21 +1,17 @@
-
-import DashboardLayout from '@/Layouts/DashboardLayout'
-
+import DashboardLayout from "@/Layouts/DashboardLayout"
 import { useOutlet, useLocation } from 'react-router-dom'
-import { SwitchTransition, CSSTransition } from 'react-transition-group'
-import '@/index.css'
+import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { useRef } from 'react'
+import '@/index.css'
 
-const UsersPage = () => {
+const SetupApplicableModels = () => {
+  const currentOutlet = useOutlet();
   const location = useLocation()
-  const currentOutlet = useOutlet()
   const ref = useRef(null)
 
   return (
-
     <DashboardLayout>
-
-      <SwitchTransition
+       <SwitchTransition
       >
         <CSSTransition 
           key={location.pathname}
@@ -29,10 +25,9 @@ const UsersPage = () => {
         </CSSTransition>
 
       </SwitchTransition>
-
     </DashboardLayout>
   )
+
 }
 
-
-export default UsersPage
+export default SetupApplicableModels;

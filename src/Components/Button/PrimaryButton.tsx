@@ -18,7 +18,7 @@ const PrimaryButton = ({ style, backgroundValue, children, className, onClick, d
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
 
-  let defaultBackgroundColor = backgroundValue! ?? linearGradient(gradients.dark.main, gradients.dark.state)
+  let defaultBackgroundColor = backgroundValue! ?? linearGradient(gradients.primary.main, gradients.primary.state)
   let defaultLabel = children ?? 'OKAY';
 
   return (

@@ -1,9 +1,11 @@
 import TableCell from '@mui/material/TableCell'
 import colors from '@/assets/theme/base/colors';
+import '@/index.css'
 
 interface TableHeaderLabelProps {
   title: string,
   align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
+  width?: string
 }
 
 interface TableBodyLabelProps {
@@ -16,12 +18,10 @@ interface TableMainSubProps {
   subLabel: string
 }
 
-const TableHeaderLabel: React.FC<TableHeaderLabelProps> = ({ title, align = 'left' }) => {
+const TableHeaderLabel: React.FC<TableHeaderLabelProps> = ({ title, align = 'left', width }) => {
   return (
-    <TableCell align={align} sx={{ px: 2, py: 1 }} >
-      <span className='text-[#7b809a] text-[0.65rem] font-bold'>{title}</span>
-    </TableCell>
-  )
+    <th style={{textAlign: align, width: width!}} className='column-header'>{title}</th>
+ )
 }
 
 const TableBodyLabel: React.FC<TableBodyLabelProps> = ({ children, align = 'left' }) =>

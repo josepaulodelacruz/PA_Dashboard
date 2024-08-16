@@ -10,7 +10,7 @@ const SubTitleLabel = ({ children } : SubTitleLabelProps) => {
   const { text } = theme.palette as { text?: any }
 
   return (
-    <div className="text-xs font-bold" style={{color: text.main}}>
+    <div className="text-xs font-light" style={{color: text.main}}>
       {children}
     </div>
 
