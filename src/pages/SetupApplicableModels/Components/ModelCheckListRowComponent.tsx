@@ -1,15 +1,29 @@
 import { TableRow } from "@mui/material"
 import CheckBox from '@mui/material/Checkbox'
 
-const ModelCheckListRowComponent = () => {
+interface ModelCheckListRowComponentProps {
+  is_applicable: boolean,
+  id: number,
+  group: string,
+  class: string,
+  item: string
+}
+
+const ModelCheckListRowComponent = (props: {
+  checklist: ModelCheckListRowComponentProps,
+  style?: React.CSSProperties,
+  onClick?: (isApplicable: boolean) => void,
+}) => {
+  const { checklist } = props
+  const isApplicable = Boolean(checklist.is_applicable) 
   return (
-    <TableRow className='border-b'>
+    <TableRow onClick={() => props.onClick!(checklist.is_applicable)} className='border-b ' style={props.style!}>
+      <td align="center" className='text-[0.60rem] text-black'>{checklist.id}</td>
+      <td align="left" className='text-[0.70rem] text-black'>{checklist.class}</td>
+      <td align="left" className='text-[0.70rem] text-black'>{checklist.item}</td>
       <td align='center' className='column-header'>
-        <CheckBox />
+        <CheckBox value={isApplicable} checked={isApplicable} />
       </td>
-      <td align="center" className='text-[0.60rem] text-black'>1</td>
-      <td align="center" className='text-[0.70rem] text-black'>Layout</td>
-      <td align="center" className='text-[0.70rem] text-black'>Setback according to plan</td>
     </TableRow>
   )
 }

@@ -8,16 +8,16 @@ interface ProjectResponse {
   data: Project[]
 }
 
-const useFetchProjects = () =>
+const useFetchProjectsOnlyAdded = () =>
   useQuery({
-    queryFn: () => client.get('/get-projects'),
+    queryFn: () => client.get('/get-projects?onlyAddedProjects=' + true),
     select: (response) => {
-      const body = response.data as ProjectResponse
-      return body;
+      const body = response.data as ProjectResponse 
+      return body; 
     },
     enabled: true,
     cacheTime: 0,
     staleTime: 0
   })
 
-export default useFetchProjects 
+export default useFetchProjectsOnlyAdded

@@ -3,7 +3,6 @@ import { TableRow } from "@mui/material"
 import { TableHeaderLabel } from "@/Components/Table/TableLabel"
 import { useNavigate } from 'react-router-dom';
 import StringRoutes from "@/Constants/stringRoutes";
-import useFetchProjects from "@/Hooks/Projects/useFetchProjects";
 import '@/index.css'
 import { SubSpan } from "@/Components/Labels/Spans";
 import Chip from '@/Components/Chip'
@@ -12,10 +11,11 @@ import PrimaryButton from "@/Components/Button/PrimaryButton";
 import { useEffect, useState } from "react";
 import { Project } from "@/Types";
 import SubTitleLabel from "@/Components/Labels/SubTitle";
+import useFetchProjectsOnlyAdded from "@/Hooks/Projects/useFetchProjectOnlyAdded";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { data, isError, isSuccess, error } = useFetchProjects(true)
+  const { data, isError, isSuccess, error } = useFetchProjectsOnlyAdded()
   const [projects, setProjects] = useState<Project[]>([])
 
   if (isError) {

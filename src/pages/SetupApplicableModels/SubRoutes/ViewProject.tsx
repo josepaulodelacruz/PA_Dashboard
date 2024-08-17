@@ -5,65 +5,61 @@ import SubTitleLabel from '@/Components/Labels/SubTitle';
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
 import { Tabs, Tab, TableRow } from '@mui/material';
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { TableHeaderLabel } from '@/Components/Table/TableLabel';
 import useViewProjectMutation from '@/Hooks/Projects/useViewProjectMutation';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { UnitModel } from '@/Types';
-import PrimaryButton from '@/Components/Button/PrimaryButton';
 import ModelCheckListRowComponent from '../Components/ModelCheckListRowComponent';
 import { ModelCheckList } from '@/Types/Project';
+import ProjectViewEventButton from '../Components/ProjectViewEventButton';
 
 const ViewProjectPage = () => {
   const [currentTab, setCurrentTab] = useState("Core")
-  const { mutate: viewProject } = useViewProjectMutation()
-  const { mutate: viewChecklist } = useViewProjectMutation()
+  const { mutateAsync: viewProject } = useViewProjectMutation()
   const [models, setModels] = useState<UnitModel[]>([])
   const [modelChecklists, setModelChecklists] = useState<ModelCheckList[]>([])
   const [currentSelectedModel, setCurrentSelectedModel] = useState<number>(0)
-  const navigate = useNavigate()
   let { id } = useParams()
 
-
   useEffect(() => {
-    viewProject({ id: Number(id), action: 'view-models' }, {
-      onSuccess: (response) => {
-        if (response.data.status) {
-          let data = response.data.data as UnitModel[]
-
-          data = data.map((d) => ({ ...d, check_lists: [] }))
-
+    const fetchProjectData = async () => {
+      try {
+        const projectResponse = await viewProject({ id: Number(id), action: 'view-models' });
+        if (projectResponse.data.status) {
+          let data = projectResponse.data.data as UnitModel[];
+          data = data.map((d) => ({ ...d, check_lists: [] }));
           if (data.length > 0) {
-            setModels(data)
-            setCurrentSelectedModel(0)
-            return
+            setModels(data);
+            setCurrentSelectedModel(0);
           }
         }
-      },
-      onError: (error) => {
-        console.error(error)
 
-      }
-    })
-
-    viewChecklist({ id: Number(id), action: 'view-checklist' }, {
-      onSuccess: (response) => {
-        if (response.data.status) {
-          const data = response.data.data as ModelCheckList[]
+        const checklistResponse = await viewProject({ id: Number(id), action: 'view-checklist' });
+        if (checklistResponse.data.status) {
+          const data = checklistResponse.data.data as ModelCheckList[];
           if (data.length > 0) {
-            setModelChecklists(data)
-            return
+            setModelChecklists(data);
           }
         }
-      },
-      onError: (error) => {
-        console.error(error)
+      } catch (error) {
+        console.error(error);
       }
-    })
+    };
 
+    fetchProjectData();
+  }, [id, viewProject]);
 
+  const _handleProjectViewEvent = (event: string) => {
+    switch (event) {
+      case 'add-checklist':
+        _handleAddChecklist()
+        break;
+      default:
+        break;
+    }
 
-  }, [id, viewProject, viewChecklist])
+  }
 
 
   const _handleAddChecklist = async () => {
@@ -121,17 +117,47 @@ const ViewProjectPage = () => {
             }
             tableHeader={
               <TableRow className='border-b' >
-                <TableHeaderLabel width="5%" align="left" title="Applicable" />
                 <TableHeaderLabel width="10%" align="center" title="ID" />
-                <TableHeaderLabel width="15%" align="center" title="Group" />
+                <TableHeaderLabel width="15%" align="left" title="Class" />
                 <TableHeaderLabel width="66%" align="center" title="Item" />
+                <TableHeaderLabel width="5%" align="left" title="Applicable" />
               </TableRow>
             }
           >
             {
+              models[currentSelectedModel]?.check_lists !== undefined &&
+              models[currentSelectedModel]?.check_lists.map((item, index) => (
+                <ModelCheckListRowComponent key={index}
+                  checklist={item}
+                  onClick={(isApplicable) => {
+                    setModels(prevState => {
+                      // Create a copy of the models array
+                      const newModels = [...prevState];
+
+                      // Copy the current model
+                      const updatedModel = { ...newModels[currentSelectedModel] };
+
+                      // Copy the check_lists array of the current model
+                      updatedModel.check_lists = [...updatedModel.check_lists];
+
+                      // Update the specific checklist item immutably
+                      updatedModel.check_lists[index] = {
+                        ...updatedModel.check_lists[index],
+                        is_applicable: !isApplicable
+                      };
+
+                      // Update the model in the newModels array
+                      newModels[currentSelectedModel] = updatedModel;
+
+                      return newModels;
+                    });
+                  }}
+                  style={{
+                    backgroundColor: index % 2 === 0 ? '#f8f9fa' : 'transparent',
+                    cursor: 'pointer',
+                  }} />
+              ))
             }
-
-
 
           </TableContainer>
         </div>
@@ -140,10 +166,10 @@ const ViewProjectPage = () => {
 
           <div style={{ overflowY: 'auto' }} className='bg-white shadow-sm rounded-md flex-1 mx-0'>
             <div className='p-4'>
-              <PrimaryButton
-                onClick={_handleAddChecklist}
+              <ProjectViewEventButton
+                status={(models[currentSelectedModel]?.check_lists === undefined || models[currentSelectedModel]?.check_lists.length > 0) ? 'save' : 'add'}
 
-                style={{ float: 'right' }}>Add Checklist</PrimaryButton>
+                onClick={_handleProjectViewEvent} />
               <MainSpan>St. Joseph Village 6 Models</MainSpan>
               <SubTitleLabel>List of models under St. Joseph Village 6</SubTitleLabel>
             </div>

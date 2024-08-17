@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid'
 import '@/index.css'
 import { useSnackbar } from 'notistack';
 import ProjectRowComponent from "../Components/ProjectRowComponent";
-import useFetchProjects from "@/Hooks/Projects/useFetchProjects";
 import React, { useEffect, useState } from "react";
 import { Project } from "@/Types";
 import LoadingHud from "@/Components/Modal/LoadingHud";
@@ -18,6 +17,7 @@ import Tab from '@mui/material/Tab'
 import PrimaryButton from "@/Components/Button/PrimaryButton";
 import useRemoveProjectMutation from "@/Hooks/Projects/useRemoveProjectMutation";
 import { isAxiosError } from "axios";
+import useFetchProjects from "@/Hooks/Projects/useFetchProjects";
 
 const ToggleProjectPage = () => {
   const { enqueueSnackbar } = useSnackbar()
