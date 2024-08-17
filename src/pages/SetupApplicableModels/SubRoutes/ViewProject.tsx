@@ -162,7 +162,7 @@ const ViewProjectPage = () => {
           </TableContainer>
         </div>
 
-        <div className='flex-col flex-[0.5]'>
+        <div id="unitmodels" className='flex-col flex-[0.5] order-first md:order-none'>
 
           <div style={{ overflowY: 'auto' }} className='bg-white shadow-sm rounded-md flex-1 mx-0'>
             <div className='p-4'>
