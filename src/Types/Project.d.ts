@@ -14,5 +14,15 @@ export type UnitModel = {
   code: string,
   description: string,
   model: string,
-  model_name: string
+  model_name: string,
+  check_lists: ModelCheckList[]
+}
+
+
+export type ModelCheckList = {
+  id: number,
+  group: string,
+  class: string,
+  item: string,
+  is_applicable: boolean
 }

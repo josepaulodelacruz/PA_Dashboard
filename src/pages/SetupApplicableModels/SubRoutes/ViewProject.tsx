@@ -11,12 +11,16 @@ import CheckBox from '@mui/material/Checkbox'
 import useViewProjectMutation from '@/Hooks/Projects/useViewProjectMutation';
 import { useParams, useNavigate } from 'react-router-dom';
 import { UnitModel } from '@/Types';
+import PrimaryButton from '@/Components/Button/PrimaryButton';
+import { ModelCheckList } from '@/Types/Project';
+import ModelCheckListRowComponent from '../Components/ModelCheckListRowComponent';
 
 const ViewProjectPage = () => {
   const [currentTab, setCurrentTab] = useState("Core")
   const { mutateAsync: viewProject } = useViewProjectMutation()
   const [models, setModels] = useState<UnitModel[]>([])
-  const [currentSelectedModel, setCurrentSelectedModel] = useState("")
+  const [modelChecklists, setModelChecklists] = useState<ModelCheckList[]>([])
+  const [currentSelectedModel, setCurrentSelectedModel] = useState<number>(0)
   const navigate = useNavigate()
   let { id } = useParams()
 
@@ -30,24 +34,52 @@ const ViewProjectPage = () => {
         const data = response.data.data as UnitModel[]
         if (data.length > 0) {
           setModels(data)
-          setCurrentSelectedModel(data[0].model_name)
+          setCurrentSelectedModel(1)
+          return
+        }
+      }
+    }
+
+    async function viewChecklist() {
+      var response = await viewProject({ id: Number(id), action: 'view-checklist' })
+
+      if (response.data.status) {
+        const data = response.data.data as ModelCheckList[]
+        if (data.length > 0) {
+          setModelChecklists(data)
           return
         }
       }
     }
 
     viewModels()
+    viewChecklist()
 
-  }, [])
+  }, [viewProject])
 
-  const ListModelItem = (props: { unit: UnitModel }) => {
-    const { unit } = props
+  const _handleAddChecklist = async () => {
+    let index: number = currentSelectedModel
+    if (models[index].check_lists?.length === 0 || !models[index].check_lists) {
+      setModels(prevState => {
+        const updatedModels = [...prevState]
+        updatedModels[index] = {
+          ...updatedModels[index],
+          check_lists: modelChecklists
+        }
+
+        return updatedModels
+      })
+    }
+  }
+
+  const ListModelItem = (props: { unit: UnitModel, index: number }) => {
+    const { unit, index } = props
     return (
       <>
         <ListItemButton
-          onClick={() => setCurrentSelectedModel(unit.model_name)}
-          selected={currentSelectedModel === unit.model_name}>
-          <SubSpan>{unit.model_name}</SubSpan>
+          onClick={() => setCurrentSelectedModel(index)}
+          selected={currentSelectedModel === index}>
+          <SubSpan className='text-sm font-light' style={{ color: 'black'}}>{unit.model_name}</SubSpan>
         </ListItemButton>
         <LineDivider />
       </>
@@ -88,14 +120,11 @@ const ViewProjectPage = () => {
               </TableRow>
             }
           >
-            <TableRow className='border-b'>
-              <td align='center' className='column-header'>
-                <CheckBox />
-              </td>
-              <td align="center" className='text-[0.60rem] text-black'>1</td>
-              <td align="center" className='text-[0.70rem] text-black'>Layout</td>
-              <td align="center" className='text-[0.70rem] text-black'>Setback according to plan</td>
-            </TableRow>
+           <ModelCheckListRowComponent/> 
+           <ModelCheckListRowComponent/> 
+           <ModelCheckListRowComponent/> 
+           <ModelCheckListRowComponent/> 
+           <ModelCheckListRowComponent/> 
 
 
           </TableContainer>
@@ -103,19 +132,23 @@ const ViewProjectPage = () => {
 
         <div className='flex flex-col flex-[0.5]'>
 
-          <div style={{ backgroundColor: 'white' }} className='shadow-md rounded-md flex-1 mx-0'>
+          <div style={{ overflowY: 'auto' }} className='rounded-md flex-1 mx-0'>
             <div className='p-4'>
+              <PrimaryButton
+                onClick={_handleAddChecklist}
+
+                style={{ float: 'right' }}>Add Checklist</PrimaryButton>
               <MainSpan>St. Joseph Village 6 Models</MainSpan>
               <SubTitleLabel>List of models under St. Joseph Village 6</SubTitleLabel>
             </div>
             <LineDivider />
 
-            <div className='px-4 py-2'>
+            <div id='list-models' className='px-4 py-2' style={{overflowY: 'auto'}}>
               <List>
                 {
                   models.map((model, index) => (
                     <div key={index}>
-                      <ListModelItem unit={model} />
+                      <ListModelItem unit={model} index={index} />
                     </div>
                   ))
                 }
