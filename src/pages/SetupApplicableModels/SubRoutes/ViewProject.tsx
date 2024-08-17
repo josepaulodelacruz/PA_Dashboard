@@ -5,19 +5,19 @@ import SubTitleLabel from '@/Components/Labels/SubTitle';
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
 import { Tabs, Tab, TableRow } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { TableHeaderLabel } from '@/Components/Table/TableLabel';
-import CheckBox from '@mui/material/Checkbox'
 import useViewProjectMutation from '@/Hooks/Projects/useViewProjectMutation';
 import { useParams, useNavigate } from 'react-router-dom';
 import { UnitModel } from '@/Types';
 import PrimaryButton from '@/Components/Button/PrimaryButton';
-import { ModelCheckList } from '@/Types/Project';
 import ModelCheckListRowComponent from '../Components/ModelCheckListRowComponent';
+import { ModelCheckList } from '@/Types/Project';
 
 const ViewProjectPage = () => {
   const [currentTab, setCurrentTab] = useState("Core")
-  const { mutateAsync: viewProject } = useViewProjectMutation()
+  const { mutate: viewProject } = useViewProjectMutation()
+  const { mutate: viewChecklist } = useViewProjectMutation()
   const [models, setModels] = useState<UnitModel[]>([])
   const [modelChecklists, setModelChecklists] = useState<ModelCheckList[]>([])
   const [currentSelectedModel, setCurrentSelectedModel] = useState<number>(0)
@@ -26,36 +26,45 @@ const ViewProjectPage = () => {
 
 
   useEffect(() => {
-    async function viewModels() {
-      //view-checklist
-      var response = await viewProject({ id: Number(id), action: 'view-models' })
+    viewProject({ id: Number(id), action: 'view-models' }, {
+      onSuccess: (response) => {
+        if (response.data.status) {
+          let data = response.data.data as UnitModel[]
 
-      if (response.data.status) {
-        const data = response.data.data as UnitModel[]
-        if (data.length > 0) {
-          setModels(data)
-          setCurrentSelectedModel(1)
-          return
+          data = data.map((d) => ({ ...d, check_lists: [] }))
+
+          if (data.length > 0) {
+            setModels(data)
+            setCurrentSelectedModel(0)
+            return
+          }
         }
+      },
+      onError: (error) => {
+        console.error(error)
+
       }
-    }
+    })
 
-    async function viewChecklist() {
-      var response = await viewProject({ id: Number(id), action: 'view-checklist' })
-
-      if (response.data.status) {
-        const data = response.data.data as ModelCheckList[]
-        if (data.length > 0) {
-          setModelChecklists(data)
-          return
+    viewChecklist({ id: Number(id), action: 'view-checklist' }, {
+      onSuccess: (response) => {
+        if (response.data.status) {
+          const data = response.data.data as ModelCheckList[]
+          if (data.length > 0) {
+            setModelChecklists(data)
+            return
+          }
         }
+      },
+      onError: (error) => {
+        console.error(error)
       }
-    }
+    })
 
-    viewModels()
-    viewChecklist()
 
-  }, [viewProject])
+
+  }, [id, viewProject, viewChecklist])
+
 
   const _handleAddChecklist = async () => {
     let index: number = currentSelectedModel
@@ -79,7 +88,7 @@ const ViewProjectPage = () => {
         <ListItemButton
           onClick={() => setCurrentSelectedModel(index)}
           selected={currentSelectedModel === index}>
-          <SubSpan className='text-sm font-light' style={{ color: 'black'}}>{unit.model_name}</SubSpan>
+          <SubSpan className='text-sm font-light' style={{ color: 'black' }}>{unit.model_name}</SubSpan>
         </ListItemButton>
         <LineDivider />
       </>
@@ -90,7 +99,6 @@ const ViewProjectPage = () => {
   const _handleChange = (value: string) => {
     setCurrentTab(value)
   }
-
 
   return (
     <div className='flex flex-col'>
@@ -120,19 +128,17 @@ const ViewProjectPage = () => {
               </TableRow>
             }
           >
-           <ModelCheckListRowComponent/> 
-           <ModelCheckListRowComponent/> 
-           <ModelCheckListRowComponent/> 
-           <ModelCheckListRowComponent/> 
-           <ModelCheckListRowComponent/> 
+            {
+            }
+
 
 
           </TableContainer>
         </div>
 
-        <div className='flex flex-col flex-[0.5]'>
+        <div className='flex-col flex-[0.5]'>
 
-          <div style={{ overflowY: 'auto' }} className='rounded-md flex-1 mx-0'>
+          <div style={{ overflowY: 'auto' }} className='bg-white shadow-sm rounded-md flex-1 mx-0'>
             <div className='p-4'>
               <PrimaryButton
                 onClick={_handleAddChecklist}
@@ -143,7 +149,7 @@ const ViewProjectPage = () => {
             </div>
             <LineDivider />
 
-            <div id='list-models' className='px-4 py-2' style={{overflowY: 'auto'}}>
+            <div id='list-models' className='px-4 py-2' style={{ overflowY: 'auto' }}>
               <List>
                 {
                   models.map((model, index) => (
