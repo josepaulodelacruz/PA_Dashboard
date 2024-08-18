@@ -13,6 +13,7 @@ const ProjectViewEventButton: React.FC<ProjectViewEventButtonProps> = ({ onClick
       style={{ float: 'right' }}>Add Checklist</PrimaryButton>
   } else {
     return <BorderedButton
+      onClick={() => onClick!('save-checklist')}
       style={{float:'right'}}
       >
       Save Checklist

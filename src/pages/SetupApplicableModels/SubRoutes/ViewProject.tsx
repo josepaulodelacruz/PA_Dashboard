@@ -65,6 +65,9 @@ const ViewProjectPage = () => {
       case 'add-checklist':
         _handleAddChecklist()
         break;
+      case 'save-checklist':
+        _handleSaveChecklist()
+        break;
       default:
         break;
     }
@@ -87,6 +90,10 @@ const ViewProjectPage = () => {
         return updatedModels
       })
     }
+  }
+
+  const _handleSaveChecklist = async () => {
+    console.log(models[currentTabIndex])
   }
 
   const ListModelItem = (props: { unit: UnitModel, index: number }) => {
@@ -152,7 +159,7 @@ const ViewProjectPage = () => {
 
                       // Copy the check_lists array of the current model
                       updatedModel.house_type[currentTabIndex].check_lists = [
-                          ...updatedModel.house_type[currentTabIndex].check_lists
+                        ...updatedModel.house_type[currentTabIndex].check_lists
                       ];
 
                       // Update the specific checklist item immutably
@@ -183,15 +190,21 @@ const ViewProjectPage = () => {
             <div className='p-4'>
               <ProjectViewEventButton
                 status={
-                  (models[currentSelectedModel]?.house_type[currentTabIndex].check_lists === undefined || 
+                  (models[currentSelectedModel]?.house_type[currentTabIndex].check_lists === undefined ||
                     models[currentSelectedModel]?.house_type[currentTabIndex].type === currentTab &&
-                    models[currentSelectedModel]?.house_type[currentTabIndex].check_lists.length > 0 
-                  ) 
+                    models[currentSelectedModel]?.house_type[currentTabIndex].check_lists.length > 0
+                  )
                     ? 'save' : 'add'}
 
                 onClick={_handleProjectViewEvent} />
-              <MainSpan>St. Joseph Village 6 Models</MainSpan>
-              <SubTitleLabel>List of models under St. Joseph Village 6</SubTitleLabel>
+              {
+                models.length > 0 && (
+                  <div>
+                    <MainSpan>{models[0].project_name}</MainSpan>
+                    <SubTitleLabel>List of models under {models[0].project_name}</SubTitleLabel>
+                  </div>
+                )
+              }
             </div>
             <LineDivider />
 

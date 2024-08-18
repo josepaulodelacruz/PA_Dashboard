@@ -82,11 +82,6 @@ const ToggleProjectPage = () => {
 
   const _handleDeleteProject = (project: Project, canBeDeleted: boolean, index: number) => {
     if (canBeDeleted) {
-      project = {
-        ...project,
-        is_removed_from_list: !project.is_removed_from_list,
-      }
-
 
       deleteProject({ is_remove_from_list: project.is_removed_from_list.toString(), id: project.id }, {
         onSuccess: () => {
@@ -99,6 +94,10 @@ const ToggleProjectPage = () => {
             }
           })
 
+          project = {
+            ...project,
+            is_removed_from_list: !project.is_removed_from_list,
+          }
 
           setProjects(prevState => {
             const newProjects = [...prevState]

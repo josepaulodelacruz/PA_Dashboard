@@ -12,7 +12,7 @@ export type Project = {
 export type UnitModel = {
   id: number,
   code: string,
-  description: string,
+  project_name: string,
   model: string,
   model_name: string,
   house_type: HouseType[]
