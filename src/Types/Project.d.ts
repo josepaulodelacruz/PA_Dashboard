@@ -5,7 +5,7 @@ export type Project = {
   code: string,
   shortDesc: string,
   is_included: boolean,
-  is_remove_from_list: boolean
+  is_removed_from_list: boolean
 }
 
 

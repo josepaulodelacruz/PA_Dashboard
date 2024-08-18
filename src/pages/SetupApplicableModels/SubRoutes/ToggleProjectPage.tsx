@@ -84,15 +84,15 @@ const ToggleProjectPage = () => {
     if (canBeDeleted) {
       project = {
         ...project,
-        is_remove_from_list: !project.is_remove_from_list,
+        is_removed_from_list: !project.is_removed_from_list,
       }
 
 
-      deleteProject({ is_remove_from_list: project.is_remove_from_list.toString(), id: project.id }, {
+      deleteProject({ is_remove_from_list: project.is_removed_from_list.toString(), id: project.id }, {
         onSuccess: () => {
-          let displayText = project.is_remove_from_list ? "DELETED" : "RETRIEVE"
+          let displayText = project.is_removed_from_list ? "DELETED" : "RETRIEVE"
           enqueueSnackbar(`${displayText} ${project.description}`, {
-            variant: project.is_remove_from_list ? 'error' : 'success',
+            variant: project.is_removed_from_list ? 'error' : 'success',
             anchorOrigin: {
               horizontal: 'right',
               vertical: 'bottom',
@@ -125,7 +125,7 @@ const ToggleProjectPage = () => {
       return isSuccess && projects.map((item, index) => {
         if (!item.is_removed_from_list) {
           return <ProjectRowComponent
-            isProjectDeleted={item.is_remove_from_list}
+            isProjectDeleted={item.is_removed_from_list}
             onModeDelete={isRemove}
             onDelete={(project, canBeDeleted) => _handleDeleteProject(project, canBeDeleted, index)}
             key={item.id} project={item}
@@ -137,7 +137,7 @@ const ToggleProjectPage = () => {
       return isSuccess && projects.map((item, index) => {
         if (item.is_removed_from_list) {
           return <ProjectRowComponent
-            isProjectDeleted={item.is_remove_from_list}
+            isProjectDeleted={item.is_removed_from_list}
             onModeDelete={true}
             onDelete={(project, canBeDeleted) => _handleDeleteProject(project, canBeDeleted, index)}
             key={item.id} project={item}
