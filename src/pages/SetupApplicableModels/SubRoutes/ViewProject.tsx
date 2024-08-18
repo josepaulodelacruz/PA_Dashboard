@@ -15,7 +15,8 @@ import { ModelCheckList } from '@/Types/Project';
 import ProjectViewEventButton from '../Components/ProjectViewEventButton';
 
 const ViewProjectPage = () => {
-  const [currentTab, setCurrentTab] = useState("Core")
+  const [currentTab, setCurrentTab] = useState("CORE")
+  const [currentTabIndex, setCurrentTabIndex] = useState(0)
   const { mutateAsync: viewProject } = useViewProjectMutation()
   const [models, setModels] = useState<UnitModel[]>([])
   const [modelChecklists, setModelChecklists] = useState<ModelCheckList[]>([])
@@ -23,12 +24,21 @@ const ViewProjectPage = () => {
   let { id } = useParams()
 
   useEffect(() => {
+    let index = currentTab === 'CORE' ? 0 : 1
+    setCurrentTabIndex(index)
+  }, [currentTab])
+
+  useEffect(() => {
     const fetchProjectData = async () => {
       try {
         const projectResponse = await viewProject({ id: Number(id), action: 'view-models' });
         if (projectResponse.data.status) {
           let data = projectResponse.data.data as UnitModel[];
-          data = data.map((d) => ({ ...d, check_lists: [] }));
+          data.forEach(unit => {
+            unit.house_type = []
+            unit.house_type[0] = { type: 'CORE', check_lists: [] };
+            unit.house_type[1] = { type: 'COMPLETE', check_lists: [] };
+          });
           if (data.length > 0) {
             setModels(data);
             setCurrentSelectedModel(0);
@@ -64,14 +74,16 @@ const ViewProjectPage = () => {
 
   const _handleAddChecklist = async () => {
     let index: number = currentSelectedModel
-    if (models[index].check_lists?.length === 0 || !models[index].check_lists) {
+    if (models[index].house_type[currentTabIndex]?.check_lists?.length === 0 || !models[index].house_type[currentTabIndex]?.check_lists) {
       setModels(prevState => {
         const updatedModels = [...prevState]
         updatedModels[index] = {
-          ...updatedModels[index],
+          ...updatedModels[index]
+        }
+        updatedModels[index].house_type[currentTabIndex] = {
+          type: currentTab,
           check_lists: modelChecklists
         }
-
         return updatedModels
       })
     }
@@ -111,8 +123,8 @@ const ViewProjectPage = () => {
                 indicatorColor="primary"
                 variant="fullWidth"
               >
-                <Tab value={'Core'} label='Core' />
-                <Tab value={'Complete'} label='Complete' disabled style={{ cursor: 'warning' }} />
+                <Tab value={'CORE'} label='Core' />
+                <Tab value={'COMPLETE'} label='Complete' style={{ cursor: 'warning' }} />
               </Tabs>
             }
             tableHeader={
@@ -125,8 +137,9 @@ const ViewProjectPage = () => {
             }
           >
             {
-              models[currentSelectedModel]?.check_lists !== undefined &&
-              models[currentSelectedModel]?.check_lists.map((item, index) => (
+              models[currentSelectedModel]?.house_type[currentTabIndex]?.check_lists !== undefined &&
+              models[currentSelectedModel]?.house_type[currentTabIndex]?.type === currentTab &&
+              models[currentSelectedModel]?.house_type[currentTabIndex]?.check_lists.map((item, index) => (
                 <ModelCheckListRowComponent key={index}
                   checklist={item}
                   onClick={(isApplicable) => {
@@ -138,11 +151,13 @@ const ViewProjectPage = () => {
                       const updatedModel = { ...newModels[currentSelectedModel] };
 
                       // Copy the check_lists array of the current model
-                      updatedModel.check_lists = [...updatedModel.check_lists];
+                      updatedModel.house_type[currentTabIndex].check_lists = [
+                          ...updatedModel.house_type[currentTabIndex].check_lists
+                      ];
 
                       // Update the specific checklist item immutably
-                      updatedModel.check_lists[index] = {
-                        ...updatedModel.check_lists[index],
+                      updatedModel.house_type[currentTabIndex].check_lists[index] = {
+                        ...updatedModel.house_type[currentTabIndex].check_lists[index],
                         is_applicable: !isApplicable
                       };
 
@@ -167,7 +182,12 @@ const ViewProjectPage = () => {
           <div style={{ overflowY: 'auto' }} className='bg-white shadow-sm rounded-md flex-1 mx-0'>
             <div className='p-4'>
               <ProjectViewEventButton
-                status={(models[currentSelectedModel]?.check_lists === undefined || models[currentSelectedModel]?.check_lists.length > 0) ? 'save' : 'add'}
+                status={
+                  (models[currentSelectedModel]?.house_type[currentTabIndex].check_lists === undefined || 
+                    models[currentSelectedModel]?.house_type[currentTabIndex].type === currentTab &&
+                    models[currentSelectedModel]?.house_type[currentTabIndex].check_lists.length > 0 
+                  ) 
+                    ? 'save' : 'add'}
 
                 onClick={_handleProjectViewEvent} />
               <MainSpan>St. Joseph Village 6 Models</MainSpan>

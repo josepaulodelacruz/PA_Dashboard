@@ -2,12 +2,14 @@ import Paper from '@mui/material/Paper'
 import SettingIcon from '@mui/icons-material/Settings'
 import SideMenuToggleIcon from '@mui/icons-material/Menu'
 import { useTheme } from '@mui/material'
-import TextField from '@mui/material/TextField'
+import { TextField, InputAdornment, IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import { RouteModel, NavRoute } from '@/Types'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
+import useSearchNavbar from '@/Hooks/Search/useSearchNavbar'
+import ClearIcon from '@mui/icons-material/Clear'
 
 
 interface NavbarProps {
@@ -18,9 +20,9 @@ interface NavbarProps {
 const Navbar = ({ isScrolled, route }: NavbarProps) => {
   const [navRoute, setNavRoute] = useState<NavRoute>();
   const { pathname } = useLocation()
-  const navigate = useNavigate()
   const theme = useTheme()
   const store = useToggleDrawer();
+  const { onSearch, search, onReset } = useSearchNavbar()
   let colorIcon = theme.palette.grey[500]
   let backgroundColor = isScrolled ? 'rgba(255, 255, 255, 0.8)' : 'transparent';
   let backdropFilter = isScrolled ? 'saturate(200%) blur(1.875rem);' : 'none';
@@ -29,7 +31,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
   const IconComponent: React.FC<{ style: React.CSSProperties, name: string }> = ({ style, name }) => {
     if (name === 'Setup Checklist') {
       return <SettingIcon fontSize='small' style={style} />;
-    } 
+    }
     return null;
   };
 
@@ -100,9 +102,24 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
             component='form'
             noValidate
             autoComplete="off"
-            className='w-1/2 flex justify-end'
+            className='w-full md:w-1/2 flex justify-end'
           >
-            <TextField fullWidth={false} id="outlined-basic" size='small' label="Search" variant="outlined" />
+            <TextField
+              value={search}
+              InputProps={{
+                endAdornment: search && (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="clear search"
+                      onClick={() => onReset()}
+                      edge="end"
+                    >
+                      <ClearIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              onChange={(e) => onSearch(e.target.value)} fullWidth={false} id="outlined-basic" size='small' label="Search" variant="outlined" />
           </Box>
           <div className='justify-end'>
             <SideMenuToggleIcon onClick={_handleSidebarToggle} fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />

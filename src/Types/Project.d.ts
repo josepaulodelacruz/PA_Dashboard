@@ -15,14 +15,19 @@ export type UnitModel = {
   description: string,
   model: string,
   model_name: string,
-  check_lists: ModelCheckList[]
+  house_type: HouseType[]
 }
 
+export type HouseType = {
+  type: string,
+  check_lists: ModelCheckList[]
+}
 
 export type ModelCheckList = {
   id: number,
   group: string,
   class: string,
   item: string,
-  is_applicable: boolean
+  is_applicable: boolean,
+  house_type: string
 }
