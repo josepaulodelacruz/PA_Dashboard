@@ -87,11 +87,6 @@ const ToggleProjectPage = () => {
         is_remove_from_list: !project.is_remove_from_list,
       }
 
-      setProjects(prevState => {
-        const newProjects = [...prevState]
-        newProjects[index] = project;
-        return newProjects
-      })
 
       deleteProject({ is_remove_from_list: project.is_remove_from_list.toString(), id: project.id }, {
         onSuccess: () => {
@@ -102,6 +97,13 @@ const ToggleProjectPage = () => {
               horizontal: 'right',
               vertical: 'bottom',
             }
+          })
+
+
+          setProjects(prevState => {
+            const newProjects = [...prevState]
+            newProjects[index] = project;
+            return newProjects
           })
         },
         onError: () => {
@@ -121,7 +123,7 @@ const ToggleProjectPage = () => {
   const ActiveTab = () => {
     if (value === 1) {
       return isSuccess && projects.map((item, index) => {
-        if (!item.is_remove_from_list) {
+        if (!item.is_removed_from_list) {
           return <ProjectRowComponent
             isProjectDeleted={item.is_remove_from_list}
             onModeDelete={isRemove}
@@ -133,7 +135,7 @@ const ToggleProjectPage = () => {
       })
     } else {
       return isSuccess && projects.map((item, index) => {
-        if (item.is_remove_from_list) {
+        if (item.is_removed_from_list) {
           return <ProjectRowComponent
             isProjectDeleted={item.is_remove_from_list}
             onModeDelete={true}
