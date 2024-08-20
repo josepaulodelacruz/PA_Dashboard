@@ -50,6 +50,10 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
 
   }, [pathname])
 
+  const _decodeURL = (encodedString : string) => {
+    return decodeURIComponent(encodedString)
+  }
+
   const _handleSidebarToggle = () => {
     store.isToggled()
   }
@@ -86,7 +90,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
                   return (
                     <div key={index}>
                       <span className='hover:text-blue' onClick={() => index < navRoute.pathItems.length - 1 ? _handleNavigateBack(index) : null} style={{ paddingLeft: '5px', cursor: 'pointer' }}>
-                        {item}{index < navRoute.pathItems.length - 1 ? ' /' : ''}
+                        {_decodeURL(item)}{index < navRoute.pathItems.length - 1 ? ' /' : ''}
                       </span>
                     </div>
                   )
@@ -94,7 +98,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
               }
             </div>
           </div>
-          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{navRoute?.name}</span>
+          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{_decodeURL(navRoute?.name)}</span>
         </div>
 
         <div className='flex flex-row items-center w-full justify-between  sm:justify-end py-2 sm:p-0'>

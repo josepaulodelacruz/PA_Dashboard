@@ -32,7 +32,7 @@ const router = createBrowserRouter(
         <Route path={StringRoutes.dashboard} element={<SetupApplicableModels/>}>
           <Route path={StringRoutes.dashboard} element={<HomePage/>}/>
           <Route path={StringRoutes.project_list} element={<ToggleProjectPage/>}/>
-          <Route path={StringRoutes.view_project + "/:id"} element={<ViewProjectPage />}/>
+          <Route path={StringRoutes.view_project + "/:id" + "/:project_name"} element={<ViewProjectPage />}/>
           
         </Route>
       </Route>

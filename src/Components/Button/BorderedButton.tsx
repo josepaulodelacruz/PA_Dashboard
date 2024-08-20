@@ -32,8 +32,8 @@ const BorderedButton = ({
       style={style!}
       sx={{
         background: backgroundValue,
-        borderColor: gradients.dark.main,
-        color: gradients.dark.main,
+        borderColor: '#006442',
+        color: gradients.primary.main,
         '&:hover': {
           borderColor: gradients.dark.main,
         },

@@ -35,7 +35,7 @@ const HomePage = () => {
   };
 
   const _handleViewProject = async (project: Project) => {
-    let navpath = StringRoutes.view_project + '/' + project.id
+    let navpath = StringRoutes.view_project + '/' + project.id + '/' + project.description
     navigate(navpath)
   }
 
@@ -108,9 +108,9 @@ const RowComponent = (props: any & Project) => {
 
     <td className="column-header">
 
-      <PrimaryButton onClick={() => props.handleViewProjet(project)}>
-        <span className="text-[0.5rem] font-light">View</span>
-      </PrimaryButton>
+      <BorderedButton style={{padding: '0.4rem'}} onClick={() => props.handleViewProjet(project)}>
+        <span className="text-[0.85rem] font-light">View</span>
+      </BorderedButton>
     </td>
 
   </TableRow>
