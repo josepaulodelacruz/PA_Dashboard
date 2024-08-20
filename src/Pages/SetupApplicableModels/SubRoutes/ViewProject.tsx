@@ -1,5 +1,6 @@
 import TableContainer from '@/Components/Table/TableContainer'
 import { MainSpan, SubSpan } from '@/Components/Labels/Spans'
+import { useSnackbar } from 'notistack';
 import LineDivider from "@/Components/LineDivider";
 import SubTitleLabel from '@/Components/Labels/SubTitle';
 import List from '@mui/material/List'
@@ -28,6 +29,8 @@ const ViewProjectPage = () => {
   const [modelChecklists, setModelChecklists] = useState<ModelCheckList[]>([])
   const [currentSelectedModel, setCurrentSelectedModel] = useState<number>(0)
   let { id } = useParams()
+  const { enqueueSnackbar } = useSnackbar()
+
 
   useEffect(() => {
     let index = currentTab === 'CORE' ? 0 : 1
@@ -116,6 +119,14 @@ const ViewProjectPage = () => {
       try {
         await modelAddChecklist({ id: models[index].id, model_id: models[index].model, housetype: currentTab }, {
           onSuccess: () => {
+            enqueueSnackbar("Successfully add checklist to this model.", {
+              variant: 'success',
+              anchorOrigin: {
+                horizontal: 'right',
+                vertical: 'bottom',
+              },
+            })
+
             setModels(prevState => {
               const updatedModels = [...prevState]
               updatedModels[index] = {
@@ -140,9 +151,9 @@ const ViewProjectPage = () => {
   const _handleSaveChecklist = async () => {
     const isApplicable: string[] = []
     const isNotApplicable: string[] = []
-    
+
     models[currentSelectedModel].house_type[currentTabIndex].check_lists.map((item) => {
-      if(item.is_applicable) {
+      if (item.is_applicable) {
         isApplicable.push(item.id.toString())
       } else {
         isNotApplicable.push(item.id.toString())
@@ -150,7 +161,7 @@ const ViewProjectPage = () => {
     })
 
     const request = {
-      id: id!, 
+      id: id!,
       model_id: models[currentSelectedModel].model,
       house_type: currentTabIndex === 0 ? "CORE" : "COMPLETE",
       isNotApplicable: isNotApplicable,
@@ -159,16 +170,27 @@ const ViewProjectPage = () => {
 
     try {
       await saveModelChecklist(request, {
-        onSuccess: (response) => {
-          console.log(response)
-
-        }, 
-        onError: (err) => { 
-          console.error(err)
+        onSuccess: (_) => {
+          enqueueSnackbar("Successfully save checklist", {
+            variant: 'success',
+            anchorOrigin: {
+              horizontal: 'right',
+              vertical: 'bottom',
+            },
+          })
+        },
+        onError: (err) => {
+          enqueueSnackbar(err.toString(), {
+            variant: 'error',
+            anchorOrigin: {
+              horizontal: 'right',
+              vertical: 'bottom',
+            },
+          })
         }
       })
 
-    } catch(err) {
+    } catch (err) {
       console.error(err)
     }
 
@@ -190,8 +212,8 @@ const ViewProjectPage = () => {
               var checkListComplete: ModelCheckList[] = []
               if (data.length > 0) {
                 data.map((item) => {
-                  if(item.housetype === 'CORE') checkListCore.push(item)
-                  if(item.housetype === 'COMPLETE') checkListComplete.push(item)
+                  if (item.housetype === 'CORE') checkListCore.push(item)
+                  if (item.housetype === 'COMPLETE') checkListComplete.push(item)
                 })
 
                 setModels(prevState => {
@@ -200,7 +222,7 @@ const ViewProjectPage = () => {
                   updatedModel[index].house_type[0].check_lists = checkListCore;
                   updatedModel[index].house_type[1].check_lists = checkListComplete;
 
-                  return updatedModel 
+                  return updatedModel
                 })
               }
             }

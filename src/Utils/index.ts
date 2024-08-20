@@ -1,5 +1,6 @@
 import { RefObject, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 interface ScrollToTopProps {
   scrollRef: RefObject<HTMLElement>
@@ -17,7 +18,28 @@ const ScrollToTop = ({ scrollRef }: ScrollToTopProps) => {
   return null;
 };
 
+const globalSnackbar = ({ 
+  message,
+  variant
+} : { 
+  message: string,
+  variant: 'default' | 'error' | 'success' | 'warning' | 'info'
+}) => {
+  const { enqueueSnackbar } = useSnackbar()
+
+  enqueueSnackbar(message, {
+    variant: variant,
+    anchorOrigin: {
+      horizontal: 'right',
+      vertical: 'bottom',
+    },
+  })
+
+
+}
+
 export {
-  ScrollToTop
+  ScrollToTop,
+  globalSnackbar
 }
 
