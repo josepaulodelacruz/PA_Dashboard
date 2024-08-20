@@ -5,7 +5,9 @@ export type Project = {
   code: string,
   shortDesc: string,
   is_included: boolean,
-  is_removed_from_list: boolean
+  is_removed_from_list: boolean,
+  models: strings,
+  housetypes: strings,
 }
 
 
@@ -29,5 +31,5 @@ export type ModelCheckList = {
   class: string,
   item: string,
   is_applicable: boolean,
-  house_type: string
+  housetype: string
 }

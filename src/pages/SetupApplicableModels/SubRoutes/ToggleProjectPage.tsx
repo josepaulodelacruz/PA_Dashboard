@@ -51,15 +51,15 @@ const ToggleProjectPage = () => {
   }, [isSuccess])
 
   const _handleUpdate = (project: Project, isChecked: boolean) => {
-
-    setProjects(prevProjects => {
-      let index = prevProjects.findIndex(el => el.id === project.id)
-      prevProjects[index].is_included = isChecked;
-      return prevProjects;
-    })
-
     includeProject({ is_included: isChecked.toString(), id: project.id.toString() }, {
       onSuccess: () => {
+
+        setProjects(prevProjects => {
+          let index = prevProjects.findIndex(el => el.id === project.id)
+          prevProjects[index].is_included = isChecked;
+          return prevProjects;
+        })
+
         enqueueSnackbar(isChecked ? `${project.description} added` : `${project.description} remove`, {
           variant: isChecked ? 'success' : 'warning',
           anchorOrigin: {
@@ -85,9 +85,9 @@ const ToggleProjectPage = () => {
 
       deleteProject({ is_remove_from_list: project.is_removed_from_list.toString(), id: project.id }, {
         onSuccess: () => {
-          let displayText = project.is_removed_from_list ? "DELETED" : "RETRIEVE"
+          let displayText = !project.is_removed_from_list ? "DELETED" : "RETRIEVE"
           enqueueSnackbar(`${displayText} ${project.description}`, {
-            variant: project.is_removed_from_list ? 'error' : 'success',
+            variant: !project.is_removed_from_list ? 'error' : 'success',
             anchorOrigin: {
               horizontal: 'right',
               vertical: 'bottom',

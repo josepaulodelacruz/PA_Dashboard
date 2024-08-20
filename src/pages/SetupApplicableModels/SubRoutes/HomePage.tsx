@@ -65,10 +65,10 @@ const HomePage = () => {
       >
         {
           projects.map((project, index) => (
-            <RowComponent 
+            <RowComponent
               index={index}
               handleViewProjet={(project: Project) => _handleViewProject(project)}
-              key={project.id} project={project}/>
+              key={project.id} project={project} />
           ))
         }
       </TableContainer>
@@ -78,8 +78,10 @@ const HomePage = () => {
 
 const RowComponent = (props: any & Project) => {
   const { project, index } = props;
-  let rowColor = index % 2 === 1 ? '#f8f9fa' : 'transparent' 
-  return <TableRow className="border-b" style={{backgroundColor: rowColor}}>
+  let rowColor = index % 2 === 1 ? '#f8f9fa' : 'transparent'
+  const models: string[] = project.models ? JSON.parse(project.models) : [];
+  const housetypes: string[] = project.housetypes ? JSON.parse(project.housetypes) : [];
+  return <TableRow className="border-b" style={{ backgroundColor: rowColor }}>
     <td className="column-header">
       <SubSpan>{project.id}</SubSpan>
     </td>
@@ -89,13 +91,19 @@ const RowComponent = (props: any & Project) => {
     <td className="column-header">
       <SubTitleLabel>{project.description}</SubTitleLabel>
     </td>
-    <td align='center' className="column-header w-[250px]">
-      <Chip />
-      <Chip />
-      <Chip />
+    <td align='left' className="column-header w-[250px]">
+      {
+        models.map((item, index) => (
+          <Chip key={index} name={item} />
+        ))
+      }
     </td>
     <td align='center' className="column-header flex-wrap w-[200px]">
-      <Chip />
+      {
+        housetypes.map((item, index) => (
+          <Chip key={index} name={item}/>
+        ))
+      }
     </td>
 
     <td className="column-header">

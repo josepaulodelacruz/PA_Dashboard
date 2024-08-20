@@ -1,9 +1,13 @@
 import SubTitleLabel from "../Labels/SubTitle"
 
-const Chip = () => {
+interface ChipProps {
+  name?: string
+}
+
+const Chip = ({name} : ChipProps) => {
   return (
-    <div className="inline-flex mr-1 border border-black p-1 rounded-sm">
-      <SubTitleLabel>CORE</SubTitleLabel>
+    <div className="inline-flex mx-[1px] my-[1px] border border-black p-1 rounded-sm">
+      <SubTitleLabel>{name}</SubTitleLabel>
     </div>
   )
 

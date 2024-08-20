@@ -13,11 +13,15 @@ import { UnitModel } from '@/Types';
 import ModelCheckListRowComponent from '../Components/ModelCheckListRowComponent';
 import { ModelCheckList } from '@/Types/Project';
 import ProjectViewEventButton from '../Components/ProjectViewEventButton';
+import useViewModelChecklist from '@/Hooks/Projects/useViewModelChecklistMutation';
+import useModelAddChecklistMutation from '@/Hooks/Projects/useModelAddChecklistMutation';
 
 const ViewProjectPage = () => {
   const [currentTab, setCurrentTab] = useState("CORE")
   const [currentTabIndex, setCurrentTabIndex] = useState(0)
   const { mutateAsync: viewProject } = useViewProjectMutation()
+  const { mutateAsync: viewModelChecklist } = useViewModelChecklist()
+  const { mutateAsync: modelAddChecklist } = useModelAddChecklistMutation()
   const [models, setModels] = useState<UnitModel[]>([])
   const [modelChecklists, setModelChecklists] = useState<ModelCheckList[]>([])
   const [currentSelectedModel, setCurrentSelectedModel] = useState<number>(0)
@@ -33,11 +37,31 @@ const ViewProjectPage = () => {
       try {
         const projectResponse = await viewProject({ id: Number(id), action: 'view-models' });
         if (projectResponse.data.status) {
+
           let data = projectResponse.data.data as UnitModel[];
-          data.forEach(unit => {
-            unit.house_type = []
-            unit.house_type[0] = { type: 'CORE', check_lists: [] };
-            unit.house_type[1] = { type: 'COMPLETE', check_lists: [] };
+
+          const modelChecklistResponse = await _handleViewModelChecklist({ id: Number(id), data: data[0] })
+
+          let checkListsCore: ModelCheckList[] = [];
+          let checkListsComplete: ModelCheckList[] = [];
+          if (modelChecklistResponse.data.status || modelChecklistResponse.data.length > 0) {
+            let checkLists = modelChecklistResponse.data as ModelCheckList[]
+            checkLists.map((item) => {
+              if (item.housetype === 'CORE') checkListsCore.push(item)
+              if (item.housetype === 'COMPLETE') checkListsComplete.push(item)
+            })
+          }
+
+          data.forEach((unit, index) => {
+            if (index === 0) {
+              unit.house_type = []
+              unit.house_type[0] = { type: 'CORE', check_lists: checkListsCore };
+              unit.house_type[1] = { type: 'COMPLETE', check_lists: checkListsComplete };
+            } else {
+              unit.house_type = []
+              unit.house_type[0] = { type: 'CORE', check_lists: [] };
+              unit.house_type[1] = { type: 'COMPLETE', check_lists: [] };
+            }
           });
           if (data.length > 0) {
             setModels(data);
@@ -71,24 +95,43 @@ const ViewProjectPage = () => {
       default:
         break;
     }
-
   }
 
+  const _handleViewModelChecklist = async ({ id, data }: { id: number, data: UnitModel }) => {
+    try {
+      const response = await viewModelChecklist({ id: Number(id), model_id: data.model })
+
+      return response;
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   const _handleAddChecklist = async () => {
     let index: number = currentSelectedModel
     if (models[index].house_type[currentTabIndex]?.check_lists?.length === 0 || !models[index].house_type[currentTabIndex]?.check_lists) {
-      setModels(prevState => {
-        const updatedModels = [...prevState]
-        updatedModels[index] = {
-          ...updatedModels[index]
-        }
-        updatedModels[index].house_type[currentTabIndex] = {
-          type: currentTab,
-          check_lists: modelChecklists
-        }
-        return updatedModels
-      })
+
+      try {
+        await modelAddChecklist({ id: models[index].id, model_id: models[index].model, housetype: currentTab }, {
+          onSuccess: () => {
+            setModels(prevState => {
+              const updatedModels = [...prevState]
+              updatedModels[index] = {
+                ...updatedModels[index]
+              }
+              updatedModels[index].house_type[currentTabIndex] = {
+                type: currentTab,
+                check_lists: modelChecklists
+              }
+              return updatedModels
+            })
+          }
+        })
+
+      } catch (err) {
+        console.error(err)
+      }
+
     }
   }
 
@@ -101,7 +144,32 @@ const ViewProjectPage = () => {
     return (
       <>
         <ListItemButton
-          onClick={() => setCurrentSelectedModel(index)}
+          onClick={async () => {
+            setCurrentSelectedModel(index)
+            if (models[index].house_type[currentTabIndex].check_lists.length === 0) {
+              var response = await viewModelChecklist({ id: Number(id), model_id: models[index].model })
+
+              let data = response.data as ModelCheckList[]
+
+              var checkListCore: ModelCheckList[] = []
+              var checkListComplete: ModelCheckList[] = []
+              if (data.length > 0) {
+                data.map((item) => {
+                  if(item.housetype === 'CORE') checkListCore.push(item)
+                  if(item.housetype === 'COMPLETE') checkListComplete.push(item)
+                })
+
+                setModels(prevState => {
+                  const updatedModel = [...prevState];
+
+                  updatedModel[index].house_type[0].check_lists = checkListCore;
+                  updatedModel[index].house_type[1].check_lists = checkListComplete;
+
+                  return updatedModel 
+                })
+              }
+            }
+          }}
           selected={currentSelectedModel === index}>
           <SubSpan className='text-sm font-light' style={{ color: 'black' }}>{unit.model_name}</SubSpan>
         </ListItemButton>
