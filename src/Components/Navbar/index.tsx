@@ -98,7 +98,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
               }
             </div>
           </div>
-          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{_decodeURL(navRoute?.name)}</span>
+          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{_decodeURL(navRoute?.name!)}</span>
         </div>
 
         <div className='flex flex-row items-center w-full justify-between  sm:justify-end py-2 sm:p-0'>

@@ -1,6 +1,6 @@
 //import { AxiosError  } from "axios";
 import { useQuery } from "react-query";
-import client from '@/Config/Client'
+import client from '@/Config/client'
 
 const useTestApi = () =>
   useQuery({

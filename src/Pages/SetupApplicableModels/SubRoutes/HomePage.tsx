@@ -7,7 +7,6 @@ import '@/index.css'
 import { SubSpan } from "@/Components/Labels/Spans";
 import Chip from '@/Components/Chip'
 import BorderedButton from '@/Components/Button/BorderedButton'
-import PrimaryButton from "@/Components/Button/PrimaryButton";
 import { useEffect, useState } from "react";
 import { Project } from "@/Types";
 import SubTitleLabel from "@/Components/Labels/SubTitle";

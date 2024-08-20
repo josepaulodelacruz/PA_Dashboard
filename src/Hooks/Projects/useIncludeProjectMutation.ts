@@ -14,7 +14,7 @@ type ResponseData = any; // Replace with your actual response data type
 const useIncludeProjectMutation = () =>
   useMutation<ResponseData, AxiosError, MutationParams>({
     mutationFn: async (params) => {
-      const response = await client.get(`/get-projects/include?isIncluded=${params.is_included}&id=${params.id}`);
+      const response = await client.get(`/get-projects/include?isIncluded=${params.is_included}&id=${params.id}`, {});
       return response.data;
     },
     onError: (error) => {
