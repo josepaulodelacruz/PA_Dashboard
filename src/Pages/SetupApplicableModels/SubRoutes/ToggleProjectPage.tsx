@@ -124,6 +124,7 @@ const ToggleProjectPage = () => {
       return isSuccess && projects.map((item, index) => {
         if (!item.is_removed_from_list) {
           return <ProjectRowComponent
+            index={index}
             isProjectDeleted={item.is_removed_from_list}
             onModeDelete={isRemove}
             onDelete={(project, canBeDeleted) => _handleDeleteProject(project, canBeDeleted, index)}
@@ -136,6 +137,7 @@ const ToggleProjectPage = () => {
       return isSuccess && projects.map((item, index) => {
         if (item.is_removed_from_list) {
           return <ProjectRowComponent
+            index={index}
             isProjectDeleted={item.is_removed_from_list}
             onModeDelete={true}
             onDelete={(project, canBeDeleted) => _handleDeleteProject(project, canBeDeleted, index)}

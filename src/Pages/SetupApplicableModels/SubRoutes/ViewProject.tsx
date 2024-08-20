@@ -15,6 +15,7 @@ import { ModelCheckList } from '@/Types/Project';
 import ProjectViewEventButton from '../Components/ProjectViewEventButton';
 import useViewModelChecklist from '@/Hooks/Projects/useViewModelChecklistMutation';
 import useModelAddChecklistMutation from '@/Hooks/Projects/useModelAddChecklistMutation';
+import useSaveModelChecklistMutation from '@/Hooks/Projects/useSaveModelChecklistMutation';
 
 const ViewProjectPage = () => {
   const [currentTab, setCurrentTab] = useState("CORE")
@@ -22,6 +23,7 @@ const ViewProjectPage = () => {
   const { mutateAsync: viewProject } = useViewProjectMutation()
   const { mutateAsync: viewModelChecklist } = useViewModelChecklist()
   const { mutateAsync: modelAddChecklist } = useModelAddChecklistMutation()
+  const { mutateAsync: saveModelChecklist } = useSaveModelChecklistMutation()
   const [models, setModels] = useState<UnitModel[]>([])
   const [modelChecklists, setModelChecklists] = useState<ModelCheckList[]>([])
   const [currentSelectedModel, setCurrentSelectedModel] = useState<number>(0)
@@ -136,7 +138,40 @@ const ViewProjectPage = () => {
   }
 
   const _handleSaveChecklist = async () => {
-    console.log(models[currentTabIndex])
+    const isApplicable: string[] = []
+    const isNotApplicable: string[] = []
+    
+    models[currentSelectedModel].house_type[currentTabIndex].check_lists.map((item) => {
+      if(item.is_applicable) {
+        isApplicable.push(item.id.toString())
+      } else {
+        isNotApplicable.push(item.id.toString())
+      }
+    })
+
+    const request = {
+      id: id!, 
+      model_id: models[currentSelectedModel].model,
+      house_type: currentTabIndex === 0 ? "CORE" : "COMPLETE",
+      isNotApplicable: isNotApplicable,
+      isApplicable: isApplicable
+    }
+
+    try {
+      await saveModelChecklist(request, {
+        onSuccess: (response) => {
+          console.log(response)
+
+        }, 
+        onError: (err) => { 
+          console.error(err)
+        }
+      })
+
+    } catch(err) {
+      console.error(err)
+    }
+
   }
 
   const ListModelItem = (props: { unit: UnitModel, index: number }) => {

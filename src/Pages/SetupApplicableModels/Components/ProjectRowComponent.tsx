@@ -11,7 +11,8 @@ interface ProjectRowComponentProps {
   onToggle: (project: Project, isChecked: boolean) => void,
   onModeDelete: boolean
   onDelete: (project: Project, canBeDeleted: boolean) => void,
-  isProjectDeleted: boolean
+  isProjectDeleted: boolean,
+  index?: number,
 }
 
 const ProjectRowComponent: React.FC<ProjectRowComponentProps> = ({
@@ -19,8 +20,10 @@ const ProjectRowComponent: React.FC<ProjectRowComponentProps> = ({
   onToggle,
   onModeDelete = false,
   onDelete,
-  isProjectDeleted
+  isProjectDeleted,
+  index
 }) => {
+  let rowColor = index! % 2 === 1 ? '#f8f9fa' : 'transparent'
 
   const _handleDeleteItem = () => {
     if (project.is_included) {
@@ -32,7 +35,7 @@ const ProjectRowComponent: React.FC<ProjectRowComponentProps> = ({
   }
 
   return (
-    <TableRow key={project.id} className='w-full border-b'>
+    <TableRow key={project.id} className='w-full border-b' style={{backgroundColor: rowColor}}>
       <td className="column-header">
         <MainSpan className="text-sm ">{project.description}</MainSpan>
       </td>
