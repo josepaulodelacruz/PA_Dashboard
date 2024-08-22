@@ -7,7 +7,7 @@ import { MainSpan, SubSpan } from "../Labels/Spans";
 
 interface GenericModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   title?: string,
   label?: string,
 }

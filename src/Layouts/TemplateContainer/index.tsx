@@ -77,7 +77,7 @@ const TemplateContainer = () => {
           <ScrollToTop scrollRef={scrollableRef} />
 
           <Navbar isScrolled={isScrolled} route={routeObject} />
-          <Outlet />
+          <Outlet context={{ isScrolled }}/>
 
         </div>
 

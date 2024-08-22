@@ -11,11 +11,11 @@ const SetupApplicableModels = () => {
 
   return (
     <DashboardLayout>
-       <SwitchTransition
+      <SwitchTransition
       >
-        <CSSTransition 
+        <CSSTransition
           key={location.pathname}
-          classNames='fade' 
+          classNames='fade'
           unmountOnExit
           nodeRef={ref}
           timeout={300}>

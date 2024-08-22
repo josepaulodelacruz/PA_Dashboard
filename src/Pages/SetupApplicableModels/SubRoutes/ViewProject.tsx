@@ -31,7 +31,6 @@ const ViewProjectPage = () => {
   let { id } = useParams()
   const { enqueueSnackbar } = useSnackbar()
 
-
   useEffect(() => {
     let index = currentTab === 'CORE' ? 0 : 1
     setCurrentTabIndex(index)
@@ -309,9 +308,16 @@ const ViewProjectPage = () => {
           </TableContainer>
         </div>
 
-        <div id="unitmodels" className='flex-col flex-[0.5] order-first md:order-none'>
+        <div id="unitmodels"
+          className='flex-col flex-[0.5] order-first md:order-none'>
 
-          <div style={{ overflowY: 'auto' }} className='bg-white shadow-sm rounded-md flex-1 mx-0'>
+          <div style={{
+            overflowY: 'auto',
+            transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+            position: 'sticky',
+            top: '6rem',
+            zIndex: 1100,
+          }} className='bg-white shadow-sm rounded-md flex-1 mx-0'>
             <div className='p-4'>
               <ProjectViewEventButton
                 status={

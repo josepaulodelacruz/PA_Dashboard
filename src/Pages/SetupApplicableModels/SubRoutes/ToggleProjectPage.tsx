@@ -46,6 +46,7 @@ const ToggleProjectPage = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      console.log(data)
       setProjects(data?.data)
     }
   }, [isSuccess])
@@ -83,7 +84,7 @@ const ToggleProjectPage = () => {
   const _handleDeleteProject = (project: Project, canBeDeleted: boolean, index: number) => {
     if (canBeDeleted) {
 
-      deleteProject({ is_remove_from_list: project.is_removed_from_list.toString(), id: project.id }, {
+      deleteProject({ is_remove_from_list: Boolean(!project.is_removed_from_list).toString(), id: project.id }, {
         onSuccess: () => {
           let displayText = !project.is_removed_from_list ? "DELETED" : "RETRIEVE"
           enqueueSnackbar(`${displayText} ${project.description}`, {

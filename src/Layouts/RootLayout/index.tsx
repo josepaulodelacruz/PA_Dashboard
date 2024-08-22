@@ -3,11 +3,7 @@ import '@/index.css'
 
 
 const RootLayout = () => {
-  return (
-    <div >
-      <Outlet />
-    </div>
-  )
+  return <Outlet />
 }
 
 export default RootLayout

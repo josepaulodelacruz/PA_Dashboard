@@ -7,11 +7,9 @@ type MutationParams = {
   model_id: string
 }
 
-
 type ResponseData = any
 
 const useViewModelChecklist = () => {
-
   return useMutation<ResponseData, AxiosError, MutationParams>({
     mutationFn: async (params) => {
       const response = await client.get(`/get-projects/${params.id}/view-model-checklist?modelId=${params.model_id}`)
