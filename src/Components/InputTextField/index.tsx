@@ -3,14 +3,23 @@ import TextField from '@mui/material/TextField'
 interface InputTextFieldProps {
   placeholder?: string
   label?: string
+  type?: React.HTMLInputTypeAttribute
+  required?:  boolean,
+  name: string
 }
 
 const InputTextField = ({
   placeholder,
-  label
+  label,
+  type,
+  required = false,
+  name
 } : InputTextFieldProps ) => {
   return (
     <TextField
+      name={name!}
+      required={required!}
+      type={type!}
       InputLabelProps={{
         shrink: true,
         style: { fontSize: '16px', lineHeight: '1rem'}

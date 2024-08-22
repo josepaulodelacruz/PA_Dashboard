@@ -38,7 +38,8 @@ const AuthLayout = () => {
             timeout={300}>
             <div className="flex flex-col justify-center flex-grow relative ">
 
-              <div className="bg-gray-300 h-[300px] w-full absolute top-[0]" />
+              <div className="bg-gray-300 h-[340px] w-full absolute top-[0]" />
+
               <div ref={ref}
                 className="self-center relative justify-center z-10 h-[380px] w-[350px]">
                 {currentOutlet}

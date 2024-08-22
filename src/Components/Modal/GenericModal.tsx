@@ -8,6 +8,7 @@ import { MainSpan, SubSpan } from "../Labels/Spans";
 interface GenericModalProps {
   isOpen: boolean;
   onClose?: () => void;
+  onClick?: () => void,
   title?: string,
   label?: string,
 }
@@ -16,7 +17,8 @@ const GenericModal = ({
   isOpen,
   onClose,
   title,
-  label
+  label,
+  onClick
 }: GenericModalProps) => {
   return (
    <Modal
@@ -46,7 +48,9 @@ const GenericModal = ({
                 onClick={onClose}
               >CANCEL</BorderedButton>
               <div style={{ width: '10px' }} />
-              <PrimaryButton>OKAY</PrimaryButton>
+              <PrimaryButton
+                onClick={onClick!}
+              >OKAY</PrimaryButton>
             </div>
           </div>
         </div>

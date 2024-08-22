@@ -1,82 +1,108 @@
 import linearGradient from "@/assets/theme/functions/linearGradient"
 import { useTheme } from "@mui/material/styles"
-import IconButton from '@/Components/Button/IconButton'
-import GoogleIcon from '@mui/icons-material/Google'
-import FacebookIcon from '@mui/icons-material/FacebookOutlined'
 import InputTextField from "@/Components/InputTextField"
-import PrimaryButton from "@/Components/Button/PrimaryButton"
-import { Link } from 'react-router-dom'
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+//import PrimaryButton from "@/Components/Button/PrimaryButton"
 import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
 import { useState } from 'react'
 import CircularProgress from "@mui/material/CircularProgress"
 import LoadingHud from "@/Components/Modal/LoadingHud"
+import SubTitleLabel from "@/Components/Labels/SubTitle"
+import useLoginMutation from "@/Hooks/Auth/useLoginMutation"
+import useAuth from "@/Hooks/Auth/useAuth"
+import { useNavigate } from "react-router-dom"
+import StringRoutes from "@/Constants/stringRoutes"
 
 const LoginPage = () => {
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
-  const [isLoading, setIsLoading] = useState(false)
+  const [uiIsLoading, setIsLoading] = useState(false)
+  const { mutateAsync: login, isLoading } = useLoginMutation()
+  const { onSetSession } = useAuth()
+  const navigate = useNavigate()
+
 
   let backgroundValue = linearGradient(gradients.primary.state, gradients.primary.main);
-  console.log(backgroundValue)
 
-  const _handleLogin = () => {
+
+  const _handleLogin = async (e: React.FormEvent<HTMLInputElement>) => {
+    const form = e.target as HTMLFormElement;
+    const username = (form[0] as HTMLInputElement).value
+    const password = (form[1] as HTMLInputElement).value
+    e.preventDefault()
+
+    let loginStatus = false
     setIsLoading(true)
-    setTimeout(() => {
+    try {
+      const { data } = await login({ Username: username, Password: password });
+      console.log(data)
+      if (data.status) {
+        loginStatus = true
+      }
+
+    } catch (err) {
+      console.error(err)
+    } finally {
       setIsLoading(false)
-    }, 5000)
+      if(loginStatus) {
+        onSetSession(loginStatus)
+        navigate(StringRoutes.dashboard)
+      }
+    }
+
   }
 
   return (
     <>
 
       <div style={{ background: backgroundValue }} className="flex flex-col justify-center items-center w-[320px] rounded-lg shadow-lg mx-auto h-[100px] z-10 relative" >
-        <h3 className="text-lg font-semibold text-white">Login in with</h3>
+        <h3 className="text-lg font-semibold text-white">PMDMTS</h3>
 
         <div className="flex flex-row">
-          <IconButton color='inherit' style={{ color: 'white' }}>
-            <GoogleIcon />
-          </IconButton>
-          <IconButton color='inherit' style={{ color: 'white' }}>
-            <FacebookIcon />
-          </IconButton>
+          <SubTitleLabel style={{ color: 'white' }}>Version 2</SubTitleLabel>
+
         </div>
 
       </div>
 
       <div className="absolute h-full w-full bg-white rounded-xl shadow-xl top-5 pt-24 px-4 flex flex-col " >
 
-        <div className="">
-          <div className="py-2">
-            <InputTextField placeholder="Email" label='Username' />
+        <Box component="form" onSubmit={_handleLogin}>
+          <div className="">
+            <div className="py-2">
+              <InputTextField
+                name="username"
+                placeholder="Email" label='Username' />
+            </div>
+            <div className="py-2">
+              <InputTextField
+                required={true}
+                name="password"
+                type='password'
+                placeholder="Enter Password" label="Password" />
+            </div>
           </div>
-          <div className="py-2">
-            <InputTextField placeholder="Enter Password" label="Password" />
-          </div>
-        </div>
 
-        <PrimaryButton
-          disabled={isLoading}
-          onClick={_handleLogin}
-          backgroundValue={backgroundValue}
-          style={{ marginTop: '1rem', marginBottom: '1rem', padding: '0.55rem' }}
-        >
-          {isLoading ?
-            <CircularProgress size={20} color='inherit' />
-            : "Login"
-          }
-        </PrimaryButton>
-
+          <Button
+            style={{ background: backgroundValue, color: 'white', width: '100%' }}
+            sx={{ marginY: '1rem', paddingY: '0.6rem' }}
+            type="submit" >
+            {isLoading ?
+              <CircularProgress size={20} color='inherit' />
+              : "Login"
+            }
+          </Button>
+        </Box>
 
         <div className="self-center flex-row flex items-center ">
-          <SubSpan style={{ paddingRight: '5px' }}>Don't have an account? </SubSpan>
-          <Link to='/'>
-            <MainSpan style={{ color: backgroundValue, textDecoration: 'underline', fontSize: '0.70rem' }}>Register Here</MainSpan>
-          </Link>
+          <SubSpan style={{ paddingRight: '5px' }}>Don't have an access? </SubSpan>
+          <MainSpan style={{ color: backgroundValue, textDecoration: 'underline', fontSize: '0.70rem' }}>Request access</MainSpan>
         </div>
 
 
       </div>
-      <LoadingHud isLoading={isLoading} />
+      <LoadingHud isLoading={uiIsLoading} />
     </>
   )
 }
