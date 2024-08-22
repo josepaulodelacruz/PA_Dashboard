@@ -21,8 +21,8 @@ const useFetchProjectsOnlyAdded = () => {
       queryClient.invalidateQueries(['projects'])
     },
     enabled: true,
-    //cacheTime: 0,
-    //staleTime: 0
+    cacheTime: 0,
+    staleTime: 0
   })
 
 }

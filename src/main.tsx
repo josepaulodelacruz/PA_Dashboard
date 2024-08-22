@@ -47,7 +47,10 @@ const router = createBrowserRouter(
       </Route>
 
     </Route>
-  )
+  ),
+  {
+    basename: '/PMDMTSWebV2'
+  }
 )
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

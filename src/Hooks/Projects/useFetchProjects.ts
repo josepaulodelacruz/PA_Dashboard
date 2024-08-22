@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import client from '@/Config/client'
 import { Project } from "@/Types";
 
@@ -9,7 +9,7 @@ interface ProjectResponse {
 }
 
 const useFetchProjects = () => {
-  const queryClient = useQueryClient()
+  //const queryClient = useQueryClient()
 
   return useQuery({
     queryKey: ['projects'],
@@ -19,7 +19,7 @@ const useFetchProjects = () => {
       return body;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['projectsOnlyAdded'])
+      //queryClient.invalidateQueries(['projectsOnlyAdded'])
     },
     enabled: true,
     //cacheTime: 0,
