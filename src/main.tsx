@@ -13,6 +13,7 @@ import SetupApplicableModels from './Pages/SetupApplicableModels/index.tsx';
 import HomePage from './Pages/SetupApplicableModels/SubRoutes/HomePage.tsx';
 import ToggleProjectPage from './Pages/SetupApplicableModels/SubRoutes/ToggleProjectPage.tsx';
 import ViewProjectPage from './Pages/SetupApplicableModels/SubRoutes/ViewProject.tsx';
+import AuthRoutes from './Components/AuthRoutes.tsx';
 
 
 const client = new QueryClient({
@@ -28,14 +29,16 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />} >
 
-      <Route path={'/'} element={<TemplateContainer />}>
-        <Route path={StringRoutes.dashboard} element={<SetupApplicableModels/>}>
-          <Route path={StringRoutes.dashboard} element={<HomePage/>}/>
-          <Route path={StringRoutes.project_list} element={<ToggleProjectPage/>}/>
-          <Route path={StringRoutes.view_project + "/:id" + "/:project_name"} element={<ViewProjectPage />}/>
-          
+      <Route path='/' element={<AuthRoutes />}>
+        <Route path={'/'} element={<TemplateContainer />}>
+          <Route path={StringRoutes.dashboard} element={<SetupApplicableModels />}>
+            <Route path={StringRoutes.dashboard} element={<HomePage />} />
+            <Route path={StringRoutes.project_list} element={<ToggleProjectPage />} />
+            <Route path={StringRoutes.view_project + "/:id" + "/:project_name"} element={<ViewProjectPage />} />
+          </Route>
         </Route>
       </Route>
+
 
       <Route path='/auth' element={<AuthLayout />}>
         {

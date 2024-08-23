@@ -8,7 +8,6 @@ import useToggleDrawer from "@/Hooks/Sidenav/useToggleDrawer"
 import { ScrollToTop } from "@/Utils"
 import GenericModal from "@/Components/Modal/GenericModal"
 import StringRoutes from "@/Constants/stringRoutes"
-import useAuth from "@/Hooks/Auth/useAuth"
 
 const TemplateContainer = () => {
   const location = useLocation()
@@ -19,11 +18,8 @@ const TemplateContainer = () => {
   const _toggleSidebar = useToggleDrawer()
   const _isSidebarOpen = _toggleSidebar.isOpen
   const navigate = useNavigate()
-  const { isSessionActive, onSetSession } = useAuth()
 
   useEffect(() => {
-    if (!isSessionActive) navigate(StringRoutes.login)
-
     if (location.pathname === '/') {
       navigate(StringRoutes.dashboard)
     }
@@ -89,8 +85,8 @@ const TemplateContainer = () => {
           isOpen={isLogout}
           onClick={() => {
             setIsLogout(false)
-            onSetSession(false)
-            navigate(StringRoutes.login)
+            //onSetSession(false)
+            //navigate(StringRoutes.login)
           }}
           onClose={() => {
             setIsLogout(false)
