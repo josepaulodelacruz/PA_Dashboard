@@ -80,6 +80,7 @@ const RowComponent = (props: any & Project) => {
   let rowColor = index % 2 === 1 ? '#f8f9fa' : 'transparent'
   const models: string[] = project.models ? JSON.parse(project.models) : [];
   const housetypes: string[] = project.housetypes ? JSON.parse(project.housetypes) : [];
+  let hasModels: boolean = models.length > 0 ? false : true 
   return <TableRow className="border-b" style={{ backgroundColor: rowColor }}>
     <td className="column-header">
       <SubSpan>{project.id}</SubSpan>
@@ -107,7 +108,7 @@ const RowComponent = (props: any & Project) => {
 
     <td className="column-header">
 
-      <BorderedButton style={{padding: '0.4rem'}} onClick={() => props.handleViewProjet(project)}>
+      <BorderedButton isDisabled={hasModels} style={{padding: '0.4rem'}} onClick={() => props.handleViewProjet(project)}>
         <span className="text-[0.85rem] font-light">View</span>
       </BorderedButton>
     </td>
