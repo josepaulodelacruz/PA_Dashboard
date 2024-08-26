@@ -13,6 +13,7 @@ import useLoginMutation from "@/Hooks/Auth/useLoginMutation"
 import useAuth from "@/Hooks/Auth/useAuth"
 import { useNavigate } from "react-router-dom"
 import StringRoutes from "@/Constants/stringRoutes"
+import SnackbarComponent, { SnackbarType } from '@/Components/Snackbar'
 
 const LoginPage = () => {
   const theme = useTheme()
@@ -21,10 +22,12 @@ const LoginPage = () => {
   const { mutateAsync: login, isLoading } = useLoginMutation()
   const { onSetSession } = useAuth()
   const navigate = useNavigate()
-
+  const [snackbar, setSnackbar] = useState<SnackbarType>({
+    isOpen: false,
+    message: ''
+  })
 
   let backgroundValue = linearGradient(gradients.primary.state, gradients.primary.main);
-
 
   const _handleLogin = async (e: React.FormEvent<HTMLInputElement>) => {
     const form = e.target as HTMLFormElement;
@@ -36,21 +39,23 @@ const LoginPage = () => {
     setIsLoading(true)
     try {
       const { data } = await login({ Username: username, Password: password });
+
       console.log(data)
       if (data.status) {
         loginStatus = true
+      } else {
+        setSnackbar({ isOpen: true, message: data.errorMessage })
       }
 
     } catch (err) {
-      console.error(err)
+      setSnackbar({ isOpen: true, message: `${err}` })
     } finally {
       setIsLoading(false)
-      if(loginStatus) {
+      if (loginStatus) {
         onSetSession(loginStatus)
         navigate(StringRoutes.dashboard)
       }
     }
-
   }
 
   return (
@@ -102,6 +107,14 @@ const LoginPage = () => {
 
 
       </div>
+
+      <SnackbarComponent
+        isOpen={snackbar.isOpen}
+        message={snackbar.message}
+        onClose={() => setSnackbar({ isOpen: false })}
+      />
+
+
       <LoadingHud isLoading={uiIsLoading} />
     </>
   )
