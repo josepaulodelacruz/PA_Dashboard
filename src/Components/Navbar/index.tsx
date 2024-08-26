@@ -123,7 +123,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
                   </InputAdornment>
                 ),
               }}
-              onChange={(e) => onSearch(e.target.value)} fullWidth={false} id="outlined-basic" size='small' label="Search" variant="outlined" />
+              onChange={(e) => onSearch(e.target.value)} fullWidth={true} id="outlined-basic" size='small' label="Search" variant="outlined" />
           </Box>
           <div className='justify-end'>
             <SideMenuToggleIcon onClick={_handleSidebarToggle} fontSize='small' style={{ color: colorIcon, marginLeft: '1rem' }} />
