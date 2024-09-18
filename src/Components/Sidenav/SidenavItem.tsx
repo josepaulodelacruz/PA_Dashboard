@@ -19,7 +19,7 @@ const SidenavItem = ({ icon, name, route, onClick }: SidenavItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   //let backgroundValue = "#006442";
-  let backgroundValue = '#00573A'
+  let backgroundValue = '#00494B'
 
   const handleMouseEnter = () => {
     setIsHovered(true);
