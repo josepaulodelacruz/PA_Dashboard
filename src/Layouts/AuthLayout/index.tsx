@@ -3,6 +3,7 @@ import Box from '@mui/material/Box'
 import { useLocation, useOutlet } from 'react-router-dom'
 import { MainSpan } from "@/Components/Labels/Spans"
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
+import palogo from '@/assets/img/palogo.jpg';
 import '@/index.css'
 
 const AuthLayout = () => {
@@ -20,6 +21,10 @@ const AuthLayout = () => {
       sx={({ breakpoints, transitions }) => ({
         paddingTop: '0.5rem',
         position: "relative",
+        backgroundImage: `url(${palogo})`, // Background image
+        backgroundSize: '100% 100%',  // Ensures the image covers the entire Box
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
         [breakpoints.up("xl")]: {
           transition: transitions.create(["margin-left", "margin-right"], {
             easing: transitions.easing.easeInOut,
@@ -38,8 +43,6 @@ const AuthLayout = () => {
             timeout={300}>
             <div className="flex flex-col justify-center flex-grow relative ">
 
-              <div className="bg-gray-300 h-[340px] w-full absolute top-[0]" />
-
               <div ref={ref}
                 className="self-center relative justify-center z-10 h-[380px] w-[350px]">
                 {currentOutlet}
@@ -50,7 +53,15 @@ const AuthLayout = () => {
       </div>
       <div className="flex flex-col md:flex-row items-center justify-between md:px-24 px-2 md:pb-10">
 
-        <MainSpan style={{ fontSize: '12px' }}>© 2024, made by P.A. Alvarez Properties and Development Corporation.</MainSpan>
+        <MainSpan
+          style={{
+            fontSize: '12px',
+            color: 'white',
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)', // Darker shadow with slight blur
+          }}
+        >
+          © 2024, made by P.A. Alvarez Properties and Development Corporation.
+        </MainSpan>
 
         <div className="flex flex-row items-center  pb-2 justify-between md:justify-end gap-4 md:space-x-2">
         </div>

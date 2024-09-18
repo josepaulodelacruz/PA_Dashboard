@@ -61,7 +61,7 @@ const LoginPage = () => {
   return (
     <>
 
-      <div style={{ background: backgroundValue }} className="flex flex-col justify-center items-center w-[320px] rounded-lg shadow-lg mx-auto h-[100px] z-10 relative" >
+      <div style={{ background: backgroundValue }} className="flex flex-col justify-center items-center w-[320px] rounded-lg shadow-md mx-auto h-[100px] z-10 relative" >
         <h3 className="text-lg font-semibold text-white">PMDMTS</h3>
 
         <div className="flex flex-row">
@@ -71,7 +71,7 @@ const LoginPage = () => {
 
       </div>
 
-      <div className="absolute h-full w-full bg-white rounded-xl shadow-xl top-5 pt-24 px-4 flex flex-col " >
+      <div className="absolute h-full w-full bg-white rounded-xl shadow-2xl top-5 pt-24 px-4 flex flex-col " >
 
         <Box component="form" onSubmit={_handleLogin}>
           <div className="">
