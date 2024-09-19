@@ -10,7 +10,10 @@ import SidenavItem from './SidenavItem'
 import Drawer from '@mui/material/Drawer'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
 import LogoutIcon from '@mui/icons-material/Logout'
+import { useState, useLayoutEffect } from 'react'
+import { RouteModel } from '@/Types/RouteModel'
 import './index.css'
+import CollapsibleNav from './CollapsibleNav.ts'
 
 interface SidenavProps {
   classNames?: string
@@ -18,12 +21,17 @@ interface SidenavProps {
 }
 
 const Sidenav = ({ classNames, onLogout }: SidenavProps) => {
+  const [navItems, setNavItems] = useState<RouteModel[]>()
   const theme = useTheme()
   const { gradients } = theme.palette as { gradients?: any }
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen size is mobile
   let backgroundValue = linearGradient(gradients.primary.main, gradients.primary.state)
   let textColor = '#FFF'
   let _toggleDrawer = useToggleDrawer()
+
+  useLayoutEffect(() => {
+    setNavItems(routes);
+  }, [])
 
   const _handleCloseDrawer = () => {
     _toggleDrawer.isClosed()
@@ -35,11 +43,34 @@ const Sidenav = ({ classNames, onLogout }: SidenavProps) => {
     }
   }
 
-  const renderRoutes = routes.map((item) => (
-    <NavLink key={item.key} to={item.route} onClick={_handleDrawerEvent}>
-      <SidenavItem icon={item.icon} name={item.name} route={item.route} />
-    </NavLink>
-  ))
+  const renderRoutes = navItems?.map((item, index) => {
+    if (item.type === 'COLLAPSE') {
+      return (
+        <CollapsibleNav
+          isOpen={_toggleDrawer.isOpen}
+          key={index}
+          onClick={() => {
+            setNavItems((prevItems = []) => {
+              const _items = [...prevItems];
+
+              if (_items[index]) {
+                _items[index].isCollapsible = !_items[index].isCollapsible;
+              }
+
+              return _items;
+            });
+          }}
+          item={item} />
+      )
+    }
+
+    return (
+      <NavLink key={item.key} to={item.route} onClick={_handleDrawerEvent}>
+        <SidenavItem icon={item.icon} name={item.name} route={item.route} />
+      </NavLink>
+    )
+  })
+
 
   if (isMobile) {
     return (

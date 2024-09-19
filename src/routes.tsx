@@ -4,23 +4,55 @@ import DashboardIcon from '@mui/icons-material/Settings'
 import LoginPage from "@/Pages/Login"
 import StringRoutes from "@/Constants/stringRoutes"
 import SetupApplicableModels from "@/Pages/SetupApplicableModels"
+import PunchlistPage from "@/Pages/Punchlist"
+import PostAddIcon from '@mui/icons-material/PostAdd'
+import CalendarWithin from '@mui/icons-material/CalendarMonth'
+import CalendarBeyond from '@mui/icons-material/CalendarToday'
+import './index.css'
 
 //authRoutes
 
 const routes: RouteModel[] = [
   {
-    type: 'collapse',
+    type: 'COLLAPSE',
+    name: 'Punchlist',
+    key: 'Punchlist',
+    icon: <PostAddIcon fontSize="small" sx={{ marginRight: '10px', color: '#FFF' }} />,
+    isCollapsible: false, //close by default
+    route: StringRoutes.punchlist,
+    items: [
+      {
+        name: 'With Warranty',
+        key: 'with_warranty',
+        icon: <CalendarWithin fontSize="small" sx={{color: '#fff', ml: 'auto'}} />,
+        component: <div>With Warranty</div>,
+        route: StringRoutes.punclist_with_warranty
+      },
+      {
+        name: 'Beyond Warranty',
+        key: 'beyond_warranty',
+        icon: <CalendarBeyond fontSize="small" sx={{color: '#fff', ml: 'auto'}} />,
+        component: <div>Beyond warranty</div>,
+        route: StringRoutes.punchlist_beyond_warranty
+      }
+    ],
+
+    component: <PunchlistPage />
+  },
+  {
+    type: 'LINK',
     name: 'Setup Checklist',
-    key: 'Home',
+    key: 'Setup Checklist',
     icon: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>dashboard</DashboardIcon>,
     route: StringRoutes.dashboard,
-    component: <SetupApplicableModels /> 
-  }
+    component: <SetupApplicableModels />
+  },
+
 ];
 
 const authRoutes: RouteModel[] = [
   {
-    type: 'collapse',
+    type: 'LINK',
     name: 'Login',
     key: 'login',
     icon: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>dashboard</DashboardIcon>,

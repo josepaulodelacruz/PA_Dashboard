@@ -14,6 +14,8 @@ import HomePage from './Pages/SetupApplicableModels/SubRoutes/HomePage.tsx';
 import ToggleProjectPage from './Pages/SetupApplicableModels/SubRoutes/ToggleProjectPage.tsx';
 import ViewProjectPage from './Pages/SetupApplicableModels/SubRoutes/ViewProject.tsx';
 import AuthRoutes from './Components/AuthRoutes.tsx';
+import PunchlistPage from './Pages/Punchlist/index.tsx';
+import ListOfUnits from './Pages/Punchlist/SubRoutes/ListOfUnits.tsx';
 
 
 const client = new QueryClient({
@@ -36,6 +38,12 @@ const router = createBrowserRouter(
             <Route path={StringRoutes.project_list} element={<ToggleProjectPage />} />
             <Route path={StringRoutes.view_project + "/:id" + "/:project_name"} element={<ViewProjectPage />} />
           </Route>
+
+          <Route path={StringRoutes.punchlist} element={<PunchlistPage/>}>
+            <Route path={StringRoutes.punclist_with_warranty} element={<ListOfUnits type={'WITHIN_WARRANTY'}/>}/>
+            <Route path={StringRoutes.punchlist_beyond_warranty} element={<ListOfUnits type={'BEYOND_WARRANTY'}/>}/>
+          </Route>
+
         </Route>
       </Route>
 
