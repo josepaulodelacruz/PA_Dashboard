@@ -1,16 +1,14 @@
 import Paper from '@mui/material/Paper'
-import SettingIcon from '@mui/icons-material/Settings'
 import SideMenuToggleIcon from '@mui/icons-material/Menu'
 import { useTheme } from '@mui/material'
 import { TextField, InputAdornment, IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
-import { RouteModel, NavRoute } from '@/Types'
+import { RouteModel } from '@/Types'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
 import { useLocation } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
 import useSearchNavbar from '@/Hooks/Search/useSearchNavbar'
 import ClearIcon from '@mui/icons-material/Clear'
-import PostAddIcon from '@mui/icons-material/PostAdd'
 import StringRoutes from '@/Constants/stringRoutes'
 
 

@@ -5,6 +5,7 @@ interface ListOfUnitsProps {
 
 
 const ListOfUnits: React.FC<ListOfUnitsProps> = ({type}) => {
+  console.log(type)
   return (
     <div>
       List of units
