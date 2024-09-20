@@ -25,7 +25,9 @@ const TemplateContainer = () => {
 
     if (location.pathname === '/') {
       navigate(StringRoutes.dashboard)
+      return
     }
+
   }, [location.pathname, navigate]);
 
   const handleScroll = () => {
@@ -40,18 +42,31 @@ const TemplateContainer = () => {
 
   useLayoutEffect(() => {
     let matchedRoute = null;
+
     for (let i = 0; i < routes.length; i++) {
-      if (routes[i].route === location.pathname) {
-        matchedRoute = routes[i]
+      const currentRoute = routes[i];
+
+      // Check for items within the current route
+      if (Array.isArray(currentRoute.items)) {
+        for (let x = 0; x < currentRoute.items.length; x++) {
+          if (currentRoute.items[x].route === location.pathname) {
+            matchedRoute = currentRoute.items[x];
+            break;
+          }
+        }
+      }
+
+      // Check if the current route itself matches
+      if (currentRoute.route === location.pathname) {
+        matchedRoute = currentRoute;
         break;
       }
     }
 
     if (matchedRoute) {
-      setRouteObject(matchedRoute)
+      setRouteObject(matchedRoute);
     }
-
-  }, [location.pathname, routeObject])
+  }, [location.pathname, routes]);
 
   useEffect(() => {
     const scrollableElement = scrollableRef.current;

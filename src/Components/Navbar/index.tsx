@@ -10,6 +10,8 @@ import { useLocation } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
 import useSearchNavbar from '@/Hooks/Search/useSearchNavbar'
 import ClearIcon from '@mui/icons-material/Clear'
+import PostAddIcon from '@mui/icons-material/PostAdd'
+import StringRoutes from '@/Constants/stringRoutes'
 
 
 interface NavbarProps {
@@ -18,7 +20,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ isScrolled, route }: NavbarProps) => {
-  const [navRoute, setNavRoute] = useState<NavRoute>();
+  const [navRoute, setNavRoute] = useState<string[]>();
   const { pathname } = useLocation()
   const theme = useTheme()
   const store = useToggleDrawer();
@@ -28,38 +30,20 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
   let backdropFilter = isScrolled ? 'saturate(200%) blur(1.875rem);' : 'none';
   let boxShadow = isScrolled ? 'rgba(255, 255, 255, 0.9) 0rem 0rem 0.0625rem 0.0625rem inset, rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem' : 'none'
 
-  const IconComponent: React.FC<{ style: React.CSSProperties, name: string }> = ({ style, name }) => {
-    if (name === 'Setup Checklist') {
-      return <SettingIcon fontSize='small' style={style} />;
-    }
-    return null;
-  };
-
   useLayoutEffect(() => {
-    const comparingString = pathname.replace(/^\/dashboard\//, "").toLowerCase()
-    const routeString = comparingString.split('/')
-    const capitalizeRouteString = routeString.map((route) => {
-      return route.charAt(0).toUpperCase() + route.slice(1)
-    })
+    const items = StringRoutes.properlyParseEachNaedRoute(pathname)
+    const routesList = items?.split(',')
 
-    setNavRoute({
-      path: comparingString,
-      name: capitalizeRouteString[capitalizeRouteString.length - 1],
-      pathItems: capitalizeRouteString
-    })
+    setNavRoute(routesList)
 
   }, [pathname])
 
-  const _decodeURL = (encodedString : string) => {
+  const _decodeURL = (encodedString: string) => {
     return decodeURIComponent(encodedString)
   }
 
   const _handleSidebarToggle = () => {
     store.isToggled()
-  }
-
-  const _handleNavigateBack = (index: number) => {
-    console.log(index)
   }
 
   return (
@@ -83,22 +67,24 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
 
         <div className='flex flex-col transition duration-300 translate-y-0 w-full'>
           <div className='flex flex-row items-center'>
-            <IconComponent name={route.name} style={{ color: colorIcon, fontSize: '16px' }} />
+            {route.iconDark}
             <div className='text-sm flex flex-row flex-1 items-center' style={{ color: '#344767' }}>
               {
-                navRoute?.pathItems.map((item, index) => {
+                navRoute?.map((item, index) => {
                   return (
                     <div key={index}>
-                      <span className='hover:text-blue' onClick={() => index < navRoute.pathItems.length - 1 ? _handleNavigateBack(index) : null} style={{ paddingLeft: '5px', cursor: 'pointer' }}>
-                        {_decodeURL(item)}{index < navRoute.pathItems.length - 1 ? ' /' : ''}
+                      <span className='hover:text-blue' style={{ paddingLeft: '5px', cursor: 'pointer' }}>
+                        {_decodeURL(item)}{index < navRoute.length - 1 ? ' /' : ''}
                       </span>
                     </div>
                   )
                 })
+
               }
+
             </div>
           </div>
-          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{_decodeURL(navRoute?.name!)}</span>
+          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{StringRoutes.properlyParseNameRoute(pathname)}</span>
         </div>
 
         <div className='flex flex-row items-center w-full justify-between  sm:justify-end py-2 sm:p-0'>
