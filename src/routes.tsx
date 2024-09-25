@@ -8,7 +8,12 @@ import PunchlistPage from "@/Pages/Punchlist"
 import PostAddIcon from '@mui/icons-material/PostAdd'
 import CalendarWithin from '@mui/icons-material/CalendarMonth'
 import CalendarBeyond from '@mui/icons-material/CalendarToday'
+import OwnersPunclistIcon from '@mui/icons-material/AccountBox'
+import PersonelIcon from '@mui/icons-material/PersonAdd'
+
 import './index.css'
+import SetupPersonel from "./Pages/SetupPersonel"
+
 
 //authRoutes
 //#adb5bd
@@ -24,24 +29,41 @@ const routes: RouteModel[] = [
     route: StringRoutes.punchlist,
     items: [
       {
+        name: 'Owners Punchlist',
+        key: 'owners_punchlist',
+        icon: <OwnersPunclistIcon fontSize="small" sx={{ color: '#fff', ml: 'auto' }} />,
+        iconDark: <OwnersPunclistIcon fontSize="small" sx={{ color: '#adb5bd', ml: 'auto' }} />,
+        component: <div>With Warranty</div>,
+        route: StringRoutes.punchlist_owners
+      },
+      {
         name: 'With Warranty',
         key: 'with_warranty',
-        icon: <CalendarWithin fontSize="small" sx={{color: '#fff', ml: 'auto'}} />,
-        iconDark: <CalendarWithin fontSize="small" sx={{color: '#adb5bd', ml: 'auto'}} />,
+        icon: <CalendarWithin fontSize="small" sx={{ color: '#fff', ml: 'auto' }} />,
+        iconDark: <CalendarWithin fontSize="small" sx={{ color: '#adb5bd', ml: 'auto' }} />,
         component: <div>With Warranty</div>,
         route: StringRoutes.punclist_with_warranty
       },
       {
         name: 'Beyond Warranty',
         key: 'beyond_warranty',
-        icon: <CalendarBeyond fontSize="small" sx={{color: '#fff', ml: 'auto'}} />,
-        iconDark: <CalendarBeyond fontSize="small" sx={{color: '#adb5bd', ml: 'auto'}} />,
+        icon: <CalendarBeyond fontSize="small" sx={{ color: '#fff', ml: 'auto' }} />,
+        iconDark: <CalendarBeyond fontSize="small" sx={{ color: '#adb5bd', ml: 'auto' }} />,
         component: <div>Beyond warranty</div>,
         route: StringRoutes.punchlist_beyond_warranty
       }
     ],
 
     component: <PunchlistPage />
+  },
+  {
+    type: 'LINK',
+    name: 'Setup Personel',
+    key: 'Setup Personel',
+    icon: <PersonelIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>personel</PersonelIcon>,
+    iconDark: <PersonelIcon fontSize='small' sx={{ marginRight: '10px', color: '#adb5bd' }}>personel</PersonelIcon>,
+    route: StringRoutes.setup_personel_assign,
+    component: <SetupPersonel/> 
   },
   {
     type: 'LINK',
@@ -52,6 +74,7 @@ const routes: RouteModel[] = [
     route: StringRoutes.dashboard,
     component: <SetupApplicableModels />
   },
+
 
 ];
 

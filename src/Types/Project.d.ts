@@ -33,3 +33,18 @@ export type ModelCheckList = {
   is_applicable: boolean,
   housetype: string
 }
+
+
+export type Unit = {
+  id?: string,
+  project?: string,
+  block?: string,
+  lot?: string,
+  model?: string,
+  unit_status?: string,
+  buyers_name?: string,
+  account_no?: string,
+  accepted_date?: string
+  phase?: string,
+  no_buyer?: boolean
+}

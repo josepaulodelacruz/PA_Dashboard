@@ -16,6 +16,10 @@ import ViewProjectPage from './Pages/SetupApplicableModels/SubRoutes/ViewProject
 import AuthRoutes from './Components/AuthRoutes.tsx';
 import PunchlistPage from './Pages/Punchlist/index.tsx';
 import ListOfUnits from './Pages/Punchlist/SubRoutes/ListOfUnits.tsx';
+import OwnersPunchlist from './Pages/Punchlist/SubRoutes/OwnersPunchlist.tsx';
+import ChecklistForm from './Pages/UnitAcceptance/SubRoutes/ChecklistForm.tsx';
+import SetupPersonel from './Pages/SetupPersonel/index.tsx';
+import AssignPersonel from './Pages/SetupPersonel/SubRoutes/AssignPersonel.tsx';
 
 
 const client = new QueryClient({
@@ -40,8 +44,13 @@ const router = createBrowserRouter(
           </Route>
 
           <Route path={StringRoutes.punchlist} element={<PunchlistPage/>}>
+            <Route path={StringRoutes.punchlist_owners} element={<OwnersPunchlist />}/>
             <Route path={StringRoutes.punclist_with_warranty} element={<ListOfUnits type={'WITHIN_WARRANTY'}/>}/>
             <Route path={StringRoutes.punchlist_beyond_warranty} element={<ListOfUnits type={'BEYOND_WARRANTY'}/>}/>
+          </Route>
+
+          <Route path={StringRoutes.setup_personel} element={<SetupPersonel />} >
+            <Route path={StringRoutes.setup_personel_assign} element={<AssignPersonel />} />
           </Route>
 
         </Route>
@@ -56,6 +65,9 @@ const router = createBrowserRouter(
         }
 
       </Route>
+
+      {/*Unproctedted routes*/}
+      <Route path={StringRoutes.unit_acceptance_checklist_print} element={<ChecklistForm/>}/>
 
     </Route>
   ),

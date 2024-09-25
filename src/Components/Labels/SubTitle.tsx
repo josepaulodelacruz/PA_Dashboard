@@ -6,7 +6,7 @@ interface SubTitleLabelProps {
 
 const SubTitleLabel = ({ children, style } : SubTitleLabelProps) => {
   return (
-    <div className="text-[0.6rem] text-black font-light" style={style!}>
+    <div className="text-[0.75rem] text-black font-light" style={style!}>
       {children}
     </div>
 

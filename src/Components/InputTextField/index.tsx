@@ -5,7 +5,9 @@ interface InputTextFieldProps {
   label?: string
   type?: React.HTMLInputTypeAttribute
   required?:  boolean,
-  name: string
+  name: string,
+  value?: string,
+  onChange?: (vent: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const InputTextField = ({
@@ -13,10 +15,14 @@ const InputTextField = ({
   label,
   type,
   required = false,
-  name
+  name,
+  value,
+  onChange,
 } : InputTextFieldProps ) => {
   return (
     <TextField
+      value={value!}
+      onChange={onChange}
       name={name!}
       required={required!}
       type={type!}
