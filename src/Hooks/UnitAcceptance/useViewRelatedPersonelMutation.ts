@@ -9,7 +9,7 @@ type MutationParams = {
 type ResponseData = {
   errorMessage: string,
   status: boolean,
-  data: Array<{ noah_system: string, project_name: string, contact_person: string, contact_no: string, contact_email: string, job_role: string }>
+  data: Array<{ id: string, noah_system: string, project_name: string, contact_person: string, contact_no: string, contact_email: string, job_role: string, is_active: boolean }>
 };
 
 

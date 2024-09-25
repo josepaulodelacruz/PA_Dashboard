@@ -19,6 +19,7 @@ const ChecklistUnitInfoColumn = ({
   }>()
 
   useLayoutEffect(() => {
+    console.log(unit)
     setQueryParams({
       id: searchParams.get('ID'),
       pmd: searchParams.get('pmd'),

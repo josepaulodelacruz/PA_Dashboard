@@ -12,7 +12,6 @@ interface PrintLabelProps {
 const PrintLabel = ({
   title,
   value,
-  inline = false,
   isTitleCentered = false,
   bottomTitle,
 }: PrintLabelProps) => {

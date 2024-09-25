@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 
 interface DropdownSearchMenuProps {
   label: string;
-  placeholder: string;
+  placeholder?: string;
   isLoading?: boolean;
   items?: Array<{ name: string }> | undefined;
   isDisabled?: boolean;
@@ -52,7 +52,7 @@ const DropdownSearchMenu: React.FC<DropdownSearchMenuProps> = ({
 
       <Box className="bg-white flex w-[400px]">
         <FormControl className="flex-1">
-          <InputLabel>{placeholder}</InputLabel>
+          <InputLabel>{placeholder!}</InputLabel>
           <Select
             fullWidth
             sx={{ height: "50px", fontSize: 18 }}

@@ -1,7 +1,6 @@
 import { RefObject, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import useScroll from '@/Hooks/useScroll';
 
 interface ScrollToTopProps {
   scrollRef: RefObject<HTMLElement>

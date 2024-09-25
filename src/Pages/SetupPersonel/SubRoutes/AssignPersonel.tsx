@@ -5,16 +5,8 @@ import { TableHeaderLabel } from "@/Components/Table/TableLabel"
 import useFetchProjectSetup from "@/Hooks/UnitAcceptance/useFetchProjectSetup"
 import { ButtonBase, CircularProgress, TableRow } from "@mui/material"
 import { useEffect, useState } from 'react'
-import Box from '@mui/material/Box'
-import InputTextField from "@/Components/InputTextField"
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Button from '@mui/material/Button'
-import SubTitleLabel from "@/Components/Labels/SubTitle"
-import { useTheme } from "@mui/material/styles"
-import linearGradient from "@/assets/theme/functions/linearGradient"
 import useViewRelatedPersonelMutation from "@/Hooks/UnitAcceptance/useViewRelatedPersonelMutation"
+import PersonelForm from "../Components/PersonelForm"
 
 const ProjectRowComponent = (props: any) => {
   const handleClick = () => {
@@ -54,19 +46,20 @@ const PersonelRowComponent = (props: any) => {
 }
 
 const AssignPersonel = () => {
-  const theme = useTheme()
-  const { gradients } = theme.palette as { gradients?: any }
-  const { data, isLoading, isSuccess } = useFetchProjectSetup()
+  const { data, isLoading, isSuccess, refetch } = useFetchProjectSetup()
   const { mutateAsync: viewRelated } = useViewRelatedPersonelMutation()
   const [projects, setProjects] = useState<Array<{ project_name: string }>>()
-  const [relatedPersonels, setRelatedPersonels] = useState<Array<{ contact_person: string, job_role: string }>>()
+  const [relatedPersonels, setRelatedPersonels] = useState<Array<{ id: string, contact_person: string, job_role: string, is_active: boolean }>>()
   const [selectProject, setSelectProject] = useState('');
-  const [selectedJobRole, setSelectedJobRole] = useState<string>('PROPERTY ADMINISTRATOR')
-  const [userInput, setUserInput] = useState<{ project: string, contact_person: string, job_role: string }>({
+  const [selectedJobRole, setSelectedJobRole] = useState<'PROPERTY ADMINISTRATOR' | "ENGINEER">('PROPERTY ADMINISTRATOR')
+  const [userInput, setUserInput] = useState<{ id: string, project: string, contact_person: string, job_role: string, is_active: string }>({
+    id: '',
     project: '',
     contact_person: '',
     job_role: '',
+    is_active: '0'
   })
+  const [userAttemptingToUpdate, setUserAttemptingToUpdate] = useState(false)
 
   useEffect(() => {
     if (isSuccess) {
@@ -74,11 +67,23 @@ const AssignPersonel = () => {
     }
   }, [isSuccess])
 
-  let backgroundValue = linearGradient(gradients.primary.state, gradients.primary.main);
+  const _handleRefresh = async () => {
+    refetch();
+    await viewRelated({ title: selectProject}, {
+      onSuccess: (response) => {
+        setRelatedPersonels(response.data)
+      }, 
+      onError: (error) => {
+        console.error(error.message)
+      }
+    })
+
+
+  }
 
   const _handleViewPersonel = async (title: string) => {
     setSelectProject(title)
-    _handleUpdateInputs({key: 'project', value: title })
+    _handleUpdateInputs({ key: 'project', value: title })
     await viewRelated({ title: title }, {
       onSuccess: (response) => {
         setRelatedPersonels(response.data)
@@ -89,20 +94,23 @@ const AssignPersonel = () => {
     })
   }
 
-  const _handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
-    e.preventDefault()
-  }
-
-  const _handleSelectedJob = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedJobRole(e.target.value)
-  }
-
   const _handleUpdateInputs = ({ key, value }: { key: keyof typeof userInput, value: string }) => {
     setUserInput(prevState => {
       const inputs = { ...prevState };
-      inputs[key]= value;  // Update project field
+      inputs[key] = value;  // Update project field
       return inputs;
     })
+  }
+
+  const _handleResetForm = () => {
+    setUserInput({
+      id: '',
+      project: '',
+      contact_person: '',
+      job_role: '',
+      is_active: '0',
+    })
+    setSelectedJobRole("PROPERTY ADMINISTRATOR");
   }
 
   return (
@@ -126,7 +134,17 @@ const AssignPersonel = () => {
               </TableRow> :
               projects?.map((project, index) =>
                 <TableRow key={index}>
-                  <ProjectRowComponent onClick={(title: string) => _handleViewPersonel(title)} title={project.project_name} />
+                  <ProjectRowComponent onClick={(title: string) => {
+                    _handleViewPersonel(title)
+                    setUserInput({
+                      id: '',
+                      project: project.project_name,
+                      contact_person: '',
+                      job_role: '',
+                      is_active: '0', 
+                    })
+                    setUserAttemptingToUpdate(false)
+                  }} title={project.project_name} />
                 </TableRow>
               )
           }
@@ -134,53 +152,21 @@ const AssignPersonel = () => {
       </div>
 
       <div className="col-span-6">
-        <div className="flex flex-col bg-white shadow-md rounded-md p-5">
-          <MainSpan>ADD PERSONEL</MainSpan>
-          <SubSpan>Add new personel</SubSpan>
-          <LineDivider />
-          <Box component='form' onSubmit={_handleSubmit}>
-            <InputTextField
-              value={userInput.project}
-              onChange={(e) => _handleUpdateInputs({ key: 'project', value: e.target.value })}
-              required={true}
-              name="project"
-              type="text"
-              placeholder="Project or Phase"
-              label="Project"
-            />
-            <InputTextField
-              required={true}
-              value={userInput.contact_person}
-              onChange={(e) => _handleUpdateInputs({ key: 'contact_person', value: e.target.value })}
-              name="contact_person"
-              type="text"
-              placeholder="Enter full name"
-              label="Complete Name"
-            />
-            <SubTitleLabel>Job Role</SubTitleLabel>
-            <RadioGroup
-              row
-              aria-labelledby="demo-radio-buttons-group-label"
-              value={selectedJobRole}
-              name="radio-buttons-group"
-              onChange={_handleSelectedJob}
-            >
-              <FormControlLabel value="PROPERTY ADMINISTRATOR" control={<Radio />} label="PMD" />
-              <FormControlLabel value="ENGINEER" control={<Radio />} label="CMD" />
-            </RadioGroup>
 
-            <LineDivider />
-            <div className="h-[10px]" />
-            <Button
-              type="submit"
-              variant="contained"
-              style={{ background: backgroundValue }}
-              className="float-right">
-              ADD NEW PERSONEL
-            </Button>
-          </Box>
-
-        </div>
+        <PersonelForm
+          id={userInput.id}
+          project={userInput.project}
+          contact_person={userInput.contact_person}
+          job_role={userInput.job_role}
+          is_active={userInput.is_active}
+          userJobRole={selectedJobRole}
+          userAttemptingToUpdate={userAttemptingToUpdate}
+          onCancelUpdate={() => {
+            setUserAttemptingToUpdate(false)
+            _handleResetForm()
+          }}
+          onRefresh={_handleRefresh}
+        />
 
         <div className="flex flex-col mt-5 p-5 bg-white shadow-md rounded-md">
           <MainSpan>List of Personel</MainSpan>
@@ -189,13 +175,20 @@ const AssignPersonel = () => {
 
           {
             relatedPersonels?.map((personel, index) => {
-              return <PersonelRowComponent 
+              return <PersonelRowComponent
                 onClick={(contact_person: string) => {
-                  _handleUpdateInputs({key: 'contact_person', value: contact_person})
-                  setSelectedJobRole(personel.job_role)
+                  setUserInput({
+                    is_active: '0',
+                    project: selectProject,
+                    contact_person: contact_person,
+                    id: personel.id.toString(),
+                    job_role: '',
+                  })
+                  setSelectedJobRole(personel.job_role === "ENGINEER" ? "ENGINEER" : 'PROPERTY ADMINISTRATOR')
+                  setUserAttemptingToUpdate(true)
                 }}
                 key={index}
-                contact_person={personel.contact_person} 
+                contact_person={personel.contact_person}
                 job_role={personel.job_role} />
             })
 

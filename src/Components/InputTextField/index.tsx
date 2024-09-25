@@ -7,7 +7,8 @@ interface InputTextFieldProps {
   required?:  boolean,
   name: string,
   value?: string,
-  onChange?: (vent: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (vent: React.ChangeEvent<HTMLInputElement>) => void,
+  disabled?: boolean
 }
 
 const InputTextField = ({
@@ -18,9 +19,11 @@ const InputTextField = ({
   name,
   value,
   onChange,
+  disabled
 } : InputTextFieldProps ) => {
   return (
     <TextField
+      disabled={disabled!}
       value={value!}
       onChange={onChange}
       name={name!}
