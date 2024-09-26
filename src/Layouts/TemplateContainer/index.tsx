@@ -19,13 +19,10 @@ const TemplateContainer = () => {
   const _toggleSidebar = useToggleDrawer()
   const _isSidebarOpen = _toggleSidebar.isOpen
   const navigate = useNavigate()
-  const { onSetSession } = useAuth()
-  const { isSessionActive } = useAuth()
+  const { onSetSession, onInitialize } = useAuth()
 
   useEffect(() => {
-    if(!isSessionActive) {
-      navigate('/')
-    }
+    onInitialize()
 
   }, [location.pathname, navigate]);
 

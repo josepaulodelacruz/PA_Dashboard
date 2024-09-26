@@ -40,7 +40,6 @@ const LoginPage = () => {
     try {
       const { data } = await login({ Username: username, Password: password });
 
-      console.log(data)
       if (data.status) {
         loginStatus = true
       } else {
