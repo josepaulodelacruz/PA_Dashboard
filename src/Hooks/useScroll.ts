@@ -3,16 +3,19 @@ import { create } from 'zustand'
 interface UseScrollProps {
   isScrolled: boolean,
   onScroll: (scrollState: boolean) => void,
-  triggeredScrolling: () => void,
+  userScrolled: boolean,
+  onTriggeredScrolling: () => void,
 }
 
-const useScroll = create<UseScrollProps>((set) => ({
+const useScroll = create<UseScrollProps>((set, get) => ({
+  userScrolled: false,
   isScrolled: false,
   onScroll: (scrollState) => {
     set({ isScrolled: scrollState })
   },
-  triggeredScrolling: () => {
-    console.log('triggered scrolling');
+  onTriggeredScrolling: () => {
+    let a  = get().userScrolled
+    set({ userScrolled: !a })
   }
 })) 
 

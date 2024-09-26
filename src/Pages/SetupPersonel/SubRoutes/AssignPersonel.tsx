@@ -7,6 +7,7 @@ import { ButtonBase, CircularProgress, TableRow } from "@mui/material"
 import { useEffect, useState } from 'react'
 import useViewRelatedPersonelMutation from "@/Hooks/UnitAcceptance/useViewRelatedPersonelMutation"
 import PersonelForm from "../Components/PersonelForm"
+import useScroll from "@/Hooks/useScroll"
 
 const ProjectRowComponent = (props: any) => {
   const handleClick = () => {
@@ -60,6 +61,7 @@ const AssignPersonel = () => {
     is_active: '0'
   })
   const [userAttemptingToUpdate, setUserAttemptingToUpdate] = useState(false)
+  const { onTriggeredScrolling } = useScroll()
 
   useEffect(() => {
     if (isSuccess) {
@@ -83,6 +85,7 @@ const AssignPersonel = () => {
 
   const _handleViewPersonel = async (title: string) => {
     setSelectProject(title)
+    onTriggeredScrolling()
     _handleUpdateInputs({ key: 'project', value: title })
     await viewRelated({ title: title }, {
       onSuccess: (response) => {
@@ -116,7 +119,7 @@ const AssignPersonel = () => {
   return (
     <div className="grid grid-cols-12 gap-4">
 
-      <div className="col-span-6 ">
+      <div className="order-2 md:order-1 col-span-12 md:col-span-6 ">
         <TableContainer
           tableTitle="Projects"
           tableHeader={
@@ -151,9 +154,10 @@ const AssignPersonel = () => {
         </TableContainer>
       </div>
 
-      <div className="col-span-6">
+      <div className="order-1 md:order-2 col-span-12 md:col-span-6">
 
         <PersonelForm
+          projects={projects}
           id={userInput.id}
           project={userInput.project}
           contact_person={userInput.contact_person}

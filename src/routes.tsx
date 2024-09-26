@@ -4,11 +4,15 @@ import DashboardIcon from '@mui/icons-material/Settings'
 import LoginPage from "@/Pages/Login"
 import StringRoutes from "@/Constants/stringRoutes"
 import SetupApplicableModels from "@/Pages/SetupApplicableModels"
+
+/*
 import PunchlistPage from "@/Pages/Punchlist"
 import PostAddIcon from '@mui/icons-material/PostAdd'
 import CalendarWithin from '@mui/icons-material/CalendarMonth'
 import CalendarBeyond from '@mui/icons-material/CalendarToday'
 import OwnersPunclistIcon from '@mui/icons-material/AccountBox'
+*/
+
 import PersonelIcon from '@mui/icons-material/PersonAdd'
 
 import './index.css'
@@ -19,6 +23,7 @@ import SetupPersonel from "./Pages/SetupPersonel"
 //#adb5bd
 
 const routes: RouteModel[] = [
+  /*
   {
     type: 'COLLAPSE',
     name: 'Punchlist',
@@ -56,6 +61,7 @@ const routes: RouteModel[] = [
 
     component: <PunchlistPage />
   },
+  */
   {
     type: 'LINK',
     name: 'Setup Personel',
@@ -63,7 +69,7 @@ const routes: RouteModel[] = [
     icon: <PersonelIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>personel</PersonelIcon>,
     iconDark: <PersonelIcon fontSize='small' sx={{ marginRight: '10px', color: '#adb5bd' }}>personel</PersonelIcon>,
     route: StringRoutes.setup_personel_assign,
-    component: <SetupPersonel/> 
+    component: <SetupPersonel />
   },
   {
     type: 'LINK',

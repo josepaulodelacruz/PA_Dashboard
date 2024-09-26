@@ -20,12 +20,11 @@ const TemplateContainer = () => {
   const _isSidebarOpen = _toggleSidebar.isOpen
   const navigate = useNavigate()
   const { onSetSession } = useAuth()
+  const { isSessionActive } = useAuth()
 
   useEffect(() => {
-
-    if (location.pathname === '/') {
-      navigate(StringRoutes.dashboard)
-      return
+    if(!isSessionActive) {
+      navigate('/')
     }
 
   }, [location.pathname, navigate]);
@@ -81,7 +80,6 @@ const TemplateContainer = () => {
   const _handleLogout = () => {
     setIsLogout(true)
   }
-
 
   return (
     <>

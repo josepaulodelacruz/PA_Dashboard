@@ -65,7 +65,7 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
 
         <div className='flex flex-col transition duration-300 translate-y-0 w-full'>
           <div className='flex flex-row items-center'>
-            {route.iconDark}
+            {location.pathname === '/PMDMTSWebV2' || location.pathname === '/PMDMTSWebV2/' ? '' : route.iconDark}
             <div className='text-sm flex flex-row flex-1 items-center' style={{ color: '#344767' }}>
               {
                 navRoute?.map((item, index) => {

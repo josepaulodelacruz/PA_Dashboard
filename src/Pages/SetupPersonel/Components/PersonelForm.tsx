@@ -11,8 +11,12 @@ import { useEffect, useState } from "react"
 import BorderedButton from "@/Components/Button/BorderedButton"
 import useAssignPersonelMutation from "@/Hooks/UnitAcceptance/useAssignPersonelMutation"
 import useDeactivatePersonelMutation from "@/Hooks/UnitAcceptance/useDeactivatePersonelMutation"
+import { useSnackbar } from 'notistack';
+import Autocomplete from "@mui/material/Autocomplete"
+import TextField from "@mui/material/TextField"
 
 interface PersonelFormProps {
+  projects?: Array<{ project_name: string }>
   id?: string,
   project?: string,
   contact_person?: string,
@@ -25,6 +29,7 @@ interface PersonelFormProps {
 }
 
 const PersonelForm = ({
+  projects = [],
   id,
   project,
   contact_person,
@@ -35,6 +40,7 @@ const PersonelForm = ({
   onCancelUpdate,
   onRefresh
 }: PersonelFormProps) => {
+  const { enqueueSnackbar } = useSnackbar()
   const { mutateAsync: assignPersonel } = useAssignPersonelMutation()
   const { mutateAsync: deactivatePersonel } = useDeactivatePersonelMutation()
   const [selectedJobRole, setSelectedJobRole] = useState<'PROPERTY ADMINISTRATOR' | "ENGINEER">('PROPERTY ADMINISTRATOR')
@@ -58,8 +64,15 @@ const PersonelForm = ({
 
   }, [project!, contact_person!, job_role, userJobRole])
 
-  //let backgroundValue = linearGradient(gradients.primary.state, gradients.primary.main);
-  //let updateBackgroundValue = linearGradient(gradients.warning.state, gradients.warning.main);
+  const showSnackbar = ({ message, variant }: { message: string, variant: 'error' | 'default' | 'success' | 'warning' }) => {
+    enqueueSnackbar(message, {
+      variant: variant,
+      anchorOrigin: {
+        horizontal: 'right',
+        vertical: 'bottom',
+      },
+    })
+  }
 
   const _handleUpdateInputs = ({ key, value }: { key: keyof typeof userInput, value: string }) => {
     setUserInput(prevState => {
@@ -86,27 +99,26 @@ const PersonelForm = ({
   }
 
   const _handleApiCall = async (isUpdate: boolean) => {
-    console.log(isUpdate);
     if (!isUpdate) {
       return await assignPersonel({ ...userInput }, {
-        onSuccess: (response) => {
-          console.log(response)
+        onSuccess: () => {
           onRefresh!()
+          showSnackbar({ message: 'Successfully add new personel', variant: 'success' })
         },
         onError: (error) => {
           console.log(error.message)
+          showSnackbar({ message: error.message, variant: 'error' })
         }
       })
     } else {
-      console.log('show user id: ', userInput.id)
-      console.log(id)
-      return await deactivatePersonel({id: userInput.id }, {
-        onSuccess: (response) => {
-          console.log(response);
+      return await deactivatePersonel({ id: userInput.id }, {
+        onSuccess: () => {
           onRefresh!();
+          showSnackbar({ message: 'Successfully remove personel', variant: 'warning' })
         },
         onError: (error) => {
           console.error(error.message)
+          showSnackbar({ message: error.message, variant: 'error' })
         }
       })
     }
@@ -117,8 +129,8 @@ const PersonelForm = ({
       return (
         <div className="flex flex-row justify-between">
           <div className="flex flex-col">
-            <MainSpan>DEACTIVATE PERSONEL</MainSpan>
-            <SubSpan>Remove Personel</SubSpan>
+            <MainSpan>REMOVE PERSONEL</MainSpan>
+            <SubSpan>Remove Personel who is not active or resign</SubSpan>
           </div>
           <BorderedButton onClick={onCancelUpdate}>CANCEL</BorderedButton>
         </div>
@@ -141,16 +153,40 @@ const PersonelForm = ({
       <PersonelFormHeader />
       <LineDivider />
       <Box component='form' onSubmit={_handleSubmit}>
-        <InputTextField
-          disabled={userAttemptingToUpdate}
-          value={userInput.project}
-          onChange={(e) => _handleUpdateInputs({ key: 'project', value: e.target.value })}
-          required={true}
-          name="project"
-          type="text"
-          placeholder="Project or Phase"
-          label="Project"
-        />
+        <div className="flex flex-col">
+          <Autocomplete
+            freeSolo
+            disablePortal
+            disabled={userAttemptingToUpdate}
+            value={userInput.project}
+            options={projects?.map((project) => project.project_name)}
+            sx={{ width: '100%' }}
+            onChange={(_, value) => _handleUpdateInputs({ key: 'project', value: value!})}
+            renderInput={(params) => {
+              return (
+                <TextField
+                  {...params}
+                  disabled={userAttemptingToUpdate}
+                  required={true}
+                  value={userInput.project}
+                  onChange={(e) => _handleUpdateInputs({ key: 'project', value: e.target.value })}
+                  name="project"
+                  type="text"
+                  placeholder="Project or Phase"
+                  label="Project"
+                  InputLabelProps={{
+                    shrink: true,
+                    style: { fontSize: '16px', lineHeight: '1rem' }
+                  }}
+                  fullWidth 
+                  size='small' 
+                  variant='standard' sx={{ marginY: 1.2 }} />
+              )
+            }}
+          />
+          <span className="text-[0.65rem] leading-[0.8rem] font-bold text-amber-500" >IMPORTANT NOTE: MAKE SURE THE ENTERED PROJECT NAME IS THE SAME IN THE PMDMTS PHASE NAME. (CASE SENSITIVE)</span>
+        </div>
+
         <InputTextField
           disabled={userAttemptingToUpdate}
           required={true}
@@ -169,8 +205,8 @@ const PersonelForm = ({
           name="radio-buttons-group"
           onChange={_handleSelectedJob}
         >
-          <FormControlLabel value="PROPERTY ADMINISTRATOR" control={<Radio />} label="PMD" />
-          <FormControlLabel value="ENGINEER" control={<Radio />} label="CMD" />
+          <FormControlLabel disabled={userAttemptingToUpdate} value="PROPERTY ADMINISTRATOR" control={<Radio />} label="PMD" />
+          <FormControlLabel disabled={userAttemptingToUpdate} value="ENGINEER" control={<Radio />} label="CMD" />
         </RadioGroup>
 
         <LineDivider />
@@ -181,7 +217,7 @@ const PersonelForm = ({
           variant={userAttemptingToUpdate ? 'outlined' : 'contained'}
           className="float-right">
           {
-            userAttemptingToUpdate ? "CONFIRM" : "ADD NEW PERSONEL"
+            userAttemptingToUpdate ? "CONFIRM REMOVE USER" : "ADD NEW PERSONEL"
           }
         </Button>
       </Box>

@@ -24,7 +24,6 @@ const useFetchProjectSetup = () => {
     enabled: true,
     cacheTime: 0,
     staleTime: 0
-
   })
 
 }

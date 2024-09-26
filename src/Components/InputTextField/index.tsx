@@ -32,7 +32,6 @@ const InputTextField = ({
       InputLabelProps={{
         shrink: true,
         style: { fontSize: '16px', lineHeight: '1rem'}
-        
       }}
       inputProps={{
         style: { fontSize: '14px' }

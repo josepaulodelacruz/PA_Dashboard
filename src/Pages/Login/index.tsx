@@ -12,7 +12,7 @@ import SubTitleLabel from "@/Components/Labels/SubTitle"
 import useLoginMutation from "@/Hooks/Auth/useLoginMutation"
 import useAuth from "@/Hooks/Auth/useAuth"
 import { useNavigate } from "react-router-dom"
-import StringRoutes from "@/Constants/stringRoutes"
+//import StringRoutes from "@/Constants/stringRoutes"
 import SnackbarComponent, { SnackbarType } from '@/Components/Snackbar'
 
 const LoginPage = () => {
@@ -53,7 +53,8 @@ const LoginPage = () => {
       setIsLoading(false)
       if (loginStatus) {
         onSetSession(loginStatus)
-        navigate(StringRoutes.dashboard)
+        //navigate(StringRoutes.dashboard)
+        navigate('/')
       }
     }
   }
@@ -66,7 +67,6 @@ const LoginPage = () => {
 
         <div className="flex flex-row">
           <SubTitleLabel style={{ color: 'white' }}>Version 2</SubTitleLabel>
-
         </div>
 
       </div>
