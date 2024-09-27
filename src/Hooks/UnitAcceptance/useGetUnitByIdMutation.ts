@@ -8,13 +8,11 @@ type MutationParams = {
 
 type ResponseData = any;
 
-
-
-
 const useGetUnitByIdMutation = () =>
   useMutation<ResponseData, AxiosError, MutationParams>({
     mutationFn: async (params) => {
       const response = await client.get(`/PMDMTSv2/print/${params.id}`)
+      console.log(response.data)
       return response.data
     },
     onError: (error) => {

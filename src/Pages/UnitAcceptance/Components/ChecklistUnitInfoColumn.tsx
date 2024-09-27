@@ -1,33 +1,13 @@
-import { useSearchParams } from "react-router-dom"
 import { PrintLabel, SectionLabel } from "./PrintLabel"
-import { useLayoutEffect, useState } from 'react';
-import { Unit } from "@/Types/Project";
+import { ChecklistUnit } from "@/Types"
 
-interface ChecklistUnitInfoColumn {
-  unit: Unit
+interface ChecklistUnitInfoColumnProps {
+  unit: ChecklistUnit
 }
- 
+
 const ChecklistUnitInfoColumn = ({
   unit
-} : ChecklistUnitInfoColumn) => {
-  const [searchParams] = useSearchParams();
-  const [queryParams, setQueryParams] = useState<{
-    id: string | null,
-    pmd: string | null,
-    cmd: string | null,
-    warranty_expire: string | null 
-  }>()
-
-  useLayoutEffect(() => {
-    console.log(unit)
-    setQueryParams({
-      id: searchParams.get('ID'),
-      pmd: searchParams.get('pmd'),
-      cmd: searchParams.get('cmd'),
-      warranty_expire: searchParams.get('warranty_expire')
-    })
-
-  }, [searchParams])
+}: ChecklistUnitInfoColumnProps) => {
 
   return (
     <section className="col-span-2 bg-white">
@@ -42,21 +22,21 @@ const ChecklistUnitInfoColumn = ({
       </div>
 
       <div className="border flex items-start flex-col bg-white">
-        <PrintLabel title="DATE TODAY:" value="Oct 21, 1995" />
-        <PrintLabel title="PROJECT" value={"ST. Joseph"} />
+        <PrintLabel title="DATE TODAY:" value={unit.date_today} />
+        <PrintLabel title="PROJECT" value={unit.project} />
 
         <div className="flex flex-row w-full">
-          <PrintLabel title="BLOCK" value="024" />
-          <PrintLabel title="LOT" value="0018" />
+          <PrintLabel title="BLOCK" value={unit.block} />
+          <PrintLabel title="LOT" value={unit.lot} />
         </div>
 
         <div className="flex flex-row w-full border border-black items-center">
           <span className="text-[0.60rem] whitespace-nowrap">HOUSE MODEL: </span>
-          <span className="flex text-[0.60rem] font-bold justify-center items-center w-full">IRIS</span>
+          <span className="flex text-[0.60rem] font-bold justify-center items-center w-full">{unit.model}</span>
         </div>
 
-        <PrintLabel title="ENGINEER-IN-CHARGE:" value={queryParams?.cmd} />
-        <PrintLabel title="CONTRACTOR" value="" />
+        <PrintLabel title="ENGINEER-IN-CHARGE:" value={unit.eic} />
+        <PrintLabel title="CONTRACTOR" value={unit.contractor} />
 
       </div>
       {/*END CMD TO PMD SECTION*/}
@@ -64,9 +44,9 @@ const ChecklistUnitInfoColumn = ({
       {/*START PMD'S ACCEPTANCE*/}
       <SectionLabel title="PMD'S ACCEPTANCE" />
 
-      <PrintLabel title="PROPERTY ADMIN" value={queryParams?.pmd} />
-      <PrintLabel title="DATE TODAY: " value="09/24/2024" />
-      <PrintLabel title={`CONSTRUCTION WARRANTY WILL EXPIRE ON: `} value={queryParams?.warranty_expire} isTitleCentered />
+      <PrintLabel title="PROPERTY ADMIN" value={unit.prop_admin} />
+      <PrintLabel title="DATE TODAY: " value={unit.date_today} />
+      <PrintLabel title={`CONSTRUCTION WARRANTY WILL EXPIRE ON: `} value={unit.const_warranty} isTitleCentered />
       {/*END PMD'S ACCEPTANCE*/}
 
 
@@ -74,6 +54,7 @@ const ChecklistUnitInfoColumn = ({
       <SectionLabel title="PMD'S PUNCHLIST" />
 
       <PrintLabel title="ACKNOWLEDGED BY:"
+        value={unit.ack_by}
         bottomTitle={
           <span className="text-[0.40rem] text-center">ENGINEER-IN-CHARGE</span>
         } />

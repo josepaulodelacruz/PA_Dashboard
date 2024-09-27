@@ -1,18 +1,20 @@
 import ChecklistUnitInfoColumn from "../Components/ChecklistUnitInfoColumn"
 import useGetUnitByIdMutation from "@/Hooks/UnitAcceptance/useGetUnitByIdMutation"
 import { useSnackbar } from "notistack"
-import { useEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { Unit } from "@/Types/Project"
+import { ChecklistUnit } from "@/Types"
+import DisableIcon from '@mui/icons-material/DisabledByDefault'
 
 
 const ChecklistForm = () => {
   const { mutateAsync: getUnitById } = useGetUnitByIdMutation()
   const [searchParams] = useSearchParams()
   const { enqueueSnackbar } = useSnackbar()
-  const [unit, setUnit] = useState<Unit>();
+  const [unit, setUnit] = useState<ChecklistUnit>();
+  const [checklistTitle, setChecklistTitle] = useState<string[]>([''])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     _handleGetUnitById()
   }, [searchParams])
 
@@ -20,6 +22,7 @@ const ChecklistForm = () => {
     let id = searchParams.get('ID')
     await getUnitById({ id: id! }, {
       onSuccess: (response) => {
+        console.log(response.data)
         if (response.data.length === 0) {
           enqueueSnackbar(response.errorMessage, {
             variant: 'error',
@@ -30,8 +33,16 @@ const ChecklistForm = () => {
           });
         }
 
-        const _unit: Unit =  response.data[0] as Unit
+        const _unit: ChecklistUnit = response.data as ChecklistUnit
         setUnit(_unit)
+
+        let labels: string[] = [];
+        _unit?.checklists?.map((checklist) => {
+          if (!labels.includes(checklist.class)) {
+            labels.push(checklist.class)
+          }
+        })
+        setChecklistTitle(labels)
       },
       onError: (response) => {
         enqueueSnackbar(response.message, {
@@ -47,13 +58,55 @@ const ChecklistForm = () => {
   }
 
   return (
-    <div className="grid grid-cols-12 bg-white">
+    <div className="grid grid-cols-12 ">
 
-      <ChecklistUnitInfoColumn unit={unit!} />
+      {
+        !unit ? null : <ChecklistUnitInfoColumn unit={unit} />
+      }
 
-      <div className="col-span-4">Col 2</div>
-      <div className="col-span-3 bg-blue-300">Col 3</div>
-      <div className="col-span-3 bg-white">Col 4</div>
+      <div className="col-span-10">
+
+        <div className="w-[auto] break-words overflow-hidden" style={{ columnCount: 3, columnGap: '0px', columnFill: 'auto', height: '650px' }}>
+
+          <div className="flex flex-col bg-white flex-1 border">
+
+            {
+              checklistTitle?.map((title, index) => {
+                return (
+                  <div key={index}>
+                    <div className="bg-gray-400 flex justify-center">
+                      <span className="text-[0.60rem] font-bold text-center ">{title}</span>
+                    </div>
+                    {
+                      unit?.checklists?.map((checklist, subIndex) => {
+                        if (checklist.class === title) {
+                          let remarks = checklist.remarks === "NOT APPLICABLE" ? "N/A" : checklist.remarks
+                          let isNotApplicable = checklist.remarks === "NOT APPLICABLE" ? true : false
+                          return (
+                            <div className="flex flex-row px-3 items-center" key={subIndex}>
+                              {
+                                isNotApplicable ? <DisableIcon fontSize="small" sx={{fontSize: '12px', color: 'gray'}} /> : <input type="checkbox" disabled checked={checklist.is_check} />
+                              }
+                              <span className="text-[0.40rem] pl-1 py-[0.2rem]" style={{textDecoration: isNotApplicable ? 'line-through' : 'none', color: isNotApplicable ? 'gray' : 'inherit'}}>{checklist.item}</span>
+                              <div className="flex-1 border-b pl-2 text-center text-[0.40rem]">{remarks}</div>
+                            </div>
+                          );
+                        }
+                      })
+                    }
+                  </div>
+                )
+
+              })
+            }
+
+
+          </div>
+
+
+        </div>
+
+      </div>
 
     </div>
   )
