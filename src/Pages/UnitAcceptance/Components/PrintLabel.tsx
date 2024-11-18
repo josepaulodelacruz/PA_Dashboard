@@ -34,7 +34,7 @@ const SectionLabel = ({
 } : SectionLabelProps) => {
 
   return (
-    <div className="w-full border border-black bg-black flex flex-col justify-center items-center">
+    <div className="flex-1 w-full border border-black bg-black flex flex-col justify-center items-center">
       <span className="text-white text-[0.70rem] font-semibold text-center">{title}</span>
     </div>
   )
