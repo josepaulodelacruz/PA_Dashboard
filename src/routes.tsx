@@ -3,7 +3,6 @@ import DashboardIcon from '@mui/icons-material/Settings'
 //Pages
 import LoginPage from "@/Pages/Login"
 import StringRoutes from "@/Constants/stringRoutes"
-import SetupApplicableModels from "@/Pages/SetupApplicableModels"
 
 /*
 import PunchlistPage from "@/Pages/Punchlist"
@@ -13,14 +12,9 @@ import CalendarBeyond from '@mui/icons-material/CalendarToday'
 import OwnersPunclistIcon from '@mui/icons-material/AccountBox'
 */
 
-import PersonelIcon from '@mui/icons-material/PersonAdd'
 
 import './index.css'
-import SetupPersonel from "./Pages/SetupPersonel"
-
-
-//authRoutes
-//#adb5bd
+import DashboardPage from "./Pages/Dashboard"
 
 const routes: RouteModel[] = [
   /*
@@ -63,23 +57,13 @@ const routes: RouteModel[] = [
   },
   */
   {
-    type: 'LINK',
-    name: 'Setup Personel',
-    key: 'Setup Personel',
-    icon: <PersonelIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>personel</PersonelIcon>,
-    iconDark: <PersonelIcon fontSize='small' sx={{ marginRight: '10px', color: '#adb5bd' }}>personel</PersonelIcon>,
-    route: StringRoutes.setup_personel_assign,
-    component: <SetupPersonel />
-  },
-  {
-    type: 'LINK',
-    name: 'Setup Checklist',
-    key: 'Setup Checklist',
+    type: "LINK",
+    name: "Dashboard",
+    key: "Dashboard",
     icon: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>dashboard</DashboardIcon>,
-    iconDark: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#adb5bd' }}>dashboard</DashboardIcon>,
     route: StringRoutes.dashboard,
-    component: <SetupApplicableModels />
-  },
+    component: <DashboardPage />
+  }
 
 
 ];

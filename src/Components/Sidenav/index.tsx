@@ -185,7 +185,7 @@ const Sidenav = ({ classNames, onLogout }: SidenavProps) => {
               justifyContent: 'center',
               alignItems: 'center'
             }}
-          >Pm</div>
+          >PA</div>
           <Typography
             color={textColor}
             display="block"
@@ -201,7 +201,7 @@ const Sidenav = ({ classNames, onLogout }: SidenavProps) => {
               transition: 'transform 0.3s ease, opacity 0.3s ease',
             }}
           >
-            PMDMTSWeb
+            PA APP
           </Typography>
         </Box>
 

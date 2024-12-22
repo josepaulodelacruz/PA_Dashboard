@@ -11,19 +11,7 @@ class StringRoutes {
 
   static login = '/auth/login'
 
-  static dashboard = '/project'
-  static project_list = '/project/list'
-  static view_project = '/project/view'
-
-  static setup_personel = '/setup/personel';
-  static setup_personel_assign = '/setup/personel/assign';
-
-  static punchlist = '/punchlist'
-  static punchlist_owners = '/punchlist/owners'
-  static punclist_with_warranty = '/punchlist/with-warranty'
-  static punchlist_beyond_warranty = '/punchlist/beyond-warranty'
-
-  static unit_acceptance_checklist_print = '/unit-acceptance/checklist/print'
+  static dashboard = '/'
 
   static properlyParseNameRoute = (key: string): string | undefined => {
     const item = items.find(item => item.urlRoute === key);
@@ -53,36 +41,7 @@ class StringRoutes {
 const items: RouteName[] = [
   {
     urlRoute: StringRoutes.dashboard,
-    nameRoute: 'Setup Checklist',
-  },
-  {
-    urlRoute: StringRoutes.setup_personel_assign,
-    nameRoute: 'Setup Personel',
-  },
-
-  {
-    urlRoute: StringRoutes.project_list,
-    nameRoute: 'List'
-  },
-  {
-    urlRoute: StringRoutes.view_project,
-    nameRoute: 'View'
-  },
-  {
-    urlRoute: StringRoutes.punchlist,
-    nameRoute: 'Punchlist',
-  },
-  {
-    urlRoute: StringRoutes.punchlist_owners,
-    nameRoute: "Owner's Punchlist"
-  },
-  {
-    urlRoute: StringRoutes.punclist_with_warranty,
-    nameRoute: 'With Warranty',
-  },
-  {
-    urlRoute: StringRoutes.punchlist_beyond_warranty,
-    nameRoute: 'Beyond Warranty',
+    nameRoute: 'Dashboard',
   }
 ]
 
