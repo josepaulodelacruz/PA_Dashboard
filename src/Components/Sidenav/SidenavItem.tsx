@@ -30,13 +30,27 @@ const SidenavItem = ({ icon, name, route, onClick }: SidenavItemProps) => {
   };
 
 
+
   const _isRouteHighlighted = () => {
-    const modifiedString = route.replace(/^\/home\//, "").toLowerCase()
-    const comparingString = location.pathname.replace(/^\/home\//, "").toLowerCase()
-    if(comparingString.includes(modifiedString)) {
-      return true
-    }
-    return false
+     // Clean and normalize routes
+     const normalizeRoute = (path: string) => path
+       .replace(/^\/home\//, '')
+       .toLowerCase()
+       .split('/')
+       .filter(Boolean);
+
+     const routeParts = normalizeRoute(route);
+     const currentRouteParts = normalizeRoute(location.pathname);
+
+     if (!routeParts.length || !currentRouteParts.length) return false;
+
+     const lastRouteSegment = routeParts[routeParts.length - 1];
+     const currentLastSegment = currentRouteParts[currentRouteParts.length - 1];
+
+    console.log(currentLastSegment.includes(lastRouteSegment));
+
+     return currentLastSegment.includes(lastRouteSegment);
+
   }
 
   return (

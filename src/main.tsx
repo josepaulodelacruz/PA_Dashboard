@@ -10,6 +10,8 @@ import TemplateContainer from '@/Layouts/TemplateContainer/index.tsx'
 
 import AuthRoutes from './Components/AuthRoutes.tsx';
 import DashboardPage from './Pages/Dashboard/index.tsx';
+import StringRoutes from './Constants/stringRoutes.tsx';
+import MapPage from './Pages/Map/index.tsx';
 
 
 const client = new QueryClient({
@@ -27,7 +29,9 @@ const router = createBrowserRouter(
 
       <Route path='/' element={<AuthRoutes />}>
         <Route path={'/'} element={<TemplateContainer />}>
-          <Route path={'/'} element={<DashboardPage />}/>
+          <Route path={StringRoutes.dashboard} element={<DashboardPage />}/>
+          <Route path={StringRoutes.map} element={<MapPage/>}/>
+
         </Route>
       </Route>
 

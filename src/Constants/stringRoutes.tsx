@@ -11,7 +11,10 @@ class StringRoutes {
 
   static login = '/auth/login'
 
-  static dashboard = '/'
+  static dashboard = '/dashboard'
+
+  //map
+  static map = "/map";
 
   static properlyParseNameRoute = (key: string): string | undefined => {
     const item = items.find(item => item.urlRoute === key);

@@ -1,5 +1,6 @@
 import { RouteModel } from "./Types"
 import DashboardIcon from '@mui/icons-material/Settings'
+import MapOutlinedIcon from '@mui/icons-material/MapOutlined'
 //Pages
 import LoginPage from "@/Pages/Login"
 import StringRoutes from "@/Constants/stringRoutes"
@@ -15,6 +16,7 @@ import OwnersPunclistIcon from '@mui/icons-material/AccountBox'
 
 import './index.css'
 import DashboardPage from "./Pages/Dashboard"
+import MapPage from "./Pages/Map"
 
 const routes: RouteModel[] = [
   /*
@@ -63,6 +65,14 @@ const routes: RouteModel[] = [
     icon: <DashboardIcon fontSize='small' sx={{ marginRight: '10px', color: '#FFF' }}>dashboard</DashboardIcon>,
     route: StringRoutes.dashboard,
     component: <DashboardPage />
+  },
+  {
+    type: "LINK",
+    name: "Map",
+    key: "Map",
+    icon: <MapOutlinedIcon fontSize="small" sx={{marginRight: '10px', color: '#fff'}}/>,
+    route: StringRoutes.map,
+    component: <MapPage />
   }
 
 
