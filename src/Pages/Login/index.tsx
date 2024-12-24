@@ -62,10 +62,10 @@ const LoginPage = () => {
     <>
 
       <div style={{ background: backgroundValue }} className="flex flex-col justify-center items-center w-[320px] rounded-lg shadow-md mx-auto h-[100px] z-10 relative" >
-        <h3 className="text-lg font-semibold text-white">PMDMTS</h3>
+        <h3 className="text-lg font-semibold text-white">PA Dashboard</h3>
 
         <div className="flex flex-row">
-          <SubTitleLabel style={{ color: 'white' }}>Version 2</SubTitleLabel>
+          <SubTitleLabel style={{ color: 'white' }}>DEFAULT</SubTitleLabel>
         </div>
 
       </div>
