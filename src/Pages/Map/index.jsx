@@ -20,9 +20,10 @@ const MapPage = () => {
               <MainSpan>{value}</MainSpan> :
               <div class="flex flex-col">
                 {
-                  values.map((val) => (
-                    <SubSpan>{val}</SubSpan>
-                  ))
+                  values.map((val) => {
+                    let index = values.indexOf(val);
+                    return <SubSpan>{index + 1}. {val}</SubSpan>
+                  })
                 }
               </div>
 
@@ -73,33 +74,33 @@ const MapPage = () => {
 
             <div className='col-span-10 px-5'>
               <SiteProjectFields
-                label="Developer"
+                label="Developer:"
                 value="P.A Properties Development Corporation"
               />
               <div className='flex flex-row gap-4'>
                 <SiteProjectFields
-                  label="Project Head"
+                  label="Project Head:"
                   value="Dela Cruz, Jose Paulo"
                 />
                 <SiteProjectFields
-                  label="Project Engineer"
+                  label="Project Engineer:"
                   value="Dela Cruz, Jose Paulo"
                 />
               </div>
 
               <SiteProjectFields
-                label="CMD"
+                label="CMD:"
                 value="Dela Cruz, Jose Paulo"
               />
 
               <SiteProjectFields
-                label="PMD"
+                label="PMD:"
                 value="Dela Cruz, Jose Paulo"
               />
 
               <div className='flex flex-row gap-4'>
                 <SiteProjectFields
-                  label="Phases"
+                  label="Phases:"
                   values={[
                     "St. Joseph Village 6 and old projects",
                     "St. Joseph Village 6 Phase 1",
@@ -111,7 +112,7 @@ const MapPage = () => {
                   ]}
                 />
                 <SiteProjectFields
-                  label="Models"
+                  label="Models:"
                   values={[
                     "Havanna",
                     "Mahogany",
