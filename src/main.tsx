@@ -11,7 +11,8 @@ import TemplateContainer from '@/Layouts/TemplateContainer/index.tsx'
 import AuthRoutes from './Components/AuthRoutes.tsx';
 import DashboardPage from './Pages/Dashboard/index.tsx';
 import StringRoutes from './Constants/stringRoutes.tsx';
-import MapPage from './Pages/Map/index.tsx';
+
+import MapPage from '@/Pages/Map/index.jsx'
 
 
 const client = new QueryClient({

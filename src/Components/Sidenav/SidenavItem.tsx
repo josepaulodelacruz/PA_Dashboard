@@ -47,8 +47,6 @@ const SidenavItem = ({ icon, name, route, onClick }: SidenavItemProps) => {
      const lastRouteSegment = routeParts[routeParts.length - 1];
      const currentLastSegment = currentRouteParts[currentRouteParts.length - 1];
 
-    console.log(currentLastSegment.includes(lastRouteSegment));
-
      return currentLastSegment.includes(lastRouteSegment);
 
   }

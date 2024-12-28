@@ -16,7 +16,7 @@ import OwnersPunclistIcon from '@mui/icons-material/AccountBox'
 
 import './index.css'
 import DashboardPage from "./Pages/Dashboard"
-import MapPage from "./Pages/Map"
+import MapPage from "./Pages/Map/index.jsx"
 
 const routes: RouteModel[] = [
   /*
