@@ -3,8 +3,9 @@ import DashboardLayout from "@/Layouts/DashboardLayout";
 import { MainSpan, SubSpan } from '@/Components/Labels/Spans.tsx'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import GeoJsonComponent from "./Components/GeoJsonComponent";
-import BorderedButton from '../../Components/Button/BorderedButton';
+import BorderedButton from '@/Components/Button/BorderedButton';
 import "leaflet/dist/leaflet.css";
+import useScroll from "@/Hooks/useScroll"
 
 const MapPage = () => {
   const [siteProject, setSiteProject] = useState("");

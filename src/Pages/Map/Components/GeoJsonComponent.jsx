@@ -11,7 +11,7 @@ const GeoJsonComponent = ({onClick}) => {
 
   return (
     <>
-      <GeoJSON data={geojsonData} style={{ color: "#00595c", weight: 10 }} />
+      <GeoJSON data={geojsonData} style={{ color: "#00595c", weight: 5 }} />
       <Marker position={[14.283487045004009, 121.13838586162709]}>
         <Popup >
           Saint Joseph Village 6

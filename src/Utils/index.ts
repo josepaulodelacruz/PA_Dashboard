@@ -9,13 +9,13 @@ interface ScrollToTopProps {
 
 const ScrollToTop = ({ scrollRef }: ScrollToTopProps) => {
   const { pathname } = useLocation();
-  const { userScrolled } = useScroll()
+  const { userScrolled, userScrolledToBottom } = useScroll()
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [pathname, scrollRef, userScrolled]);
+  }, [pathname, scrollRef, userScrolled, userScrolledToBottom]);
 
   return null;
 };
