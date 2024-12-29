@@ -1,12 +1,11 @@
 import { GeoJSON, useMapEvents, Marker, Popup } from 'react-leaflet'
 import { geojsonData } from '@/Constants/GeoJson'
 
-const GeoJsonComponent = () => {
+const GeoJsonComponent = ({onClick}) => {
 
   const map = useMapEvents({
     click(e) {
-      console.log(e);
-      console.log('map sjv clicked')
+      onClick('saint joseph 6')
     }
   })
 

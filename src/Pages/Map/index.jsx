@@ -7,24 +7,23 @@ import BorderedButton from '../../Components/Button/BorderedButton';
 import "leaflet/dist/leaflet.css";
 
 const MapPage = () => {
-  const [siteProject, setSiteProject] = useState()
+  const [siteProject, setSiteProject] = useState("");
   const position = [14.283487045004009, 121.13838586162709];
 
   const SiteProjectFields = ({ label, value, values = [] }) => {
     return (
-      <div className='grow'>
+      <div className="flex-grow">
         <SubSpan>{label}</SubSpan>
         <div className='border p-2 bg-gray-100 shadow-sm'>
           {
             values.length <= 0 ?
               <MainSpan>{value}</MainSpan> :
-              <div class="flex flex-col">
+              <div className="flex flex-col">
                 {
                   values.map((val) => {
                     let index = values.indexOf(val);
-                    return <SubSpan>{index + 1}. {val}</SubSpan>
-                  })
-                }
+                    return <SubSpan key={val} ><strong>{index + 1}</strong>. {val}</SubSpan>
+                  }) }
               </div>
 
           }
@@ -52,7 +51,9 @@ const MapPage = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
               url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
             />
-            <GeoJsonComponent />
+            <GeoJsonComponent
+              onClick={(val) => console.log(val)}
+            />
 
           </MapContainer>
 
@@ -119,6 +120,25 @@ const MapPage = () => {
                     "Marimar 1"
                   ]}
                 />
+              </div>
+
+              <div className='flex flex-row gap-4'>
+                <SiteProjectFields 
+                  label="Conractors"
+                  values={[
+                    "PA Builders",
+                  ]}
+                />
+
+                <SiteProjectFields 
+                  label="Engineers"
+                  values={[
+                    "Engr. Cruz",
+                    "Engr. John",
+                    "Engr. Doe"
+                  ]}
+                />
+
               </div>
 
 
