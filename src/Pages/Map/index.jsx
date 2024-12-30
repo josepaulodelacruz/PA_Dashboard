@@ -10,6 +10,7 @@ import useScroll from "@/Hooks/useScroll"
 const MapPage = () => {
   const [siteProject, setSiteProject] = useState("");
   const position = [14.283487045004009, 121.13838586162709];
+  const { onTriggeredScrollingToBottom } = useScroll()
 
   const SiteProjectFields = ({ label, value, values = [] }) => {
     return (
@@ -24,7 +25,7 @@ const MapPage = () => {
                   values.map((val) => {
                     let index = values.indexOf(val);
                     return <SubSpan key={val} ><strong>{index + 1}</strong>. {val}</SubSpan>
-                  }) }
+                  })}
               </div>
 
           }
@@ -32,6 +33,11 @@ const MapPage = () => {
       </div>
     )
   }
+
+  const _handleSelectSiteProject = (_) => {
+    onTriggeredScrollingToBottom()
+  }
+
 
   return (
     <DashboardLayout>
@@ -51,9 +57,8 @@ const MapPage = () => {
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
               url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            />
-            <GeoJsonComponent
-              onClick={(val) => console.log(val)}
+            /> <GeoJsonComponent
+              onClick={_handleSelectSiteProject}
             />
 
           </MapContainer>
@@ -124,14 +129,14 @@ const MapPage = () => {
               </div>
 
               <div className='flex flex-row gap-4'>
-                <SiteProjectFields 
+                <SiteProjectFields
                   label="Conractors"
                   values={[
                     "PA Builders",
                   ]}
                 />
 
-                <SiteProjectFields 
+                <SiteProjectFields
                   label="Engineers"
                   values={[
                     "Engr. Cruz",

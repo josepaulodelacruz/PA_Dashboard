@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { routes } from '@/routes'
 import { RouteModel } from "@/Types"
 import useToggleDrawer from "@/Hooks/Sidenav/useToggleDrawer"
-import { ScrollToTop } from "@/Utils"
+import { ScrollToTop, ScrollToBottom } from "@/Utils"
 import GenericModal from "@/Components/Modal/GenericModal"
 import StringRoutes from "@/Constants/stringRoutes"
 import useAuth from "@/Hooks/Auth/useAuth"
@@ -87,7 +87,10 @@ const TemplateContainer = () => {
         />
 
         <div ref={scrollableRef} className="overflow-auto">
+
           <ScrollToTop scrollRef={scrollableRef} />
+
+          <ScrollToBottom scrollRef={scrollableRef} />
 
           <Navbar isScrolled={isScrolled} route={routeObject} />
           <Outlet context={{ isScrolled }} />
