@@ -17,30 +17,6 @@ const BlockLotSearch = ({
   const primar = theme.palette.primary
   const navigate = useNavigate()
 
-  const SiteProjectFields = ({ label, value, values = [], loading }) => {
-    return (
-      <div className="flex-grow">
-        <SubSpan>{label}</SubSpan>
-        <div className='border bg-gray-100 shadow-sm'>
-          {loading ? (
-            <div className="shimmer h-10 w-full"></div>
-          ) : (
-            values.length <= 0 ? (
-              <MainSpan style={{ padding: '0.5rem' }}>{value}</MainSpan>
-            ) : (
-              <div className="flex flex-col">
-                {values.map((val) => {
-                  let index = values.indexOf(val);
-                  return <SubSpan key={val}><strong>{index + 1}</strong>. {val}</SubSpan>
-                })}
-              </div>
-            )
-          )}
-        </div>
-      </div>
-    );
-  };
-
   return <div className='absolute rounded-md top-10 left-[50px] bg-white w-[45%] z-[500] p-2'>
     <div className='flex flex-row items-center justify-between'>
       <div className='flex flex-col flex-[0.7]'>
@@ -82,10 +58,12 @@ const BlockLotSearch = ({
             style={{ color: primar.main }} className='ml-5' /> :
           <MenuOpenIcon
             onClick={() => onSideOpen()}
-            style={{ color: primar.main }} className='ml-5' />
-
+            style={{ color: primar.main }} className='ml-5' /> 
+          
       }
     </div>
+
+
 
 
   </div>
