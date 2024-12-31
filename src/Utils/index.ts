@@ -49,12 +49,13 @@ interface ScrollToBottomProps {
 }
 
 const ScrollToBottom = ({ scrollRef }: ScrollToBottomProps) => {
-  const { userScrolledToBottom } = useScroll()
+  const { userScrolledToBottom, onTiggeredScrollToBottomReset } = useScroll()
 
   useEffect(() => {
-    if (scrollRef.current) {
+    if (userScrolledToBottom && scrollRef.current) {
       scrollRef.current.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
+    onTiggeredScrollToBottomReset()
   }, [scrollRef, userScrolledToBottom]);
 
   return null;

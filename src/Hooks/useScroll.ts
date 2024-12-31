@@ -6,6 +6,7 @@ interface UseScrollProps {
   userScrolled: boolean,
   userScrolledToBottom: boolean,
   onTriggeredScrolling: () => void,
+  onTiggeredScrollToBottomReset: () => void,
 }
 
 const useScroll = create<UseScrollProps>((set, get) => ({
@@ -20,8 +21,10 @@ const useScroll = create<UseScrollProps>((set, get) => ({
     set({ userScrolled: !a })
   },
   onTriggeredScrollingToBottom: () => {
-    let a = get().userScrolledToBottom
-    set({ userScrolledToBottom: !a})
+    set({ userScrolledToBottom: true })
+  },
+  onTiggeredScrollToBottomReset: () => {
+    set({ userScrolledToBottom: false })
   }
 })) 
 

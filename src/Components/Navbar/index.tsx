@@ -5,7 +5,7 @@ import { TextField, InputAdornment, IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import { RouteModel } from '@/Types'
 import useToggleDrawer from '@/Hooks/Sidenav/useToggleDrawer'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
 import useSearchNavbar from '@/Hooks/Search/useSearchNavbar'
 import ClearIcon from '@mui/icons-material/Clear'
@@ -17,9 +17,10 @@ interface NavbarProps {
   route: RouteModel
 }
 
-const Navbar = ({ isScrolled, route }: NavbarProps) => {
+const Navbar = ({ isScrolled }: NavbarProps) => {
   const [navRoute, setNavRoute] = useState<string[]>();
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const theme = useTheme()
   const store = useToggleDrawer();
   const { onSearch, search, onReset } = useSearchNavbar()
@@ -70,8 +71,14 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
               {
                 navRoute?.map((item, index) => {
                   return (
-                    <div key={index}>
-                      <span className='hover:text-blue' style={{ paddingLeft: '5px', cursor: 'pointer' }}>
+                    <div onClick={() => {
+                      if(navRoute.length <= 1) return;
+                      if(navRoute.length === (index + 1)) return;
+                      navigate(index - 1)
+                    }} 
+                      className={navRoute.length > (index + 1) ? 'text-blue-400' : ''}
+                      key={index}>
+                      <span style={{ paddingLeft: index >= 1 ? '5px' : '0', cursor: 'pointer' }}>
                         {_decodeURL(item)}{index < navRoute.length - 1 ? ' /' : ''}
                       </span>
                     </div>

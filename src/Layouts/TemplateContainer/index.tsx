@@ -9,6 +9,7 @@ import { ScrollToTop, ScrollToBottom } from "@/Utils"
 import GenericModal from "@/Components/Modal/GenericModal"
 import StringRoutes from "@/Constants/stringRoutes"
 import useAuth from "@/Hooks/Auth/useAuth"
+import { MainSpan } from "@/Components/Labels/Spans"
 
 const TemplateContainer = () => {
   const location = useLocation()
@@ -94,6 +95,7 @@ const TemplateContainer = () => {
 
           <Navbar isScrolled={isScrolled} route={routeObject} />
           <Outlet context={{ isScrolled }} />
+
 
         </div>
 

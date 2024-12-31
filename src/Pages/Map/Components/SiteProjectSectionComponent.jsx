@@ -1,13 +1,11 @@
 import BorderedButton from '@/Components/Button/BorderedButton';
 import { MainSpan, SubSpan } from '@/Components/Labels/Spans.tsx'
-import { NavLink, useNavigate } from "react-router-dom"
-import { useViewTransition } from '@/Utils/index'
+import { NavLink } from "react-router-dom"
+import StringRoutes from "@/Constants/stringRoutes"
 import '../index.css'
 
 
-const SiteProjectSectionComponent = ({ isLoading = false }) => {
-  const navigate = useNavigate()
-  const { navigateWithTransition } = useViewTransition();
+const SiteProjectSectionComponent = ({ isLoading = false, onVisit = null }) => {
 
   const SiteProjectFields = ({ label, value, values = [], loading }) => {
     return (
@@ -33,11 +31,6 @@ const SiteProjectSectionComponent = ({ isLoading = false }) => {
     );
   };
 
-
-  const navTo = () => {
-    navigateWithTransition('/map/plot')
-  }
-
   return (
     <section className="px-4 relative -top-5">
       <div className='flex flex-row justify-between items-center'>
@@ -45,15 +38,17 @@ const SiteProjectSectionComponent = ({ isLoading = false }) => {
           <MainSpan>Saint Joseph Village 6</MainSpan>
           <SubSpan>Brgy. Butong, Cabuyao City, Laguna</SubSpan>
         </div>
-        <BorderedButton
-          onClick={navTo}
-        >VISIT</BorderedButton>
+        <NavLink
+          unstable_viewTransition={true}
+          to={StringRoutes.view_map_plot} >
+          <BorderedButton >VISIT</BorderedButton>
+        </NavLink>
       </div>
 
       <div className='grid grid-cols-12 pt-2'>
 
         <div
-          style={{ viewTransitionName: 'logo' }} className='bg-gray-200 col-span-2 h-[150px] w-full'>
+          className='bg-gray-200 col-span-2 h-[150px] w-full'>
           logo here
         </div>
 

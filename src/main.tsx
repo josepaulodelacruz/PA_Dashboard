@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route, UNSAFE_ViewTransitionContext, unstable_useViewTransitionState } from 'react-router-dom'
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import App from './App.tsx'
 import '@/index.css'
 import { authRoutes } from '@/routes.tsx'
@@ -27,16 +27,16 @@ const client = new QueryClient({
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    
+
     <Route path='/' element={<App />} >
 
       <Route path='/' element={<AuthRoutes />}>
         <Route path={'/'} element={<TemplateContainer />}>
-          <Route path={StringRoutes.dashboard} element={<DashboardPage />}/>
-          <Route path={StringRoutes.map} element={<MapPage/>}/>
-          <Route path={StringRoutes.view_map_plot} element={<ViewPlotPage />}/>
+          <Route path={StringRoutes.dashboard} element={<DashboardPage />} />
+          <Route path={StringRoutes.map} element={<MapPage />} />
 
         </Route>
+        <Route path={StringRoutes.view_map_plot} element={<ViewPlotPage />} />
       </Route>
 
 
