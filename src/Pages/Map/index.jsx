@@ -29,7 +29,7 @@ const MapPage = () => {
         className="block bg-white mt-8 rounded-md pb-10 shadow-sm">
 
         <NavLink
-          unstable_viewTransition={false}
+          viewTransition
           style={{viewTransitionName: 'main'}}
           to={null}
           className="relative h-[600px] flex flex-grow shadow-2xl ml-4 mr-4 mt-4 top-[-40px] rounded-lg" >

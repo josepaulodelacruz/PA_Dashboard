@@ -26,6 +26,7 @@ const client = new QueryClient({
 });
 
 const router = createBrowserRouter(
+
   createRoutesFromElements(
 
     <Route path='/' element={<App />} >
@@ -51,13 +52,18 @@ const router = createBrowserRouter(
 
 
     </Route>
-  )
+  ),
+  {
+    future: {
+      v7_relativeSplatPath: true,
+    }
+  }
 )
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={client} >
-      <RouterProvider future={{ v7_startTransition: true }} router={router} />
+      <RouterProvider router={router} />
     </QueryClientProvider>
   </React.StrictMode>,
 )

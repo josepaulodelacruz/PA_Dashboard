@@ -1,11 +1,12 @@
 import BorderedButton from '@/Components/Button/BorderedButton';
 import { MainSpan, SubSpan } from '@/Components/Labels/Spans.tsx'
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import StringRoutes from "@/Constants/stringRoutes"
 import '../index.css'
 
 
 const SiteProjectSectionComponent = ({ isLoading = false, onVisit = null }) => {
+  const navigate = useNavigate()
 
   const SiteProjectFields = ({ label, value, values = [], loading }) => {
     return (
@@ -38,11 +39,15 @@ const SiteProjectSectionComponent = ({ isLoading = false, onVisit = null }) => {
           <MainSpan>Saint Joseph Village 6</MainSpan>
           <SubSpan>Brgy. Butong, Cabuyao City, Laguna</SubSpan>
         </div>
-        <NavLink
-          unstable_viewTransition={true}
-          to={StringRoutes.view_map_plot} >
-          <BorderedButton >VISIT</BorderedButton>
-        </NavLink>
+        {
+
+          <NavLink
+            viewTransition
+            to={StringRoutes.view_map_plot}
+          >
+            <BorderedButton >VISIT</BorderedButton>
+          </NavLink>
+        }
       </div>
 
       <div className='grid grid-cols-12 pt-2'>
