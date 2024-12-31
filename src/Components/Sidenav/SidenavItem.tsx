@@ -32,23 +32,23 @@ const SidenavItem = ({ icon, name, route, onClick }: SidenavItemProps) => {
 
 
   const _isRouteHighlighted = () => {
-     // Clean and normalize routes
-     const normalizeRoute = (path: string) => path
-       .replace(/^\/home\//, '')
-       .toLowerCase()
-       .split('/')
-       .filter(Boolean);
+    // Clean and normalize routes
+    const normalizeRoute = (path: string) => path
+      .replace(/^\/home\//, '')
+      .toLowerCase()
+      .split('/')
+      .filter(Boolean);
 
-     const routeParts = normalizeRoute(route);
-     const currentRouteParts = normalizeRoute(location.pathname);
+    const routeParts = normalizeRoute(route);
+    const currentRouteParts = normalizeRoute(location.pathname);
 
-     if (!routeParts.length || !currentRouteParts.length) return false;
 
-     const lastRouteSegment = routeParts[routeParts.length - 1];
-     const currentLastSegment = currentRouteParts[currentRouteParts.length - 1];
+    if (!routeParts.length || !currentRouteParts.length) return false;
 
-     return currentLastSegment.includes(lastRouteSegment);
+    const lastRouteSegment = routeParts[routeParts.length - 1];
+    const currentLastSegment = currentRouteParts[currentRouteParts.length - 1];
 
+    return currentRouteParts.includes(lastRouteSegment);
   }
 
   return (

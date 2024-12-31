@@ -64,8 +64,8 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
       <nav className='flex sm:flex-row flex-col px-4 md:justify-between items-start md:items-center'>
 
         <div className='flex flex-col transition duration-300 translate-y-0 w-full'>
+          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{StringRoutes.properlyParseNameRoute(pathname)}</span>
           <div className='flex flex-row items-center'>
-            {location.pathname === '/PMDMTSWebV2' || location.pathname === '/PMDMTSWebV2/' ? '' : route.iconDark}
             <div className='text-sm flex flex-row flex-1 items-center' style={{ color: '#344767' }}>
               {
                 navRoute?.map((item, index) => {
@@ -82,7 +82,6 @@ const Navbar = ({ isScrolled, route }: NavbarProps) => {
 
             </div>
           </div>
-          <span className='font-bold text-[1rem] ' style={{ color: '#344767', lineHeight: '1.625' }}>{StringRoutes.properlyParseNameRoute(pathname)}</span>
         </div>
 
         <div className='flex flex-row items-center w-full justify-between  sm:justify-end py-2 sm:p-0'>

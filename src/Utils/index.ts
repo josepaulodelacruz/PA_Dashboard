@@ -2,6 +2,30 @@ import { RefObject, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import useScroll from '@/Hooks/useScroll';
+import { useNavigate } from 'react-router-dom';
+import { flushSync } from 'react-dom';
+
+// Custom hook to handle view transitions
+const useViewTransition = () => {
+  const navigate = useNavigate();
+
+  const navigateWithTransition = async (to: string) => {
+    if (!document.startViewTransition) {
+      navigate(to);
+      return;
+    }
+
+    console.log(document.startViewTransition)
+
+    document.startViewTransition(() => {
+      flushSync(() => {
+        navigate(to);
+      })
+    });
+  };
+
+  return { navigateWithTransition };
+};
 
 interface ScrollToTopProps {
   scrollRef: RefObject<HTMLElement>
@@ -59,6 +83,7 @@ const globalSnackbar = ({
 export {
   ScrollToTop,
   ScrollToBottom,
-  globalSnackbar
+  globalSnackbar,
+  useViewTransition
 }
 

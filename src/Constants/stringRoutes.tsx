@@ -15,6 +15,7 @@ class StringRoutes {
 
   //map
   static map = "/map";
+  static view_map_plot = '/map/plot';
 
   static properlyParseNameRoute = (key: string): string | undefined => {
     const item = items.find(item => item.urlRoute === key);
@@ -45,6 +46,14 @@ const items: RouteName[] = [
   {
     urlRoute: StringRoutes.dashboard,
     nameRoute: 'Dashboard',
+  },
+  {
+    urlRoute: StringRoutes.map,
+    nameRoute: 'Map'
+  },
+  {
+    urlRoute: StringRoutes.view_map_plot,
+    nameRoute: 'Site Plot'
   }
 ]
 
