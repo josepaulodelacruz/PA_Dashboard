@@ -8,7 +8,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button'
+import TableRow from '@mui/material/TableRow'
 import { flushSync } from 'react-dom';
+import TableContainer from '@/Components/Table/TableContainer'
 
 const SiteProjectFields = ({ label, value, values = [], loading, btn = null }) => {
   return (
@@ -50,7 +52,6 @@ const ViewPlotPage = () => {
         setIsExpanded(state => !state)
       })
     })
-
   }
 
   return (
@@ -58,7 +59,7 @@ const ViewPlotPage = () => {
       style={{
         viewTransitionName: 'main',
       }}
-      className={`group transition-all duration-1000 h-screen bg-gray-200 shadow-md grid grid-cols[100%] ease-in-out `}
+      className={`group transition-all duration-1000 h-screen shadow-md grid grid-cols[100%] ease-in-out `}
     >
 
       {/* 1st grid START HERE*/}
@@ -92,7 +93,7 @@ const ViewPlotPage = () => {
       {/* 1st grid END HERE*/}
 
       {/* 2nd grid START HERE*/}
-      <div style={{ viewTransitionName: "expanded-grid", width: isExpanded ? '100%' : isSideOpen ? '450px' : 0 }} className={`overflow-auto bg-white h-full right-0 absolute duration-500`}>
+      <div style={{ viewTransitionName: "expanded-grid", width: isExpanded ? '100%' : isSideOpen ? '450px' : 0 }} className={`overflow-auto bg-gray-200 h-full right-0 absolute duration-500`}>
         <div className='p-2'>
           <SiteProjectFields
             label="Site Project:"
@@ -140,14 +141,28 @@ const ViewPlotPage = () => {
           </div>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
+              className='whitespace-nowrap'
               variant="fullWidth"
               value={tabValue} onChange={(_, newValue) => setTabValue(newValue)} aria-label="basic tabs example">
               <Tab value={"tasks"} label="Tasks" />
               <Tab value={"workers"} label="Workers" />
               <Tab value={"scopeOfWorks"} label="SCOPE OF WORKS" />
             </Tabs>
-
           </Box>
+
+          <div className='py-2'/>
+
+          <TableContainer
+            tableTitle='Tasks'
+            tableHeader={
+              <TableRow>
+                <th align='left' className='column-header'>Code</th>
+                <th align='left' className='column-header'>Description</th>
+                <th align='left' className='column-header'>Time</th>
+              </TableRow>
+            }
+          >
+          </TableContainer>
         </div>
       </div>
       {/* 2nd grid END HERE*/}
