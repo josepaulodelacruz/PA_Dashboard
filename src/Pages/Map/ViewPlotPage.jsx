@@ -8,6 +8,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button'
+import { flushSync } from 'react-dom';
 
 const SiteProjectFields = ({ label, value, values = [], loading, btn = null }) => {
   return (
@@ -40,59 +41,68 @@ const ViewPlotPage = () => {
   const position = [14.283487045004009, 121.13838586162709];
   const { onSearch, search, onReset } = useSearchNavbar()
   const [isSideOpen, setIsSideOpen] = useState(false)
-  const [tabValue, setTabValue] = useState("tasks");
+  const [tabValue, setTabValue] = useState("tasks")
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const _handleExpandedView = () => {
+    document.startViewTransition(() => {
+      flushSync(() => {
+        setIsExpanded(state => !state)
+      })
+    })
+
+  }
 
   return (
     <div
       style={{
         viewTransitionName: 'main',
       }}
-      className={`group transition-all duration-300 h-screen bg-gray-200 shadow-md grid grid-cols[100%] ease-in-out ${isSideOpen ? 'grid-cols-[auto_450px]' : 'grid-cols-[100%_0%]'}`}
+      className={`group transition-all duration-1000 h-screen bg-gray-200 shadow-md grid grid-cols[100%] ease-in-out `}
     >
 
-      <div className=''>
-        <BlockLotSearch
-          isSideOpen={isSideOpen}
-          search={search}
-          onReset={onReset}
-          onSideOpen={() => {
-            setIsSideOpen((state) => !state)
-          }}
-
-        />
+      {/* 1st grid START HERE*/}
+      <div>
+        {
+          !isExpanded ?
+            <BlockLotSearch
+              isSideOpen={isSideOpen}
+              search={search}
+              onReset={onReset}
+              onSideOpen={() => {
+                setIsSideOpen((state) => !state)
+              }}
+            /> : null
+        }
 
         <MapContainer
           center={position}
           zoom={16}
           scrollWheelZoom={true}
           style={{ height: "100%", width: "100%", zIndex: 0 }}
-
-          className="rounded-lg"
+          className=''
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           />
           <GeoJsonComponent />
-
         </MapContainer>
       </div>
+      {/* 1st grid END HERE*/}
 
-      <div className='overflow-auto'>
-
+      {/* 2nd grid START HERE*/}
+      <div style={{ viewTransitionName: "expanded-grid", width: isExpanded ? '100%' : isSideOpen ? '450px' : 0 }} className={`overflow-auto bg-white h-full right-0 absolute duration-500`}>
         <div className='p-2'>
-
           <SiteProjectFields
             label="Site Project:"
             value="Saint Joseph Village 6"
-            btn={<Button>Expand</Button>}
+            btn={<Button onClick={_handleExpandedView}>Expand</Button>}
           />
-
           <SiteProjectFields
             label="Address"
             value="Brgy. Butong, Cabuyao City Laguna"
           />
-
           <div className='flex flex-row flex-grow gap-2'>
             <SiteProjectFields
               label="BLOCK: "
@@ -108,7 +118,6 @@ const ViewPlotPage = () => {
               value="Annex A"
             />
           </div>
-
           <div className='flex flex-row gap-2'>
             <SiteProjectFields
               label="Start Date:"
@@ -119,7 +128,6 @@ const ViewPlotPage = () => {
               value="October 21, 2024"
             />
           </div>
-
           <div className='flex flex-row gap-2'>
             <SiteProjectFields
               label="Contract Price"
@@ -129,10 +137,7 @@ const ViewPlotPage = () => {
               label="Percentage of Completion"
               value="85%"
             />
-
           </div>
-
-
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
               variant="fullWidth"
@@ -143,14 +148,9 @@ const ViewPlotPage = () => {
             </Tabs>
 
           </Box>
-
-
-
         </div>
-
-
       </div>
-
+      {/* 2nd grid END HERE*/}
     </div>
   )
 }

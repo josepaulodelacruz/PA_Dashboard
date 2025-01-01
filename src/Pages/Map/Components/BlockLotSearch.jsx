@@ -1,10 +1,10 @@
 import { TextField, Box, InputAdornment, IconButton } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
-import { MainSpan } from "@/Components/Labels/Spans"
 import { useTheme } from "@mui/material/styles"
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
+import { MainSpan, SubSpan } from '@/Components/Labels/Spans.tsx'
 
 const BlockLotSearch = ({
   onReset = null,
@@ -22,9 +22,9 @@ const BlockLotSearch = ({
       <div className='flex flex-col flex-[0.7]'>
         <MainSpan>Plot</MainSpan>
         <div className='flex flex-row text-sm'>
-          <a href={null} onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>Map</a>
+          <a href={null} onClick={() => navigate(-1)} style={{ cursor: 'pointer' }} className='text-blue-500 pr-1'>Map</a>
           <span>/</span>
-          <span>Plot</span>
+          <span className='pl-1'>Plot</span>
         </div>
 
       </div>
@@ -58,12 +58,10 @@ const BlockLotSearch = ({
             style={{ color: primar.main }} className='ml-5' /> :
           <MenuOpenIcon
             onClick={() => onSideOpen()}
-            style={{ color: primar.main }} className='ml-5' /> 
-          
+            style={{ color: primar.main }} className='ml-5' />
+
       }
     </div>
-
-
 
 
   </div>
