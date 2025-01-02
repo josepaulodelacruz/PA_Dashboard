@@ -98,7 +98,7 @@ const ViewPlotPage = () => {
           <SiteProjectFields
             label="Site Project:"
             value="Saint Joseph Village 6"
-            btn={<Button onClick={_handleExpandedView}>Expand</Button>}
+            btn={<Button onClick={_handleExpandedView}>{isSideOpen ? (isExpanded ? "Minimize" : "Expand") : ""}</Button>}
           />
           <SiteProjectFields
             label="Address"
