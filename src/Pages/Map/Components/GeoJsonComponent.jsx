@@ -1,7 +1,7 @@
 import { GeoJSON, useMapEvents, Marker, Popup } from 'react-leaflet'
 import { geojsonData } from '@/Constants/GeoJson'
 
-const GeoJsonComponent = ({onClick}) => {
+const GeoJsonComponent = ({ onClick }) => {
 
   const map = useMapEvents({
     click(e) {
@@ -9,9 +9,15 @@ const GeoJsonComponent = ({onClick}) => {
     }
   })
 
+  console.log(geojsonData.length)
+
   return (
     <>
-      <GeoJSON data={geojsonData} style={{ color: "#00595c", weight: 5 }} />
+      {
+        geojsonData.map((data, index) => {
+          return <GeoJSON key={index} data={data} style={{ color: "#00595c", weight: 5 }} />
+        })
+      }
       <Marker position={[14.283487045004009, 121.13838586162709]}>
         <Popup >
           Saint Joseph Village 6

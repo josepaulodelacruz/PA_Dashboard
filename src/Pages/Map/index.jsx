@@ -30,7 +30,7 @@ const MapPage = () => {
 
         <NavLink
           viewTransition
-          style={{viewTransitionName: 'main'}}
+          style={{ viewTransitionName: 'main' }}
           to={null}
           className="relative h-[600px] flex flex-grow shadow-2xl ml-4 mr-4 mt-4 top-[-40px] rounded-lg" >
 
@@ -44,11 +44,8 @@ const MapPage = () => {
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
-              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            /> <GeoJsonComponent
-              onClick={_handleSelectSiteProject}
-            />
-
+              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"/>
+            <GeoJsonComponent onClick={_handleSelectSiteProject} />
           </MapContainer>
 
         </NavLink>
