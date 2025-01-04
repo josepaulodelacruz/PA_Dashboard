@@ -2,6 +2,7 @@ export const geojsonData = [
   {
     type: "FeatureCollection",
     name: "Saint Joseph Village 6",
+    position: [14.283487045004009, 121.13838586162709],
     crs: {
       type: "name",
       properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
@@ -9,7 +10,10 @@ export const geojsonData = [
     features: [
       {
         type: "Feature",
-        properties: { fid: 1 },
+        properties: {
+          fid: 1,
+          name: "Saint Joseph Village 6",
+        },
         geometry: {
           type: "MultiPolygon",
           coordinates: [
@@ -54,7 +58,8 @@ export const geojsonData = [
   },
   {
     type: "FeatureCollection",
-    name: "richfield",
+    name: "St. Joseph Richfield",
+    position: [14.32813493647682, 121.10421060280815],
     crs: { type: "name", properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" } },
     bbox: [121.101216158451, 14.3240601621756, 121.105536362815, 14.3317534574945],
     features: [
@@ -62,7 +67,7 @@ export const geojsonData = [
         type: "Feature",
         properties: {
           fid: 1,
-          richfield: null
+          name: "St. Joseph Richfield",
         },
         bbox: [121.101216158450598, 14.324060162175638, 121.105536362815243, 14.3317534574945],
         geometry: {

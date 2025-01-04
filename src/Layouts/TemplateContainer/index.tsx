@@ -9,6 +9,7 @@ import { ScrollToTop, ScrollToBottom } from "@/Utils"
 import GenericModal from "@/Components/Modal/GenericModal"
 import StringRoutes from "@/Constants/stringRoutes"
 import useAuth from "@/Hooks/Auth/useAuth"
+import useSearch from "@/Hooks/Search/useSearchNavbar"
 
 const TemplateContainer = () => {
   const location = useLocation()
@@ -20,6 +21,7 @@ const TemplateContainer = () => {
   const _isSidebarOpen = _toggleSidebar.isOpen
   const navigate = useNavigate()
   const { onSetSession, onInitialize } = useAuth()
+  const { search } = useSearch()
 
   useEffect(() => {
     onInitialize()
