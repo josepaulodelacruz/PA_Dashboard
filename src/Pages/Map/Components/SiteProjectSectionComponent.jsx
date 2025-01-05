@@ -5,7 +5,7 @@ import StringRoutes from "@/Constants/stringRoutes"
 import '../index.css'
 
 
-const SiteProjectSectionComponent = ({ isLoading = false, onVisit = null }) => {
+const SiteProjectSectionComponent = ({ siteProject = null, isLoading = false, onVisit = null }) => {
   const navigate = useNavigate()
 
   const SiteProjectFields = ({ label, value, values = [], loading }) => {
@@ -36,14 +36,14 @@ const SiteProjectSectionComponent = ({ isLoading = false, onVisit = null }) => {
     <section className="px-4 relative -top-5">
       <div className='flex flex-row justify-between items-center'>
         <div className='flex flex-col'>
-          <MainSpan>Saint Joseph Village 6</MainSpan>
+          <MainSpan>{siteProject.name}</MainSpan>
           <SubSpan>Brgy. Butong, Cabuyao City, Laguna</SubSpan>
         </div>
         {
 
           <NavLink
             viewTransition
-            to={StringRoutes.view_map_plot}
+            to={StringRoutes.view_map_plot + '/' + siteProject.name}
           >
             <BorderedButton >VISIT</BorderedButton>
           </NavLink>

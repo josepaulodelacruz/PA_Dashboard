@@ -8,22 +8,22 @@ import SiteProjectSectionComponent from './Components/SiteProjectSectionComponen
 import { NavLink } from 'react-router-dom';
 import useSearch from "@/Hooks/Search/useSearchNavbar"
 import { geojsonData } from '@/Constants/GeoJson'
+import { MainSpan, SubSpan } from '@/Components/Labels/Spans'
 
 const MapPage = () => {
   const [siteProject, setSiteProject] = useState("");
   const [selectedPosition, setSelectedPositiopn] = useState();
-  const position = [14.283487045004009, 121.13838586162709];
+  const position = [14.32813493647682, 121.10421060280815]
   const { onTriggeredScrollingToBottom } = useScroll()
   const [isLoading, setIsLoading] = useState(false)
   const { search } = useSearch()
 
-  const _handleSelectSiteProject = async (data, index) => {
-    console.log(data)
-    console.log(data.properties)
-    // setIsLoading(true)
-    // onTriggeredScrollingToBottom()
-    // await new Promise(resolve => setTimeout(resolve, 5000))
-    // setIsLoading(false)
+  const _handleSelectSiteProject = async (data) => {
+    setSiteProject(data.properties.name);
+    setIsLoading(true)
+    await new Promise(resolve => setTimeout(resolve, 5000))
+    setIsLoading(false)
+    onTriggeredScrollingToBottom()
   }
 
   return (
@@ -40,7 +40,7 @@ const MapPage = () => {
 
           <MapContainer
             center={position}
-            zoom={16}
+            zoom={12}
             scrollWheelZoom={true}
             style={{ height: "100%", width: "100%" }}
 
@@ -51,20 +51,30 @@ const MapPage = () => {
               url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
             {
               geojsonData.map((data, index) => (
-                  <GeoJsonComponent
-                    search={search}
-                    onClick={(a) => _handleSelectSiteProject(a, index)}
-                    key={index}
-                    data={data}/>
-                ))
+                <GeoJsonComponent
+                  search={search}
+                  onClick={_handleSelectSiteProject}
+                  key={index}
+                  data={data} />
+              ))
             }
 
           </MapContainer>
 
         </NavLink>
 
-        <SiteProjectSectionComponent
-          isLoading={isLoading} />
+        {
+          siteProject !== "" ?
+            <SiteProjectSectionComponent
+              siteProject={{ name: siteProject }}
+              isLoading={isLoading} /> :
+            <section className="px-4 relative -top-5">
+              <MainSpan>Select a Site</MainSpan>
+              <SubSpan>Click anywhere</SubSpan>
+            </section>
+
+        }
+
 
       </div>
 

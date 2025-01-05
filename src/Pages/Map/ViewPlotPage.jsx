@@ -2,7 +2,7 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 import GeoJsonComponent from "./Components/GeoJsonComponent";
 import useSearchNavbar from '@/Hooks/Search/useSearchNavbar'
 import BlockLotSearch from './Components/BlockLotSearch';
-import { useState } from 'react';
+import { useLayoutEffect, useState, useMemo } from 'react';
 import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -11,6 +11,9 @@ import Button from '@mui/material/Button'
 import TableRow from '@mui/material/TableRow'
 import { flushSync } from 'react-dom';
 import TableContainer from '@/Components/Table/TableContainer'
+import { useParams } from 'react-router-dom'
+import Fuse from 'fuse.js';
+import { geojsonData } from '@/Constants/GeoJson'
 
 const SiteProjectFields = ({ label, value, values = [], loading, btn = null }) => {
   return (
@@ -40,11 +43,18 @@ const SiteProjectFields = ({ label, value, values = [], loading, btn = null }) =
 }
 
 const ViewPlotPage = () => {
-  const position = [14.283487045004009, 121.13838586162709];
+  const [position, setPosition]= useState([14.32813493647682, 121.10421060280815]); 
   const { onSearch, search, onReset } = useSearchNavbar()
   const [isSideOpen, setIsSideOpen] = useState(false)
   const [tabValue, setTabValue] = useState("tasks")
   const [isExpanded, setIsExpanded] = useState(false)
+  const { name } = useParams()
+  const [data, setData] = useState();
+  const fuseInstance = useMemo(() => new Fuse(geojsonData, {
+    keys: ['name'],
+    threshold: 0.3, // Add threshold for better matching
+    distance: 100
+  }), []);
 
   const _handleExpandedView = () => {
     document.startViewTransition(() => {
@@ -53,6 +63,14 @@ const ViewPlotPage = () => {
       })
     })
   }
+
+  useLayoutEffect(() => {
+    const results = fuseInstance.search(name);
+    if (results.length > 0 && results[0].item.position) {
+      setData(results[0].item);
+      setPosition(results[0].item.position)
+    }
+  }, [])
 
   return (
     <div
@@ -87,7 +105,11 @@ const ViewPlotPage = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           />
-          <GeoJsonComponent />
+          <GeoJsonComponent
+            data={data}
+            isViewing={true}
+          />
+
         </MapContainer>
       </div>
       {/* 1st grid END HERE*/}
@@ -150,7 +172,7 @@ const ViewPlotPage = () => {
             </Tabs>
           </Box>
 
-          <div className='py-2'/>
+          <div className='py-2' />
 
           <TableContainer
             tableTitle='Tasks'

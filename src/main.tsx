@@ -37,7 +37,7 @@ const router = createBrowserRouter(
           <Route path={StringRoutes.map} element={<MapPage />} />
 
         </Route>
-        <Route path={StringRoutes.view_map_plot} element={<ViewPlotPage />} />
+        <Route path={`${StringRoutes.view_map_plot}/:name`} element={<ViewPlotPage />} />
       </Route>
 
 

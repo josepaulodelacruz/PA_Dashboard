@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo, useLayoutEffect } from 'react';
 import { GeoJSON, useMapEvents } from 'react-leaflet';
 import Fuse from 'fuse.js';
 import { geojsonData } from '@/Constants/GeoJson';
@@ -8,7 +8,7 @@ const ZOOM_LEVEL = 16;
 const SEARCH_DELAY = 500;
 const DEFAULT_STYLE = { color: "#00595c", weight: 5 };
 
-const GeoJsonComponent = ({ data, onClick, search = "" }) => {
+const GeoJsonComponent = ({ data, onClick, search = "", isViewing = false }) => {
   // Initialize Fuse instance once
   const fuseInstance = useMemo(() => new Fuse(geojsonData, {
     keys: ['name'],
@@ -16,11 +16,18 @@ const GeoJsonComponent = ({ data, onClick, search = "" }) => {
     distance: 100
   }), []); // Empty dependency array as geojsonData is imported
 
+
   const map = useMapEvents({
     locationfound(e) {
       console.log('Location found:', e);
     }
   });
+
+  useLayoutEffect(() => {
+    if(isViewing) {
+      map.panTo(data.position);
+    }
+  }, [])
 
   const flyToLocation = useCallback((position, targetZoom = ZOOM_LEVEL) => {
     const currentZoom = map.getZoom();
@@ -33,6 +40,9 @@ const GeoJsonComponent = ({ data, onClick, search = "" }) => {
 
   const handleFeatureClick = useCallback((feature) => {
     onClick?.(feature);
+    const results = fuseInstance.search(feature.properties.name);
+
+    map.flyTo(results[0].item.position, 16)
   }, [onClick, flyToLocation]);
 
   const onEachFeature = useCallback((feature, layer) => {
@@ -59,6 +69,10 @@ const GeoJsonComponent = ({ data, onClick, search = "" }) => {
 
     return () => clearTimeout(timeoutId);
   }, [search, handleSearch]);
+
+  if (!data) {
+    return null;
+  }
 
   return (
     <GeoJSON
