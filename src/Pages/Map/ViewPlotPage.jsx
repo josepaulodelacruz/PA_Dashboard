@@ -4,6 +4,10 @@ import useSearchNavbar from '@/Hooks/Search/useSearchNavbar'
 import BlockLotSearch from './Components/BlockLotSearch';
 import { useLayoutEffect, useState, useMemo } from 'react';
 import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import InputLabel from '@mui/material/InputLabel'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -14,6 +18,12 @@ import TableContainer from '@/Components/Table/TableContainer'
 import { useParams } from 'react-router-dom'
 import Fuse from 'fuse.js';
 import { geojsonData } from '@/Constants/GeoJson'
+
+const _applications = [
+  "TCT Dashboard",
+  "Dar App",
+  "Poc Tagger",
+]
 
 const SiteProjectFields = ({ label, value, values = [], loading, btn = null }) => {
   return (
@@ -50,6 +60,7 @@ const ViewPlotPage = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const { name } = useParams()
   const [data, setData] = useState();
+  const [application, setApplication] = useState("");
   const fuseInstance = useMemo(() => new Fuse(geojsonData, {
     keys: ['name'],
     threshold: 0.3, // Add threshold for better matching
@@ -62,6 +73,15 @@ const ViewPlotPage = () => {
         setIsExpanded(state => !state)
       })
     })
+  }
+
+  const _handleSideOpenView = () => {
+    document.startViewTransition(() => {
+      flushSync(() => {
+        setIsSideOpen((state) => !state)
+      })
+    })
+
   }
 
   useLayoutEffect(() => {
@@ -82,25 +102,50 @@ const ViewPlotPage = () => {
 
       {/* 1st grid START HERE*/}
       <div>
-        <div className='flex flex-row justify-between'>
+        <div >
           {
             !isExpanded ?
-              <BlockLotSearch
-                isSideOpen={isSideOpen}
-                search={search}
-                onReset={onReset}
-                onSideOpen={() => {
-                  setIsSideOpen((state) => !state)
-                }}
-              /> : null
+              <div className='flex flex-row m-10 items-center'>
+                <BlockLotSearch
+                  isSideOpen={isSideOpen}
+                  search={search}
+                  onReset={onReset}
+                  onSideOpen={_handleSideOpenView}
+                />
+                {
+                  !isSideOpen ?
+                    <div className='flex flex-grow justify-end '>
+                      <div
+                        className='bg-white flex flex-row flex-grow-[0.5] z-[500] rounded-md self-end'>
+                        <FormControl
+                          fullWidth >
+                          <Select
+                            displayEmpty
+                            value={application}
+                            inputProps={{ 'aria-label': 'Without label' }}
+                            onChange={(e) => console.log(e.target.value)}
+                          >
+                            {
+                              _applications.map((item, index) => (
+                                <MenuItem value={item} key={index}>{item}</MenuItem>
+                              ))
+                            }
+                          </Select>
+                        </FormControl>
+                      </div>
+
+                    </div>
+                    : null
+                }
+              </div> : null
           }
+
         </div>
 
         <MapContainer
           center={position}
           zoom={16}
           scrollWheelZoom={true}
-          //style={{ height: "100%", width: "100%", zIndex: 0}}
           className='absolute h-full w-full top-[0] z-0'
         >
           <TileLayer
