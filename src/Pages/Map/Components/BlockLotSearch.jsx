@@ -17,7 +17,7 @@ const BlockLotSearch = ({
   const primar = theme.palette.primary
   const navigate = useNavigate()
 
-  return <div className='absolute rounded-md top-10 left-[50px] bg-white w-[45%] z-[500] p-2'>
+  return <div className='relative rounded-md top-10 left-[50px] bg-white w-[45%] z-[500] p-2'>
     <div className='flex flex-row items-center justify-between'>
       <div className='flex flex-col flex-[0.7]'>
         <MainSpan>Plot</MainSpan>
@@ -62,6 +62,7 @@ const BlockLotSearch = ({
 
       }
     </div>
+
 
 
   </div>

@@ -43,7 +43,7 @@ const SiteProjectFields = ({ label, value, values = [], loading, btn = null }) =
 }
 
 const ViewPlotPage = () => {
-  const [position, setPosition]= useState([14.32813493647682, 121.10421060280815]); 
+  const [position, setPosition] = useState([14.32813493647682, 121.10421060280815]);
   const { onSearch, search, onReset } = useSearchNavbar()
   const [isSideOpen, setIsSideOpen] = useState(false)
   const [tabValue, setTabValue] = useState("tasks")
@@ -82,24 +82,26 @@ const ViewPlotPage = () => {
 
       {/* 1st grid START HERE*/}
       <div>
-        {
-          !isExpanded ?
-            <BlockLotSearch
-              isSideOpen={isSideOpen}
-              search={search}
-              onReset={onReset}
-              onSideOpen={() => {
-                setIsSideOpen((state) => !state)
-              }}
-            /> : null
-        }
+        <div className='flex flex-row justify-between'>
+          {
+            !isExpanded ?
+              <BlockLotSearch
+                isSideOpen={isSideOpen}
+                search={search}
+                onReset={onReset}
+                onSideOpen={() => {
+                  setIsSideOpen((state) => !state)
+                }}
+              /> : null
+          }
+        </div>
 
         <MapContainer
           center={position}
           zoom={16}
           scrollWheelZoom={true}
-          style={{ height: "100%", width: "100%", zIndex: 0 }}
-          className=''
+          //style={{ height: "100%", width: "100%", zIndex: 0}}
+          className='absolute h-full w-full top-[0] z-0'
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
