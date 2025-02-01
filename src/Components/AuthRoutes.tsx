@@ -14,7 +14,7 @@ const AuthRoutes = () => {
   useEffect(() => {
     initializeSession(); // check if the session is expired
 
-    if (isSessionActive) {
+    if (!isSessionActive) {
       navigate(StringRoutes.login);
     }
   }, [isSessionActive, initializeSession, navigate]);

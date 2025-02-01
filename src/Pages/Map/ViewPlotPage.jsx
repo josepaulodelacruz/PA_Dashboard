@@ -1,3 +1,4 @@
+import React, { ReactComponent } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import GeoJsonComponent from "./Components/GeoJsonComponent";
 import useSearchNavbar from '@/Hooks/Search/useSearchNavbar'
@@ -18,6 +19,9 @@ import TableContainer from '@/Components/Table/TableContainer'
 import { useParams } from 'react-router-dom'
 import Fuse from 'fuse.js';
 import { geojsonData } from '@/Constants/GeoJson'
+import SvgMaps from './Components/SvgMaps';
+
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 const _applications = [
   "TCT Dashboard",
@@ -97,7 +101,7 @@ const ViewPlotPage = () => {
       style={{
         viewTransitionName: 'main',
       }}
-      className={`group transition-all duration-1000 h-screen shadow-md grid grid-cols[100%] ease-in-out `}
+      className={`group bg-white transition-all duration-1000 h-screen shadow-md grid grid-cols[100%] ease-in-out `}
     >
 
       {/* 1st grid START HERE*/}
@@ -142,22 +146,37 @@ const ViewPlotPage = () => {
 
         </div>
 
-        <MapContainer
-          center={position}
-          zoom={16}
-          scrollWheelZoom={true}
-          className='absolute h-full w-full top-[0] z-0'
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-          />
-          <GeoJsonComponent
-            data={data}
-            isViewing={true}
-          />
+          <div style={{position: 'absolute', height: '100%', widht: '100%', zIndex: 0, top: 0}}>
+            <TransformWrapper
+              initialScale={3}
+             >
+              <TransformComponent >
+                <SvgMaps />
+              </TransformComponent>
+            </TransformWrapper>
+          </div>
+          
 
-        </MapContainer>
+        {
+          // <MapContainer
+          //   center={position}
+          //   zoom={16}
+          //   scrollWheelZoom={true}
+          //   className='absolute h-full w-full top-[0] z-0'
+          // >
+          //   <TileLayer
+          //     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
+          //     url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          //   />
+          //   <GeoJsonComponent
+          //     data={data}
+          //     isViewing={true}
+          //   />
+          //
+          // </MapContainer>
+          //
+        }
+
       </div>
       {/* 1st grid END HERE*/}
 
