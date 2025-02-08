@@ -143,10 +143,9 @@ const ViewPlotPage = () => {
 
         </div>
 
-          <div style={{position: 'absolute', height: '100%', widht: '100%', zIndex: 0, top: 0}}>
+          <div style={{background: '#E3F2FD', position: 'absolute', height: '100%', widht: '100%', zIndex: 0, top: 0}}>
             <TransformWrapper
-              initialScale={3}
-             >
+          >
               <TransformComponent >
                 <SvgMaps />
               </TransformComponent>
