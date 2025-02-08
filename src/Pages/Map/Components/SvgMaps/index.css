@@ -1,0 +1,6 @@
+/* Add this to your CSS */
+.hoverStyle {
+  mix-blend-mode: normal;
+  /* Add other styles you want to change on hover */
+  fill: red;
+}

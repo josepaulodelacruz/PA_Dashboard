@@ -1,6 +1,4 @@
 import React, { ReactComponent } from 'react'
-import { MapContainer, TileLayer } from 'react-leaflet'
-import GeoJsonComponent from "./Components/GeoJsonComponent";
 import useSearchNavbar from '@/Hooks/Search/useSearchNavbar'
 import BlockLotSearch from './Components/BlockLotSearch';
 import { useLayoutEffect, useState, useMemo } from 'react';
@@ -8,7 +6,6 @@ import { MainSpan, SubSpan } from "@/Components/Labels/Spans"
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import InputLabel from '@mui/material/InputLabel'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
