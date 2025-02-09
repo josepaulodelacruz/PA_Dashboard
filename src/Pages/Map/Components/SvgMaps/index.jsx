@@ -1,7 +1,48 @@
-import * as React from "react";
+import React, { useEffect, useRef } from 'react'
 const SvgMaps = (props) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    const svgElement = ref.current;
+    const paths = svgElement.querySelectorAll('path[id^="block-"]');
+
+    paths.forEach((path) => {
+      path.addEventListener('mouseenter', () => {
+        // Your onMouseEnter logic here
+        console.log(`Mouse entered: ${path.id}`);
+        // For example, you can change the fill color
+        path.style.fill = 'blue';
+      });
+
+      path.addEventListener('mouseleave', () => {
+        // Your onMouseLeave logic here
+        console.log(`Mouse left: ${path.id}`);
+        // Reset the fill color
+        path.style.fill = '';
+      });
+    });
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      paths.forEach((path) => {
+        path.removeEventListener('mouseenter', () => {
+          console.log(`Mouse entered: ${path.id}`);
+          path.style.fill = 'blue';
+        });
+
+        path.removeEventListener('mouseleave', () => {
+          console.log(`Mouse left: ${path.id}`);
+          path.style.fill = '';
+        });
+      });
+    };
+  }, []);
+
+
+
   return (
     <svg
+      ref={ref}
       id="svg1"
       width={'100vw'}
       height={'100vh'}
